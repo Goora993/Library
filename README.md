@@ -6,3 +6,9 @@ Aplikacja ma za zadanie umożliwiać użytkownikowi dodawanie nowych pozycji (cz
 co zapewnia zapisywanie treści w przeznaczonych do tego plikach. 
 W przyszłości aplikacja otrzyma interfejs graficzny stworzony w technologii JavaFX. 
 
+12/08/2020:
+- utworzenie projektu, dodanie pierwszej klasy modelu oraz klasy z metodą main.
+
+13/08/2020:
+- dodanie dodatkowej klasy odpowiedzialnej za wczytywanie danych od użytkownika, 
+- dodanie funkcji tworzenia książek na podstawie informacji przekazywanych przez użytkownika
