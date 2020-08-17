@@ -12,3 +12,11 @@ W przyszłości aplikacja otrzyma interfejs graficzny stworzony w technologii Ja
 13/08/2020:
 - dodanie dodatkowej klasy odpowiedzialnej za wczytywanie danych od użytkownika, 
 - dodanie funkcji tworzenia książek na podstawie informacji przekazywanych przez użytkownika
+
+17/08/2020:
+- dodanie klasy kontrolera zawierającej w sobie główną pętlę programu,
+- dodanie klasy LibraryApp zawierajacej w sobie metodą main,
+- modyfikacja klasy Library w taki sposób, aby była teraz elementem modelu aplikacji, a obiekt tej klasy 
+mógł zawierać informacje na temat książek w postaci tablicy o powiększającym się rozmiarze wraz ze wzrostem ilości 
+ksiażek dodawanych do biblioteki.
+
