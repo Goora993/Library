@@ -19,3 +19,8 @@ W przyszłości aplikacja otrzyma interfejs graficzny stworzony w technologii Ja
 - modyfikacja klasy Library w taki sposób, aby była teraz elementem modelu aplikacji, a obiekt tej klasy 
 mógł zawierać informacje na temat książek w postaci tablicy o powiększającym się rozmiarze wraz ze wzrostem ilości 
 ksiażek dodawanych do biblioteki.
+
+18/08/2020:
+- wykorzystanie polimorfizmu i utworzenie jednej tabeli przechowującej obiekty Book i Magazine,
+- utworzenie możliwości dodawania osobno magazynów i książek,
+- utworzenie możliwości wyświetlania informacji osobno na temat książek, magazynów lub wszystkich obiektów w bibliotece na raz.
