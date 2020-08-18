@@ -2,66 +2,87 @@ package pl.gooradev.library.model;
 
 
 public class Library {
-    private int maxBooks = 1;
-    private Book[] books = new Book[maxBooks];
-    private int booksNumber;
+    private int maxPublications = 1;
+    private Publication[] publications = new Publication[maxPublications];
+    private int publicationNumber;
 
     public Library() {
     }
 
-    public Library(int maxBooks, Book[] books, int booksNumber) {
-        this.maxBooks = maxBooks;
-        this.books = books;
-        this.booksNumber = booksNumber;
-    }
 
-    public void addBook(Book book){
-        if(maxBooks<=booksNumber){
-            books = extendTab(books);
+    public void addPublication(Publication publication){
+        if(maxPublications<=publicationNumber){
+            publications = extendTab(publications);
         }
-        books[booksNumber] = book;
-        booksNumber++;
+        publications[publicationNumber] = publication;
+        publicationNumber++;
     }
     
-    private Book[] extendTab(Book[] books){
-        maxBooks*=maxBooks*2;
-        Book[] newBooks = new Book[maxBooks];
-        for (int i = 0; i < books.length; i++) {
-            newBooks[i] = books[i];
+    private Publication[] extendTab(Publication[] publications){
+        maxPublications*=maxPublications*2;
+        Publication[] newPublications = new Publication[maxPublications];
+        for (int i = 0; i < publications.length; i++) {
+            newPublications[i] = publications[i];
         }
-        return newBooks;
+        return newPublications;
     }
 
-    public void printBooks() {
-        if(booksNumber == 0) {
-            System.out.println("Brak książek w bibliotece");
+    public void printAll() {
+        if(publicationNumber == 0) {
+            System.out.println("Brak publikacji w bibliotece");
         }
-        for(int i=0; i<booksNumber; i++) {
-            System.out.println(books[i].toString());
+        for(int i=0; i<publicationNumber; i++) {
+            System.out.println(publications[i].toString());
         }
     }
 
-    public int getMaxBooks() {
-        return maxBooks;
+    public void printBooks(){
+        int booksNumber = 0;
+        for (Publication publication : publications) {
+            if(publication instanceof Book){
+                System.out.println(publication);
+                booksNumber++;
+            }
+            if (booksNumber == 0){
+                System.out.println("Brak książek w bibliotece");
+            }
+        }
     }
 
-    public void setMaxBooks(int maxBooks) {
-        this.maxBooks = maxBooks;
+    public void printMagazines(){
+        int magazinesNumber = 0;
+        for (Publication publication : publications) {
+            if(publication instanceof Magazine){
+                System.out.println(publication);
+                magazinesNumber++;
+            }
+            if (magazinesNumber == 0){
+                System.out.println("Brak magazynów w bibliotece");
+            }
+        }
     }
 
-    public Book[] getBooks() {
-        return books;
+    public int getMaxPublications() {
+        return maxPublications;
     }
 
-    public void setBooks(Book[] books) {
-        this.books = books;
+    public void setMaxPublications(int maxPublications) {
+        this.maxPublications = maxPublications;
     }
 
-    public int getBooksNumber() {
-        return booksNumber;
+    public Publication[] getPublications() {
+        return publications;
     }
 
-    public void setBooksNumber(int booksNumber) {
-        this.booksNumber = booksNumber;
+    public void setPublications(Publication[] publications) {
+        this.publications = publications;
+    }
+
+    public int getPublicationNumber() {
+        return publicationNumber;
+    }
+
+    public void setPublicationNumber(int publicationNumber) {
+        this.publicationNumber = publicationNumber;
     }
 }
