@@ -11,7 +11,7 @@ W przyszłości aplikacja otrzyma interfejs graficzny stworzony w technologii Ja
 
 13/08/2020:
 - dodanie dodatkowej klasy odpowiedzialnej za wczytywanie danych od użytkownika, 
-- dodanie funkcji tworzenia książek na podstawie informacji przekazywanych przez użytkownika.
+- dodanie funkcji tworzenia książek na podstawie informacji przekazywanych przez użytkownika
 
 17/08/2020:
 - dodanie klasy kontrolera zawierającej w sobie główną pętlę programu,
@@ -28,3 +28,4 @@ ksiażek dodawanych do biblioteki.
 19/08/2020:
 - wykorzystanie typu wyliczeniowego Enum w klasie Option, by usprawnić funkcjonowanie menu aplikacji,
 - wykorzystanie obiektu StringBuffer i metody append by usprawnić wyświetlanie informacji na temat publikacji w bibliotece,
+
