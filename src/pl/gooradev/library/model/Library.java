@@ -10,16 +10,16 @@ public class Library {
     }
 
 
-    public void addPublication(Publication publication){
-        if(maxPublications<=publicationNumber){
+    public void addPublication(Publication publication) {
+        if (maxPublications <= publicationNumber) {
             publications = extendTab(publications);
         }
         publications[publicationNumber] = publication;
         publicationNumber++;
     }
-    
-    private Publication[] extendTab(Publication[] publications){
-        maxPublications*=maxPublications*2;
+
+    private Publication[] extendTab(Publication[] publications) {
+        maxPublications *= maxPublications * 2;
         Publication[] newPublications = new Publication[maxPublications];
         for (int i = 0; i < publications.length; i++) {
             newPublications[i] = publications[i];
@@ -27,39 +27,53 @@ public class Library {
         return newPublications;
     }
 
-    public void printAll() {
-        if(publicationNumber == 0) {
-            System.out.println("Brak publikacji w bibliotece");
+    public String printAll() {
+
+        StringBuffer sb = new StringBuffer();
+
+        for (int i = 0; i < publicationNumber; i++) {
+            sb.append(publications[i].toString() + "\n");
         }
-        for(int i=0; i<publicationNumber; i++) {
-            System.out.println(publications[i].toString());
+        if (publicationNumber == 0) {
+            return "Brak publikacji w bibliotece";
         }
+
+        return sb.toString();
     }
 
-    public void printBooks(){
+    public String printBooks() {
+
+        StringBuffer sb = new StringBuffer();
         int booksNumber = 0;
+
         for (Publication publication : publications) {
-            if(publication instanceof Book){
-                System.out.println(publication);
+            if (publication instanceof Book) {
+                sb.append(publication.toString() + "\n");
                 booksNumber++;
             }
-            if (booksNumber == 0){
-                System.out.println("Brak książek w bibliotece");
+            if (booksNumber == 0) {
+                return "Brak książek w bibliotece";
             }
         }
+
+        return sb.toString();
     }
 
-    public void printMagazines(){
+    public String printMagazines() {
+        StringBuffer sb = new StringBuffer();
         int magazinesNumber = 0;
+
         for (Publication publication : publications) {
-            if(publication instanceof Magazine){
-                System.out.println(publication);
+            if (publication instanceof Magazine) {
+                sb.append(publication.toString() + "\n");
                 magazinesNumber++;
             }
-            if (magazinesNumber == 0){
-                System.out.println("Brak magazynów w bibliotece");
+            if (magazinesNumber == 0) {
+                return "Brak magazynów/gazet w bibliotece";
             }
         }
+
+        return sb.toString();
     }
 
     public int getMaxPublications() {

@@ -24,3 +24,7 @@ ksiażek dodawanych do biblioteki.
 - wykorzystanie polimorfizmu i utworzenie jednej tabeli przechowującej obiekty Book i Magazine,
 - utworzenie możliwości dodawania osobno magazynów i książek,
 - utworzenie możliwości wyświetlania informacji osobno na temat książek, magazynów lub wszystkich obiektów w bibliotece na raz.
+
+19/08/2020:
+- wykorzystanie typu wyliczeniowego Enum w klasie Option, by usprawnić funkcjonowanie menu aplikacji,
+- wykorzystanie obiektu StringBuffer i metody append by usprawnić wyświetlanie informacji na temat publikacji w bibliotece,

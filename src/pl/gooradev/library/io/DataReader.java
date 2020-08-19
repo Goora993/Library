@@ -22,11 +22,11 @@ public class DataReader {
         System.out.println("ISBN: ");
         String isbn = sc.nextLine();
         System.out.println("Rok wydania: ");
-        int releaseDate = getInt();
+        int year = getInt();
         System.out.println("Ilość stron: ");
         int pages = getInt();
 
-        return new Book(title, author, releaseDate, pages, publisher, isbn);
+        return new Book(title, publisher, year, author, pages, isbn);
     }
 
     public Magazine readAndCreateMagazine() {
