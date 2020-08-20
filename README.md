@@ -25,3 +25,16 @@ ksiażek dodawanych do biblioteki.
 - utworzenie możliwości dodawania osobno magazynów i książek,
 - utworzenie możliwości wyświetlania informacji osobno na temat książek, magazynów lub wszystkich obiektów w bibliotece na raz.
 
+19/08/2020:
+- wykorzystanie typu wyliczeniowego Enum w klasie Option, by usprawnić funkcjonowanie menu aplikacji,
+- wykorzystanie obiektu StringBuffer i metody append by usprawnić wyświetlanie informacji na temat publikacji 
+w bibliotece.
+
+20/08/2020:
+- dodanie obsługi wyjątków w momentach, gdzie użytkownik może wprowadzić błędne dla funkcjonowania programu
+dane,
+- dodanie klasy wyjątku NoSuchOptionException w celu sprecyzowania czego wyjatek dotyczy, a także przećwiczenia tworzenia
+własnych klas wyjątków.
+- zaimplementowanie zmian w klasach wymaganych do poprawnego działania programu po dodaniu funkcji obsługi wyjątków.
+
+

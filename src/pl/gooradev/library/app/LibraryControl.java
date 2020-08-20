@@ -1,24 +1,39 @@
 package pl.gooradev.library.app;
 
+import pl.gooradev.library.exception.NoSuchOptionException;
+import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
 
-public class LibraryControl {
-    private static final int ADD_PUBLICATION = 1;
-    private static final int PRINT_PUBLICATIONS = 2;
-    private static final int EXIT = 3;
+import java.util.InputMismatchException;
 
+public class LibraryControl {
 
     Library library = new Library();
-    DataReader dataReader = new DataReader();
+    ConsolePrinter consolePrinter = new ConsolePrinter(library);
+    DataReader dataReader = new DataReader(consolePrinter);
 
-    public void mainLoop(){
-        int option = 0;
-        do{
+    int optionInt;
+
+
+    public void mainLoop() {
+        Option option = null;
+        do {
             printOptions();
-            option = dataReader.getInt();
-            switch (option){
+            try{
+                option = getOption();
+                mainLoopSwitch(option);
+            } catch (NoSuchOptionException | InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+        } while (option != Option.EXIT);
+    }
+
+
+    private void mainLoopSwitch(Option option) throws NoSuchOptionException, InputMismatchException{
+        try{
+            switch (option) {
                 case ADD_PUBLICATION:
                     addPublication();
                     break;
@@ -28,31 +43,28 @@ public class LibraryControl {
                 case EXIT:
                     exit();
                     break;
-                default:
-                    System.out.println("Nie ma takiej opcji, wprowadź ponownie: ");
-                    
             }
-        } while(option!=0);
+        } catch (NullPointerException e){
+            throw new NoSuchOptionException("Brak opcji o id " + optionInt);
+        }
     }
 
-    private void addPublication(){
-        int option = 0;
-        do{
+    private void addPublication() {
+        Option option;
+        do {
             printMagazineOrBookMenu();
-            option = dataReader.getInt();
-            switch(option){
-                case 1:
+            option = getOption();
+            switch (option) {
+                case ADD_BOOK:
                     addBook();
                     break;
-                case 2:
+                case ADD_MAGAZINE:
                     addMagazine();
                     break;
-                case 0:
+                case BACK:
                     break;
-                default:
-                    System.out.println("Nie ma takiej opcji, wprowadź ponownie: ");
             }
-        } while(option!=0);
+        } while (option != Option.BACK);
     }
 
     private void addMagazine() {
@@ -66,68 +78,70 @@ public class LibraryControl {
     }
 
     private void printPublications() {
-        int option = 0;
-        do{
+        Option option;
+        do {
             printAddPublicationsMenu();
-            option = dataReader.getInt();
-            switch(option){
-                case 1:
+            option = getOption();
+            switch (option) {
+                case PRINT_BOOKS:
                     printBooks();
                     break;
-                case 2:
+                case PRINT_MAGAZINES:
                     printMagazines();
                     break;
-                case 3:
+                case PRINT_ALL:
                     printAll();
                     break;
-                case 0:
+                case BACK:
                     break;
-                default:
-                    System.out.println("Nie ma takiej opcji, wprowadź ponownie: ");
             }
-        } while(option!=0);
+        } while (option != Option.BACK);
     }
-
 
 
     private void printBooks() {
-        library.printBooks();
+        consolePrinter.printBooks();
     }
 
     private void printMagazines() {
-        library.printMagazines();
+        consolePrinter.printMagazines();
     }
 
     private void printAll() {
-        library.printAll();
+        consolePrinter.printAll();
     }
 
     private void exit() {
-        System.out.println("Do widzenia!");
+        consolePrinter.printLine("Do widzenia!");
         dataReader.close();
     }
 
 
     private void printOptions() {
-        System.out.println("Wybierz opcję: ");
-        System.out.println(ADD_PUBLICATION + " - dodanie nowej publikacji");
-        System.out.println(PRINT_PUBLICATIONS + " - wyświetl dostępne publikacje");
-        System.out.println(EXIT + " - wyjście z programu");
+        consolePrinter.printLine("Wybierz opcję: ");
+        consolePrinter.printLine(Option.ADD_PUBLICATION);
+        consolePrinter.printLine(Option.PRINT_PUBLICATIONS);
+        consolePrinter.printLine(Option.EXIT);
+        ;
     }
 
-    private void printMagazineOrBookMenu(){
-        System.out.println("Wybierz opcję: ");
-        System.out.println("1 - dodanie nowej książki");
-        System.out.println("2 - dodanie nowego magazynu");
-        System.out.println("0 - wróć do menu głównego");
+    private void printMagazineOrBookMenu() {
+        consolePrinter.printLine("Wybierz opcję: ");
+        consolePrinter.printLine(Option.ADD_BOOK);
+        consolePrinter.printLine(Option.ADD_MAGAZINE);
+        consolePrinter.printLine(Option.BACK);
     }
 
-    private void printAddPublicationsMenu(){
-        System.out.println("Wybierz opcję: ");
-        System.out.println("1 - wyświetl książki");
-        System.out.println("2 - wyświetl magazyny");
-        System.out.println("3 - wyświetl wszystko");
-        System.out.println("0 - wróć do menu głównego");
+    private void printAddPublicationsMenu() {
+        consolePrinter.printLine("Wybierz opcję: ");
+        consolePrinter.printLine(Option.PRINT_BOOKS);
+        consolePrinter.printLine(Option.PRINT_MAGAZINES);
+        consolePrinter.printLine(Option.PRINT_ALL);
+        consolePrinter.printLine(Option.BACK);
     }
 
+    private Option getOption() throws InputMismatchException {
+        optionInt = dataReader.getInt();
+        return Option.createFromInt(optionInt);
+    }
 }
