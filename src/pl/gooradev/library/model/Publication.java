@@ -51,4 +51,10 @@ Publication(String title, String publisher, int year){
     public int hashCode() {
         return Objects.hash(title, publisher, year);
     }
+
+    @Override
+    public String toString() {
+        return "Tytuł: " + getTitle()  + ", wydawnictwo: "
+                + getPublisher() + ", rok wydania: " + getYear();
+    }
 }

@@ -1,5 +1,7 @@
 package pl.gooradev.library.app;
 
+import pl.gooradev.library.exception.NoSuchOptionException;
+
 public enum Option {
     ADD_PUBLICATION(1, "Dodawanie publikacji"),
     ADD_BOOK(11, "Dodawanie książki"),
@@ -37,14 +39,13 @@ public enum Option {
     }
 
     static Option createFromInt(int opt) {
+
         Option[] options = Option.values();
         Option optionToReturn = null;
         for (Option option : options) {
-            if(option.getValue()==opt)
+            if (option.getValue() == opt)
                 optionToReturn = option;
         }
         return optionToReturn;
     }
-
-
 }

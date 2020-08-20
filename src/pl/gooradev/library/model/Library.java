@@ -9,7 +9,6 @@ public class Library {
     public Library() {
     }
 
-
     public void addPublication(Publication publication) {
         if (maxPublications <= publicationNumber) {
             publications = extendTab(publications);
@@ -27,54 +26,15 @@ public class Library {
         return newPublications;
     }
 
-    public String printAll() {
-
-        StringBuffer sb = new StringBuffer();
-
-        for (int i = 0; i < publicationNumber; i++) {
-            sb.append(publications[i].toString() + "\n");
+    public Publication[] getPublications() {
+        Publication[] resultTab = new Publication[publicationNumber];
+        for (int i = 0; i < publications.length; i++) {
+            if(publications[i]!=null)
+                resultTab[i] = publications[i];
         }
-        if (publicationNumber == 0) {
-            return "Brak publikacji w bibliotece";
-        }
-
-        return sb.toString();
+        return resultTab;
     }
 
-    public String printBooks() {
-
-        StringBuffer sb = new StringBuffer();
-        int booksNumber = 0;
-
-        for (Publication publication : publications) {
-            if (publication instanceof Book) {
-                sb.append(publication.toString() + "\n");
-                booksNumber++;
-            }
-            if (booksNumber == 0) {
-                return "Brak książek w bibliotece";
-            }
-        }
-
-        return sb.toString();
-    }
-
-    public String printMagazines() {
-        StringBuffer sb = new StringBuffer();
-        int magazinesNumber = 0;
-
-        for (Publication publication : publications) {
-            if (publication instanceof Magazine) {
-                sb.append(publication.toString() + "\n");
-                magazinesNumber++;
-            }
-            if (magazinesNumber == 0) {
-                return "Brak magazynów/gazet w bibliotece";
-            }
-        }
-
-        return sb.toString();
-    }
 
     public int getMaxPublications() {
         return maxPublications;
@@ -82,10 +42,6 @@ public class Library {
 
     public void setMaxPublications(int maxPublications) {
         this.maxPublications = maxPublications;
-    }
-
-    public Publication[] getPublications() {
-        return publications;
     }
 
     public void setPublications(Publication[] publications) {

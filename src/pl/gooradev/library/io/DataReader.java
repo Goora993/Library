@@ -3,56 +3,63 @@ package pl.gooradev.library.io;
 import pl.gooradev.library.model.Book;
 import pl.gooradev.library.model.Magazine;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class DataReader {
     Scanner sc = new Scanner(System.in);
+    ConsolePrinter consolePrinter;
+
+    public DataReader(ConsolePrinter consolePrinter) {
+        this.consolePrinter = consolePrinter;
+    }
 
     public void close() {
         sc.close();
     }
 
     public Book readAndCreateBook() {
-        System.out.println("Tytuł: ");
+        consolePrinter.printLine("Tytuł: ");
         String title = sc.nextLine();
-        System.out.println("Autor: ");
+        consolePrinter.printLine("Autor: ");
         String author = sc.nextLine();
-        System.out.println("Wydawnictwo: ");
+        consolePrinter.printLine("Wydawnictwo: ");
         String publisher = sc.nextLine();
-        System.out.println("ISBN: ");
+        consolePrinter.printLine("ISBN: ");
         String isbn = sc.nextLine();
-        System.out.println("Rok wydania: ");
+        consolePrinter.printLine("Rok wydania: ");
         int year = getInt();
-        System.out.println("Ilość stron: ");
+        consolePrinter.printLine("Ilość stron: ");
         int pages = getInt();
 
         return new Book(title, publisher, year, author, pages, isbn);
     }
 
     public Magazine readAndCreateMagazine() {
-        System.out.println("Tytuł: ");
+        consolePrinter.printLine("Tytuł: ");
         String title = sc.nextLine();
-        System.out.println("Wydawnictwo: ");
+        consolePrinter.printLine("Wydawnictwo: ");
         String publisher = sc.nextLine();
-        System.out.println("Język: ");
+        consolePrinter.printLine("Język: ");
         String language = sc.nextLine();
-        System.out.println("Rok wydania: ");
+        consolePrinter.printLine("Rok wydania: ");
         int year = getInt();
-        System.out.println("Miesiąc: ");
+        consolePrinter.printLine("Miesiąc: ");
         int month = getInt();
-        System.out.println("Dzień: ");
+        consolePrinter.printLine("Dzień: ");
         int day = getInt();
 
         return new Magazine(title, publisher, language, year, month, day);
     }
 
-    public int getInt(){
-        int i = sc.nextInt();
-        sc.nextLine();
-        return i;
+    public int getInt() throws InputMismatchException {
+        try {
+            return sc.nextInt();
+        } catch (InputMismatchException e) {
+            throw new InputMismatchException("Użytko błędnego znaku");
+        } finally {
+            sc.nextLine();
+        }
     }
-
-
-
 
 }
