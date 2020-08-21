@@ -1,7 +1,9 @@
 package pl.gooradev.library.model;
 
 
-public class Library {
+import java.io.Serializable;
+
+public class Library implements Serializable {
     private int maxPublications = 1;
     private Publication[] publications = new Publication[maxPublications];
     private int publicationNumber;

@@ -1,8 +1,12 @@
 package pl.gooradev.library.app;
 
+import pl.gooradev.library.exception.DataExportException;
+import pl.gooradev.library.exception.DataImportException;
 import pl.gooradev.library.exception.NoSuchOptionException;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
+import pl.gooradev.library.io.file.FileManager;
+import pl.gooradev.library.io.file.FileManagerBuilder;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
 
@@ -10,11 +14,23 @@ import java.util.InputMismatchException;
 
 public class LibraryControl {
 
-    Library library = new Library();
-    ConsolePrinter consolePrinter = new ConsolePrinter(library);
+    Library library;
+    ConsolePrinter consolePrinter = new ConsolePrinter();
     DataReader dataReader = new DataReader(consolePrinter);
-
+    FileManager fileManager;
     int optionInt;
+
+    LibraryControl() {
+        fileManager = new FileManagerBuilder(consolePrinter, dataReader).build();
+        try {
+            library = fileManager.importData();
+            consolePrinter.printLine("Zaimportowane dane z pliku");
+        } catch (DataImportException e) {
+            consolePrinter.printLine(e.getMessage());
+            consolePrinter.printLine("Zainicjowano nową bazę.");
+            library = new Library();
+        }
+    }
 
 
     public void mainLoop() {
@@ -100,18 +116,24 @@ public class LibraryControl {
 
 
     private void printBooks() {
-        consolePrinter.printBooks();
+        consolePrinter.printBooks(library);
     }
 
     private void printMagazines() {
-        consolePrinter.printMagazines();
+        consolePrinter.printMagazines(library);
     }
 
     private void printAll() {
-        consolePrinter.printAll();
+        consolePrinter.printAll(library);
     }
 
     private void exit() {
+        try {
+            fileManager.exportData(library);
+            consolePrinter.printLine("Export danych do pliku zakończony powodzeniem");
+        } catch (DataExportException e) {
+            consolePrinter.printLine(e.getMessage());
+        }
         consolePrinter.printLine("Do widzenia!");
         dataReader.close();
     }
@@ -145,3 +167,8 @@ public class LibraryControl {
         return Option.createFromInt(optionInt);
     }
 }
+
+
+
+
+
