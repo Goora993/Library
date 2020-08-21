@@ -1,7 +1,5 @@
 package pl.gooradev.library.app;
 
-import pl.gooradev.library.exception.NoSuchOptionException;
-
 public enum Option {
     ADD_PUBLICATION(1, "Dodawanie publikacji"),
     ADD_BOOK(11, "Dodawanie książki"),
@@ -22,10 +20,6 @@ public enum Option {
 
     public String getDescription() {
         return description;
-    }
-
-    Option(int value){
-        this.value = value;
     }
 
     Option(int value, String desc) {

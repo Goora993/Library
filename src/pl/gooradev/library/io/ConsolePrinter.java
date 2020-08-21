@@ -8,13 +8,8 @@ import pl.gooradev.library.model.Publication;
 
 public class ConsolePrinter {
 
-    Library library;
 
-    public ConsolePrinter(Library library) {
-        this.library = library;
-    }
-
-    public void printAll() {
+    public void printAll(Library library) {
         StringBuffer sb = new StringBuffer();
         Publication[] publications = library.getPublications();
 
@@ -29,7 +24,7 @@ public class ConsolePrinter {
         printLine(sb.toString());
     }
 
-    public void printBooks() {
+    public void printBooks(Library library) {
         StringBuffer sb = new StringBuffer();
         Publication[] publications = library.getPublications();
         int counter = 0;
@@ -48,7 +43,7 @@ public class ConsolePrinter {
         printLine(sb.toString());
     }
 
-    public void printMagazines() {
+    public void printMagazines(Library library) {
         StringBuffer sb = new StringBuffer();
         Publication[] publications = library.getPublications();
         int counter = 0;
