@@ -3,6 +3,7 @@ package pl.gooradev.library.model;
 import java.util.Objects;
 
 public class Magazine extends Publication {
+    public static final String TYPE = "Magazyn";
     private String language;
     private int month;
     private int day;
@@ -57,5 +58,16 @@ public class Magazine extends Publication {
     @Override
     public int hashCode() {
         return Objects.hash(language, month, day);
+    }
+
+    @Override
+    public String toCsv() {
+        return (TYPE + ";") +
+                getTitle() + ";" +
+                getPublisher() + ";" +
+                getYear() + ";" +
+                month + ";" +
+                day + ";" +
+                language + "";
     }
 }

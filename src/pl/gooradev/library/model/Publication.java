@@ -58,4 +58,6 @@ Publication(String title, String publisher, int year){
         return "Tytuł: " + getTitle()  + ", wydawnictwo: "
                 + getPublisher() + ", rok wydania: " + getYear();
     }
+
+    public abstract String toCsv();
 }

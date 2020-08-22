@@ -2,6 +2,7 @@ package pl.gooradev.library.app;
 
 import pl.gooradev.library.exception.DataExportException;
 import pl.gooradev.library.exception.DataImportException;
+import pl.gooradev.library.exception.InvalidDataException;
 import pl.gooradev.library.exception.NoSuchOptionException;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
@@ -25,7 +26,7 @@ public class LibraryControl {
         try {
             library = fileManager.importData();
             consolePrinter.printLine("Zaimportowane dane z pliku");
-        } catch (DataImportException e) {
+        } catch (DataImportException | InvalidDataException e) {
             consolePrinter.printLine(e.getMessage());
             consolePrinter.printLine("Zainicjowano nową bazę.");
             library = new Library();

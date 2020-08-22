@@ -47,3 +47,7 @@ utworzono interfejs FileManager i jego implementację SerializableFileManager, k
 zapisywać obiekt klasy Library przy pomocy serializacji (klasa Library i Publication implementują
 interfejs Serializable) do pliku Library.o 
 
+22/08/2020:
+- dodanie funkcji zapisaywania publikacji w pliku o rozszerzeniu .csv na podobnych zasadach jak przy wykorzystaniu
+serializacji, jednak przy wykorzystaniu innych mechanizmów zawartych głównie w klasie CsvFileManager
+
