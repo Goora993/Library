@@ -15,6 +15,14 @@ public class Magazine extends Publication {
         this.day = day;
     }
 
+    public Magazine(String title, String publisher, String language, int year, int month, int day, long id) {
+        super(title, publisher, year, id);
+        this.language = language;
+        this.month = month;
+        this.day = day;
+    }
+
+
     public String getLanguage() {
         return language;
     }
@@ -42,7 +50,8 @@ public class Magazine extends Publication {
     @Override
     public String toString() {
         return "Tytuł: " + getTitle() + ", język: " + getLanguage() + ", wydawnictwo: "
-                + getPublisher() + ", data wydania: " + getYear() + "-" + getMonth() + "-" + getDay();
+                + getPublisher() + ", data wydania: " + getYear() + "-" + getMonth() + "-" + getDay()
+                + ", ID: " + getId();
     }
 
     @Override
@@ -61,6 +70,11 @@ public class Magazine extends Publication {
     }
 
     @Override
+    public long getId() {
+        return super.getId();
+    }
+
+    @Override
     public String toCsv() {
         return (TYPE + ";") +
                 getTitle() + ";" +
@@ -68,6 +82,7 @@ public class Magazine extends Publication {
                 getYear() + ";" +
                 month + ";" +
                 day + ";" +
-                language + "";
+                language + ";" +
+                getId() + "";
     }
 }

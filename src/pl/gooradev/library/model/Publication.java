@@ -4,15 +4,32 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public abstract class Publication implements Serializable {
-private String title;
-private String publisher;
-private int year;
 
-Publication(String title, String publisher, int year){
-    this.title = title;
-    this.publisher = publisher;
-    this.year = year;
+    private long id;
+    private String title;
+    private String publisher;
+    private int year;
+
+    Publication(String title, String publisher, int year){
+        this.title = title;
+        this.publisher = publisher;
+        this.year = year;
 }
+
+    Publication(String title, String publisher, int year, long id){
+        this.id = id;
+        this.title = title;
+        this.publisher = publisher;
+        this.year = year;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -55,8 +72,8 @@ Publication(String title, String publisher, int year){
 
     @Override
     public String toString() {
-        return "Tytuł: " + getTitle()  + ", wydawnictwo: "
-                + getPublisher() + ", rok wydania: " + getYear();
+        return  "Tytuł: " + getTitle()  + ", wydawnictwo: "
+                + getPublisher() + ", rok wydania: " + getYear() + ", ID: " + getId();
     }
 
     public abstract String toCsv();

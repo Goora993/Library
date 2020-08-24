@@ -10,6 +10,7 @@ import pl.gooradev.library.io.file.FileManager;
 import pl.gooradev.library.io.file.FileManagerBuilder;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
+import pl.gooradev.library.util.IdGenerator;
 
 import java.util.InputMismatchException;
 
@@ -18,6 +19,7 @@ public class LibraryControl {
     Library library;
     ConsolePrinter consolePrinter = new ConsolePrinter();
     DataReader dataReader = new DataReader(consolePrinter);
+    private IdGenerator idGenerator = new IdGenerator();
     FileManager fileManager;
     int optionInt;
 
@@ -54,6 +56,9 @@ public class LibraryControl {
                 case ADD_PUBLICATION:
                     addPublication();
                     break;
+                case REMOVE_PUBLICATION:
+                    removePublication();
+                    break;
                 case PRINT_PUBLICATIONS:
                     printPublications();
                     break;
@@ -65,6 +70,7 @@ public class LibraryControl {
             throw new NoSuchOptionException("Brak opcji o id " + optionInt);
         }
     }
+
 
     private void addPublication() {
         Option option;
@@ -86,13 +92,59 @@ public class LibraryControl {
 
     private void addMagazine() {
         Publication publication = dataReader.readAndCreateMagazine();
+        publication.setId(idGenerator.createId(library.getPublications()));
         library.addPublication(publication);
     }
 
     private void addBook() {
         Publication publication = dataReader.readAndCreateBook();
+        publication.setId(idGenerator.createId(library.getPublications()));
         library.addPublication(publication);
     }
+
+    private void removePublication() {
+        Option option;
+        do {
+            printRemovePublicationMenu();
+            option = getOption();
+            switch (option) {
+                case REMOVE_BOOK:
+                    removeBook();
+                    break;
+                case REMOVE_MAGAZINE:
+                    removeMagazine();
+                    break;
+                case BACK:
+                    break;
+            }
+        } while (option != Option.BACK);
+
+    }
+
+    private void removeBook() {
+        try{
+            Publication publication = dataReader.readAndCreateBook();
+            if(library.removePublicationByPublication(publication))
+                consolePrinter.printLine("Usunięto książkę");
+            else
+                consolePrinter.printLine("Brak wskazanej książki");
+        } catch (InputMismatchException e){
+            consolePrinter.printLine("Nie udało się usunąć wskazanej książki, niepoprawne dane");
+        }
+    }
+
+    private void removeMagazine() {
+        try{
+            Publication publication = dataReader.readAndCreateMagazine();
+            if(library.removePublicationByPublication(publication))
+                consolePrinter.printLine("Usunięto magazyn/gazetę");
+            else
+                consolePrinter.printLine("Brak wskazanego magazynu/gazety");
+        } catch (InputMismatchException e){
+            consolePrinter.printLine("Nie udało się usunąć wskazanego magazynu/gazety, niepoprawne dane");
+        }
+    }
+
 
     private void printPublications() {
         Option option;
@@ -143,9 +195,10 @@ public class LibraryControl {
     private void printOptions() {
         consolePrinter.printLine("Wybierz opcję: ");
         consolePrinter.printLine(Option.ADD_PUBLICATION);
+        consolePrinter.printLine(Option.REMOVE_PUBLICATION);
         consolePrinter.printLine(Option.PRINT_PUBLICATIONS);
         consolePrinter.printLine(Option.EXIT);
-        ;
+
     }
 
     private void printMagazineOrBookMenu() {
@@ -160,6 +213,13 @@ public class LibraryControl {
         consolePrinter.printLine(Option.PRINT_BOOKS);
         consolePrinter.printLine(Option.PRINT_MAGAZINES);
         consolePrinter.printLine(Option.PRINT_ALL);
+        consolePrinter.printLine(Option.BACK);
+    }
+
+    private void printRemovePublicationMenu() {
+        consolePrinter.printLine("Wybierz opcję: ");
+        consolePrinter.printLine(Option.REMOVE_BOOK);
+        consolePrinter.printLine(Option.REMOVE_MAGAZINE);
         consolePrinter.printLine(Option.BACK);
     }
 

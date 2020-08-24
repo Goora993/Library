@@ -1,10 +1,11 @@
 package pl.gooradev.library.model;
 
-
 import java.io.Serializable;
+import java.util.Arrays;
 
 public class Library implements Serializable {
-    private int maxPublications = 1;
+
+    private int maxPublications = 10;
     private Publication[] publications = new Publication[maxPublications];
     private int publicationNumber;
 
@@ -13,20 +14,33 @@ public class Library implements Serializable {
 
     public void addPublication(Publication publication) {
         if (maxPublications <= publicationNumber) {
-            publications = extendTab(publications);
+            publications = Arrays.copyOf(publications, publications.length*2);
         }
         publications[publicationNumber] = publication;
         publicationNumber++;
     }
 
-    private Publication[] extendTab(Publication[] publications) {
-        maxPublications *= maxPublications * 2;
-        Publication[] newPublications = new Publication[maxPublications];
-        for (int i = 0; i < publications.length; i++) {
-            newPublications[i] = publications[i];
+    public boolean removePublicationByPublication(Publication publication){
+        final int NOT_FOUND = -1;
+        int found = NOT_FOUND;
+        int i = 0;
+        while (i < publications.length && found == NOT_FOUND) {
+            if (publication.equals(publications[i])) {
+                found = i;
+            } else {
+                i++;
+            }
         }
-        return newPublications;
+
+        if (found != NOT_FOUND) {
+            System.arraycopy(publications, found + 1, publications, found,
+                    publications.length - found - 1);
+            publicationNumber--;
+        }
+
+        return found != NOT_FOUND;
     }
+
 
     public Publication[] getPublications() {
         Publication[] resultTab = new Publication[publicationNumber];

@@ -15,6 +15,14 @@ public class Book extends Publication {
         this.isbn = isbn;
     }
 
+    public Book(String title, String publisher, int year, String author, int pages, String isbn, long id){
+        super(title, publisher, year, id);
+        this.author = author;
+        this.pages = pages;
+        this.isbn = isbn;
+    }
+
+
 
     public String getAuthor() {
         return author;
@@ -45,7 +53,8 @@ public class Book extends Publication {
     @Override
     public String toString() {
         return "Tytuł: " + getTitle() + ", autor: " + getAuthor() + ", ilość stron " + getPages() + ", wydawnictwo: "
-                + getPublisher() + ", rok wydania: " + getYear() + ", ISBN: " + getIsbn();
+                + getPublisher() + ", rok wydania: " + getYear() + ", ISBN: " + getIsbn()
+                + ", ID: " + getId();
     }
 
     @Override
@@ -64,6 +73,11 @@ public class Book extends Publication {
     }
 
     @Override
+    public long getId() {
+        return super.getId();
+    }
+
+    @Override
     public String toCsv() {
         return  (TYPE + ";") +
                 getTitle() + ";" +
@@ -71,6 +85,7 @@ public class Book extends Publication {
                 getYear() + ";" +
                 author + ";" +
                 pages + ";" +
-                isbn + "";
+                isbn + ";" +
+                + getId() + "";
     }
 }

@@ -4,11 +4,14 @@ public enum Option {
     ADD_PUBLICATION(1, "Dodawanie publikacji"),
     ADD_BOOK(11, "Dodawanie książki"),
     ADD_MAGAZINE(12, "Dodawanie magazynu/gazety"),
-    PRINT_PUBLICATIONS(2, "Wyświetlanie informacji o publikacjach"),
-    PRINT_BOOKS(21, "Wyświetlanie informacji o książkach"),
-    PRINT_MAGAZINES(22, "Wyświetlanie informacji o magazynach/gazetach"),
-    PRINT_ALL(23, "Wyświetlanie informacji o wszystkich publikacjach"),
-    BACK(3, "Wróć do poprzedniego menu"),
+    REMOVE_PUBLICATION(2, "Usuwanie publikacji"),
+    REMOVE_BOOK(21, "Usuwanie ksiażki"),
+    REMOVE_MAGAZINE(22, "Usuwanie magazynu/gazety"),
+    PRINT_PUBLICATIONS(3, "Wyświetlanie informacji o publikacjach"),
+    PRINT_BOOKS(31, "Wyświetlanie informacji o książkach"),
+    PRINT_MAGAZINES(32, "Wyświetlanie informacji o magazynach/gazetach"),
+    PRINT_ALL(33, "Wyświetlanie informacji o wszystkich publikacjach"),
+    BACK(9, "Wróć do poprzedniego menu"),
     EXIT(0, "Wyjście z programu");
 
     private int value;

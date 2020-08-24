@@ -51,3 +51,6 @@ interfejs Serializable) do pliku Library.o
 - dodanie funkcji zapisaywania publikacji w pliku o rozszerzeniu .csv na podobnych zasadach jak przy wykorzystaniu
 serializacji, jednak przy wykorzystaniu innych mechanizmów zawartych głównie w klasie CsvFileManager
 
+23/08/2020:
+- utworzenie generatora unikalnych ID dla publikacji, po to aby w przyszłości utworzyć możliwość 
+usuwania publikacji przy jego pomocy

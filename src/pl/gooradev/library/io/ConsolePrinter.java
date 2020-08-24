@@ -14,7 +14,10 @@ public class ConsolePrinter {
         Publication[] publications = library.getPublications();
 
         for (int i = 0; i < publications.length; i++) {
-            sb.append(publications[i].toString() + "\n");
+            if(publications[i] instanceof Book)
+                sb.append("Książka: " + publications[i].toString() + "\n");
+            else
+                sb.append("Magazyn/gazeta: " + publications[i].toString() + "\n");
         }
 
         if (publications.length == 0) {
