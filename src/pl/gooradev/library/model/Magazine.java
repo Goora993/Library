@@ -15,7 +15,7 @@ public class Magazine extends Publication {
         this.day = day;
     }
 
-    public Magazine(String title, String publisher, String language, int year, int month, int day, long id) {
+    public Magazine(String title, String publisher, String language, int year, int month, int day, int id) {
         super(title, publisher, year, id);
         this.language = language;
         this.month = month;
@@ -70,7 +70,7 @@ public class Magazine extends Publication {
     }
 
     @Override
-    public long getId() {
+    public int getId() {
         return super.getId();
     }
 

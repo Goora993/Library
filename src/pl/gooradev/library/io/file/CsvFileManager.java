@@ -47,7 +47,7 @@ public class CsvFileManager implements FileManager {
         String author = data[4];
         int pages = Integer.valueOf(data[5]);
         String isbn = data[6];
-        long id = Integer.valueOf(data[7]);
+        int id = Integer.valueOf(data[7]);
         return new Book(title, publisher, year, author, pages, isbn, id);
     }
 
@@ -58,7 +58,7 @@ public class CsvFileManager implements FileManager {
         int month = Integer.valueOf(data[4]);
         int day = Integer.valueOf(data[5]);
         String language = data[6];
-        long id = Integer.valueOf(data[7]);
+        int id = Integer.valueOf(data[7]);
         return new Magazine(title, publisher, language, year, month, day, id);
     }
 

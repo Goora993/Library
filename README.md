@@ -54,3 +54,7 @@ serializacji, jednak przy wykorzystaniu innych mechanizmów zawartych głównie 
 23/08/2020:
 - utworzenie generatora unikalnych ID dla publikacji, po to aby w przyszłości utworzyć możliwość 
 usuwania publikacji przy jego pomocy
+
+24/08/2020:
+- wydzielenie z głównej klasy LibraryControl, w celu poprawienia czytelności kodu, pomniejszych klas odpowiedzialnych 
+za określone funkcjonalności aplikacji (InfoControl, AddControl, RemoveControl)

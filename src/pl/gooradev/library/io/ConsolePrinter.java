@@ -1,6 +1,6 @@
 package pl.gooradev.library.io;
 
-import pl.gooradev.library.app.Option;
+import pl.gooradev.library.control.Option;
 import pl.gooradev.library.model.Book;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Magazine;

@@ -1,4 +1,6 @@
-package pl.gooradev.library.app;
+package pl.gooradev.library.control;
+
+import java.util.InputMismatchException;
 
 public enum Option {
     ADD_PUBLICATION(1, "Dodawanie publikacji"),
@@ -36,7 +38,6 @@ public enum Option {
     }
 
     static Option createFromInt(int opt) {
-
         Option[] options = Option.values();
         Option optionToReturn = null;
         for (Option option : options) {
@@ -44,5 +45,9 @@ public enum Option {
                 optionToReturn = option;
         }
         return optionToReturn;
+    }
+
+    static Option getOption(int inputInt) throws InputMismatchException {
+        return Option.createFromInt(inputInt);
     }
 }

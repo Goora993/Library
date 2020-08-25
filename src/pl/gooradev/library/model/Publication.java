@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public abstract class Publication implements Serializable {
 
-    private long id;
+    private int id;
     private String title;
     private String publisher;
     private int year;
@@ -16,18 +16,18 @@ public abstract class Publication implements Serializable {
         this.year = year;
 }
 
-    Publication(String title, String publisher, int year, long id){
+    Publication(String title, String publisher, int year, int id){
         this.id = id;
         this.title = title;
         this.publisher = publisher;
         this.year = year;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -60,14 +60,15 @@ public abstract class Publication implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Publication that = (Publication) o;
-        return year == that.year &&
+        return id == that.id &&
+                year == that.year &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(publisher, that.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, publisher, year);
+        return Objects.hash(id, title, publisher, year);
     }
 
     @Override

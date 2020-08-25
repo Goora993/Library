@@ -15,7 +15,7 @@ public class Book extends Publication {
         this.isbn = isbn;
     }
 
-    public Book(String title, String publisher, int year, String author, int pages, String isbn, long id){
+    public Book(String title, String publisher, int year, String author, int pages, String isbn, int id){
         super(title, publisher, year, id);
         this.author = author;
         this.pages = pages;
@@ -73,7 +73,7 @@ public class Book extends Publication {
     }
 
     @Override
-    public long getId() {
+    public int getId() {
         return super.getId();
     }
 
