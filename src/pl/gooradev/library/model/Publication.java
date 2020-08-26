@@ -10,6 +10,7 @@ public abstract class Publication implements Serializable {
     private String publisher;
     private int year;
 
+
     Publication(String title, String publisher, int year){
         this.title = title;
         this.publisher = publisher;
@@ -55,6 +56,7 @@ public abstract class Publication implements Serializable {
         this.year = year;
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -78,4 +80,5 @@ public abstract class Publication implements Serializable {
     }
 
     public abstract String toCsv();
+
 }

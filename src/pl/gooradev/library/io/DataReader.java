@@ -21,7 +21,7 @@ public class DataReader {
     public Book readAndCreateBook() {
         consolePrinter.printLine("Tytuł: ");
         String title = sc.nextLine();
-        consolePrinter.printLine("Autor: ");
+        consolePrinter.printLine("Autor(nazwisko_imię): ");
         String author = sc.nextLine();
         consolePrinter.printLine("Wydawnictwo: ");
         String publisher = sc.nextLine();

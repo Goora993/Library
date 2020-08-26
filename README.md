@@ -58,3 +58,11 @@ usuwania publikacji przy jego pomocy
 25/08/2020:
 - wydzielenie z głównej klasy LibraryControl, w celu poprawienia czytelności kodu, pomniejszych klas odpowiedzialnych 
 za określone funkcjonalności aplikacji (InfoControl, AddControl, RemoveControl)
+
+26/08/2020:
+- dodanie funkcji usuwania publikacji przy pomocy ID lub pełnej informacji nt. publikacji
+- rozdzielenie klasy enum Option na pomniejsze analogicznie do rozdzielenia klasy LibraryControl i umieszczenie określonej
+klasy i odpowiadającego jej enuma w oddzielnym pakiecie w celu poprawienia czytelności kodu oraz struktury plików i folderów
+- utworzenie klas komparatorów w celu dodania funkcji sortowania publikacji podczas ich wyświetlania
+- dodanie funkcji sortowania książek według tytułu lub autora
+- dodanie funkcji sortowania magazynów według nazwy lub wydawnictwa 

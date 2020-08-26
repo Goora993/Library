@@ -1,4 +1,4 @@
-package pl.gooradev.library.control;
+package pl.gooradev.library.control.add;
 
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
@@ -19,10 +19,10 @@ public class AddControl {
     }
 
     public void addPublication() {
-        Option option;
+        AddOption option;
         do {
             printAddMagazineOrBookMenu();
-            option = Option.getOption(dataReader.getInt());
+            option = AddOption.getOption(dataReader.getInt());
             switch (option) {
                 case ADD_BOOK:
                     addBook();
@@ -33,7 +33,7 @@ public class AddControl {
                 case BACK:
                     break;
             }
-        } while (option != Option.BACK);
+        } while (option != AddOption.BACK);
     }
 
     private void addMagazine() {
@@ -50,8 +50,8 @@ public class AddControl {
 
     private void printAddMagazineOrBookMenu() {
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(Option.ADD_BOOK);
-        consolePrinter.printLine(Option.ADD_MAGAZINE);
-        consolePrinter.printLine(Option.BACK);
+        consolePrinter.printLine(AddOption.ADD_BOOK);
+        consolePrinter.printLine(AddOption.ADD_MAGAZINE);
+        consolePrinter.printLine(AddOption.BACK);
     }
 }

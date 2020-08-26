@@ -1,9 +1,9 @@
-package pl.gooradev.library.control;
+package pl.gooradev.library.control.library;
 
-import pl.gooradev.library.exception.DataExportException;
-import pl.gooradev.library.exception.DataImportException;
-import pl.gooradev.library.exception.InvalidDataException;
-import pl.gooradev.library.exception.NoSuchOptionException;
+import pl.gooradev.library.control.add.AddControl;
+import pl.gooradev.library.control.info.InfoControl;
+import pl.gooradev.library.control.remove.RemoveControl;
+import pl.gooradev.library.exception.*;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.FileManager;
@@ -40,22 +40,24 @@ public class LibraryControl {
 
 
     public void run() {
-        Option option = null;
+        LibraryOption libraryOption = null;
         do {
             printOptions();
             try{
-                option = getOption();
-                mainLoop(option);
+                libraryOption = getOption();
+                mainLoop(libraryOption);
             } catch (NoSuchOptionException | InputMismatchException e) {
                 consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            } catch (NoSuchIdException e) {
+                consolePrinter.printLine(e.getMessage());
             }
-        } while (option != Option.EXIT);
+        } while (libraryOption != LibraryOption.EXIT);
     }
 
 
-    private void mainLoop(Option option) throws NoSuchOptionException, InputMismatchException{
+    private void mainLoop(LibraryOption libraryOption) throws NoSuchOptionException, InputMismatchException, NoSuchIdException {
         try{
-            switch (option) {
+            switch (libraryOption) {
                 case ADD_PUBLICATION:
                     addControl.addPublication();
                     break;
@@ -89,16 +91,16 @@ public class LibraryControl {
 
     private void printOptions() {
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(Option.ADD_PUBLICATION);
-        consolePrinter.printLine(Option.REMOVE_PUBLICATION);
-        consolePrinter.printLine(Option.PRINT_PUBLICATIONS);
-        consolePrinter.printLine(Option.EXIT);
+        consolePrinter.printLine(LibraryOption.ADD_PUBLICATION);
+        consolePrinter.printLine(LibraryOption.REMOVE_PUBLICATION);
+        consolePrinter.printLine(LibraryOption.PRINT_PUBLICATIONS);
+        consolePrinter.printLine(LibraryOption.EXIT);
     }
 
 
-    private Option getOption() throws InputMismatchException {
+    private LibraryOption getOption() throws InputMismatchException {
         optionInt = dataReader.getInt();
-        return Option.createFromInt(optionInt);
+        return LibraryOption.createFromInt(optionInt);
     }
 }
 
