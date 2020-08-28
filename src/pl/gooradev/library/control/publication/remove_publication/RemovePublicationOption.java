@@ -1,10 +1,8 @@
-package pl.gooradev.library.control.remove;
-
-import pl.gooradev.library.control.add.AddOption;
+package pl.gooradev.library.control.publication.remove_publication;
 
 import java.util.InputMismatchException;
 
-public enum RemoveOption {
+public enum RemovePublicationOption {
     REMOVE_BY_ID(1, "Usuwanie za pomocą ID publikacji"),
     REMOVE_BY_PUBLICATION(2, "Usuwanie za pomocą informacji na temat publiacji"),
     REMOVE_BOOK(21, "Usuwanie ksiażki"),
@@ -22,7 +20,7 @@ public enum RemoveOption {
         return description;
     }
 
-    RemoveOption(int value, String desc) {
+    RemovePublicationOption(int value, String desc) {
         this.value = value;
         this.description = desc;
     }
@@ -32,17 +30,17 @@ public enum RemoveOption {
         return value + " - " + description;
     }
 
-    static RemoveOption createFromInt(int opt) {
-        RemoveOption[] options = RemoveOption.values();
-        RemoveOption optionToReturn = null;
-        for (RemoveOption option : options) {
+    static RemovePublicationOption createFromInt(int opt) {
+        RemovePublicationOption[] options = RemovePublicationOption.values();
+        RemovePublicationOption optionToReturn = null;
+        for (RemovePublicationOption option : options) {
             if (option.getValue() == opt)
                 optionToReturn = option;
         }
         return optionToReturn;
     }
 
-    public static RemoveOption getOption(int inputInt) throws InputMismatchException {
-        return RemoveOption.createFromInt(inputInt);
+    public static RemovePublicationOption getOption(int inputInt) throws InputMismatchException {
+        return RemovePublicationOption.createFromInt(inputInt);
     }
 }

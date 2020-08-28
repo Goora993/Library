@@ -1,25 +1,25 @@
-package pl.gooradev.library.control.info;
+package pl.gooradev.library.control.publication.info_publication;
 
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 
-public class InfoControl {
+public class InfoPublicationControl {
     Library library;
     DataReader dataReader;
     ConsolePrinter consolePrinter;
 
-    public InfoControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
+    public InfoPublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
         this.dataReader = dataReader;
         this.consolePrinter = consolePrinter;
     }
 
     public void printPublications() {
-        InfoOption  option;
+        InfoPublicationOption option;
         do {
             printPublicationsInfoMenu();
-            option = InfoOption .getOption(dataReader.getInt());
+            option = InfoPublicationOption.getOption(dataReader.getInt());
             switch (option) {
                 case PRINT_BOOKS:
                     printSortedBooks();
@@ -33,14 +33,14 @@ public class InfoControl {
                 case BACK:
                     break;
             }
-        } while (option != InfoOption .BACK);
+        } while (option != InfoPublicationOption.BACK);
     }
 
     private void printSortedBooks(){
-        InfoOption option;
+        InfoPublicationOption option;
         do {
             printSortBooksMenu();
-            option = InfoOption.getOption(dataReader.getInt());
+            option = InfoPublicationOption.getOption(dataReader.getInt());
             switch (option) {
                 case SORT_BY_TITLE:
                 case SORT_BY_AUTHOR:
@@ -49,18 +49,18 @@ public class InfoControl {
                 case BACK:
                     break;
             }
-        } while (option != InfoOption.BACK);
+        } while (option != InfoPublicationOption.BACK);
     }
 
-    private void printBooks(InfoOption option) {
+    private void printBooks(InfoPublicationOption option) {
         consolePrinter.printBooks(library, option);
     }
 
     private void printSortedMagazines(){
-        InfoOption option;
+        InfoPublicationOption option;
         do {
             printSortMagazinesMenu();
-            option = InfoOption.getOption(dataReader.getInt());
+            option = InfoPublicationOption.getOption(dataReader.getInt());
             switch (option) {
                 case SORT_BY_NAME:
                 case SORT_BY_PUBLISHER:
@@ -69,10 +69,10 @@ public class InfoControl {
                 case BACK:
                     break;
             }
-        } while (option != InfoOption.BACK);
+        } while (option != InfoPublicationOption.BACK);
     }
 
-    private void printMagazines(InfoOption option) {
+    private void printMagazines(InfoPublicationOption option) {
         consolePrinter.printMagazines(library, option);
     }
 
@@ -83,24 +83,24 @@ public class InfoControl {
 
     private void printPublicationsInfoMenu() {
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(InfoOption.PRINT_BOOKS);
-        consolePrinter.printLine(InfoOption.PRINT_MAGAZINES);
-        consolePrinter.printLine(InfoOption.PRINT_ALL);
-        consolePrinter.printLine(InfoOption.BACK);
+        consolePrinter.printLine(InfoPublicationOption.PRINT_BOOKS);
+        consolePrinter.printLine(InfoPublicationOption.PRINT_MAGAZINES);
+        consolePrinter.printLine(InfoPublicationOption.PRINT_ALL);
+        consolePrinter.printLine(InfoPublicationOption.BACK);
     }
 
     private void printSortBooksMenu(){
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(InfoOption.SORT_BY_TITLE);
-        consolePrinter.printLine(InfoOption.SORT_BY_AUTHOR);
-        consolePrinter.printLine(InfoOption.BACK);
+        consolePrinter.printLine(InfoPublicationOption.SORT_BY_TITLE);
+        consolePrinter.printLine(InfoPublicationOption.SORT_BY_AUTHOR);
+        consolePrinter.printLine(InfoPublicationOption.BACK);
     }
 
     private void printSortMagazinesMenu(){
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(InfoOption.SORT_BY_NAME);
-        consolePrinter.printLine(InfoOption.SORT_BY_PUBLISHER);
-        consolePrinter.printLine(InfoOption.BACK);
+        consolePrinter.printLine(InfoPublicationOption.SORT_BY_NAME);
+        consolePrinter.printLine(InfoPublicationOption.SORT_BY_PUBLISHER);
+        consolePrinter.printLine(InfoPublicationOption.BACK);
     }
 }
 

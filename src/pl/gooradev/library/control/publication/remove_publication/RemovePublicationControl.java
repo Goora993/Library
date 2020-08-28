@@ -1,4 +1,4 @@
-package pl.gooradev.library.control.remove;
+package pl.gooradev.library.control.publication.remove_publication;
 
 import pl.gooradev.library.exception.NoSuchIdException;
 import pl.gooradev.library.io.ConsolePrinter;
@@ -8,22 +8,22 @@ import pl.gooradev.library.model.Publication;
 
 import java.util.InputMismatchException;
 
-public class RemoveControl {
+public class RemovePublicationControl {
     Library library;
     DataReader dataReader;
     ConsolePrinter consolePrinter;
 
-    public RemoveControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
+    public RemovePublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
         this.dataReader = dataReader;
         this.consolePrinter = consolePrinter;
     }
 
     public void removePublication() throws NoSuchIdException {
-        RemoveOption option;
+        RemovePublicationOption option;
         do {
             printRemovePublicationMenu();
-            option = RemoveOption.getOption(dataReader.getInt());
+            option = RemovePublicationOption.getOption(dataReader.getInt());
             switch (option) {
                 case REMOVE_BY_ID:
                     removeById();
@@ -34,7 +34,7 @@ public class RemoveControl {
                 case BACK:
                     break;
             }
-        } while (option != RemoveOption.BACK);
+        } while (option != RemovePublicationOption.BACK);
 
     }
 
@@ -43,9 +43,8 @@ public class RemoveControl {
         consolePrinter.printLine("Podaj ID publikacji do usunięcia: ");
         int id = dataReader.getInt();
         boolean removed;
-        Publication publication = getPublicationById(id);
         try{
-            removed = library.removePublicationByPublication(publication);
+            removed = library.removePublication(id);
         } catch (NullPointerException e){
             throw new NoSuchIdException("Brak publikacji o ID " + id);
         }
@@ -55,22 +54,12 @@ public class RemoveControl {
 
     }
 
-    private Publication getPublicationById(int id) {
-        Publication[] publications = library.getPublications();
-        Publication resultPublication = null;
-        for (Publication publication : publications) {
-            if(publication.getId()==id)
-                resultPublication = publication;
-        }
-        return resultPublication;
-    }
-
 
     private void removeByPublication() {
-        RemoveOption option;
+        RemovePublicationOption option;
         do {
             printRemoveByPublicationMenu();
-            option = RemoveOption.getOption(dataReader.getInt());
+            option = RemovePublicationOption.getOption(dataReader.getInt());
             switch (option) {
                 case REMOVE_BOOK:
                     removeBook();
@@ -81,13 +70,13 @@ public class RemoveControl {
                 case BACK:
                     break;
             }
-        } while (option != RemoveOption.BACK);
+        } while (option != RemovePublicationOption.BACK);
     }
 
     private void removeBook() {
         try{
             Publication publication = dataReader.readAndCreateBook();
-            if(library.removePublicationByPublication(publication))
+            if(library.removePublication(publication))
                 consolePrinter.printLine("Usunięto książkę");
             else
                 consolePrinter.printLine("Brak wskazanej książki");
@@ -99,7 +88,7 @@ public class RemoveControl {
     private void removeMagazine() {
         try{
             Publication publication = dataReader.readAndCreateMagazine();
-            if(library.removePublicationByPublication(publication))
+            if(library.removePublication(publication))
                 consolePrinter.printLine("Usunięto magazyn/gazetę");
             else
                 consolePrinter.printLine("Brak wskazanego magazynu/gazety");
@@ -111,15 +100,15 @@ public class RemoveControl {
 
     private void printRemovePublicationMenu() {
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(RemoveOption.REMOVE_BY_ID);
-        consolePrinter.printLine(RemoveOption.REMOVE_BY_PUBLICATION);
-        consolePrinter.printLine(RemoveOption.BACK);
+        consolePrinter.printLine(RemovePublicationOption.REMOVE_BY_ID);
+        consolePrinter.printLine(RemovePublicationOption.REMOVE_BY_PUBLICATION);
+        consolePrinter.printLine(RemovePublicationOption.BACK);
     }
 
     private void printRemoveByPublicationMenu() {
         consolePrinter.printLine("Wybierz opcję: ");
-        consolePrinter.printLine(RemoveOption.REMOVE_BOOK);
-        consolePrinter.printLine(RemoveOption.REMOVE_MAGAZINE);
-        consolePrinter.printLine(RemoveOption.BACK);
+        consolePrinter.printLine(RemovePublicationOption.REMOVE_BOOK);
+        consolePrinter.printLine(RemovePublicationOption.REMOVE_MAGAZINE);
+        consolePrinter.printLine(RemovePublicationOption.BACK);
     }
 }

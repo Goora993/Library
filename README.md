@@ -66,3 +66,9 @@ klasy i odpowiadającego jej enuma w oddzielnym pakiecie w celu poprawienia czyt
 - utworzenie klas komparatorów w celu dodania funkcji sortowania publikacji podczas ich wyświetlania
 - dodanie funkcji sortowania książek według tytułu lub autora
 - dodanie funkcji sortowania magazynów według nazwy lub wydawnictwa 
+
+28/08/2020:
+- przerobienie sposobu przechowywania publikacji z tablicy na mapę, dzięki czemu zaoszczędzono na ilości linijek kodu i 
+jego czytelności,
+- przygotowanie aplikacji pod dodanie funkcjonalności dodawania użytkowników poprzez utworzenie pustych klas 
+analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacjami

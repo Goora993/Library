@@ -1,8 +1,8 @@
-package pl.gooradev.library.control.info;
+package pl.gooradev.library.control.publication.info_publication;
 
 import java.util.InputMismatchException;
 
-public enum InfoOption {
+public enum InfoPublicationOption {
     PRINT_BOOKS(1, "Wyświetlanie informacji o książkach"),
     SORT_BY_TITLE(11, "Wyświetl posortowane według tytułu"),
     SORT_BY_AUTHOR(12, "Wyświetl posortowane według nazwiska autora"),
@@ -23,7 +23,7 @@ public enum InfoOption {
         return description;
     }
 
-    InfoOption(int value, String desc) {
+    InfoPublicationOption(int value, String desc) {
         this.value = value;
         this.description = desc;
     }
@@ -33,17 +33,17 @@ public enum InfoOption {
         return value + " - " + description;
     }
 
-    static InfoOption createFromInt(int opt) {
-        InfoOption[] options = InfoOption.values();
-        InfoOption optionToReturn = null;
-        for (InfoOption option : options) {
+    static InfoPublicationOption createFromInt(int opt) {
+        InfoPublicationOption[] options = InfoPublicationOption.values();
+        InfoPublicationOption optionToReturn = null;
+        for (InfoPublicationOption option : options) {
             if (option.getValue() == opt)
                 optionToReturn = option;
         }
         return optionToReturn;
     }
 
-    public static InfoOption getOption(int inputInt) throws InputMismatchException {
-        return InfoOption.createFromInt(inputInt);
+    public static InfoPublicationOption getOption(int inputInt) throws InputMismatchException {
+        return InfoPublicationOption.createFromInt(inputInt);
     }
 }

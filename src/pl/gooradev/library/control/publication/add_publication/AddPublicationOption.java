@@ -1,8 +1,8 @@
-package pl.gooradev.library.control.add;
+package pl.gooradev.library.control.publication.add_publication;
 
 import java.util.InputMismatchException;
 
-public enum AddOption {
+public enum AddPublicationOption {
     ADD_BOOK(1, "Dodawanie książki"),
     ADD_MAGAZINE(2, "Dodawanie magazynu/gazety"),
     BACK(0, "Wróc do poprzedniego menu");
@@ -18,7 +18,7 @@ public enum AddOption {
         return description;
     }
 
-    AddOption(int value, String desc) {
+    AddPublicationOption(int value, String desc) {
         this.value = value;
         this.description = desc;
     }
@@ -28,17 +28,17 @@ public enum AddOption {
         return value + " - " + description;
     }
 
-    static AddOption createFromInt(int opt) {
-        AddOption[] options = AddOption.values();
-        AddOption optionToReturn = null;
-        for (AddOption option : options) {
+    static AddPublicationOption createFromInt(int opt) {
+        AddPublicationOption[] options = AddPublicationOption.values();
+        AddPublicationOption optionToReturn = null;
+        for (AddPublicationOption option : options) {
             if (option.getValue() == opt)
                 optionToReturn = option;
         }
         return optionToReturn;
     }
 
-    public static AddOption getOption(int inputInt) throws InputMismatchException {
-        return AddOption.createFromInt(inputInt);
+    public static AddPublicationOption getOption(int inputInt) throws InputMismatchException {
+        return AddPublicationOption.createFromInt(inputInt);
     }
 }

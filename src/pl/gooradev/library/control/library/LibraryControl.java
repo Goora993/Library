@@ -1,8 +1,11 @@
 package pl.gooradev.library.control.library;
 
-import pl.gooradev.library.control.add.AddControl;
-import pl.gooradev.library.control.info.InfoControl;
-import pl.gooradev.library.control.remove.RemoveControl;
+import pl.gooradev.library.control.publication.add_publication.AddPublicationControl;
+import pl.gooradev.library.control.publication.info_publication.InfoPublicationControl;
+import pl.gooradev.library.control.publication.remove_publication.RemovePublicationControl;
+import pl.gooradev.library.control.user.add_user.AddUserControl;
+import pl.gooradev.library.control.user.info_user.InfoUserControl;
+import pl.gooradev.library.control.user.remove_user.RemoveUserControl;
 import pl.gooradev.library.exception.*;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
@@ -18,9 +21,13 @@ public class LibraryControl {
     ConsolePrinter consolePrinter = new ConsolePrinter();
     DataReader dataReader = new DataReader(consolePrinter);
     FileManager fileManager;
-    AddControl addControl;
-    RemoveControl removeControl;
-    InfoControl infoControl;
+    AddPublicationControl addPublicationControl;
+    RemovePublicationControl removePublicationControl;
+    InfoPublicationControl infoPublicationControl;
+    AddUserControl addUserControl;
+    RemoveUserControl removeUserControl;
+    InfoUserControl infoUserControl;
+
     int optionInt;
 
      public LibraryControl() {
@@ -28,14 +35,23 @@ public class LibraryControl {
         try {
             library = fileManager.importData();
             consolePrinter.printLine("Zaimportowane dane z pliku");
-            addControl = new AddControl(library,dataReader,consolePrinter);
-            removeControl = new RemoveControl(library, dataReader, consolePrinter);
-            infoControl = new InfoControl(library, dataReader, consolePrinter);
+            addPublicationControls();
+            addUserControls();
         } catch (DataImportException | InvalidDataException e) {
             consolePrinter.printLine(e.getMessage());
             consolePrinter.printLine("Zainicjowano nową bazę.");
             library = new Library();
         }
+    }
+
+
+    private void addPublicationControls() {
+        addPublicationControl = new AddPublicationControl(library,dataReader,consolePrinter);
+        removePublicationControl = new RemovePublicationControl(library, dataReader, consolePrinter);
+        infoPublicationControl = new InfoPublicationControl(library, dataReader, consolePrinter);
+    }
+
+    private void addUserControls() {
     }
 
 
@@ -59,14 +75,20 @@ public class LibraryControl {
         try{
             switch (libraryOption) {
                 case ADD_PUBLICATION:
-                    addControl.addPublication();
+                    addPublicationControl.addPublication();
                     break;
                 case REMOVE_PUBLICATION:
-                    removeControl.removePublication();
+                    removePublicationControl.removePublication();
                     break;
                 case PRINT_PUBLICATIONS:
-                    infoControl.printPublications();
+                    infoPublicationControl.printPublications();
                     break;
+                case ADD_USER:
+                    addUserControl.addUser();
+                case REMOVE_USER:
+                    removeUserControl.removeUser();
+                case PRINT_USER:
+                    infoUserControl.printUsers();
                 case EXIT:
                     exit();
                     break;

@@ -1,56 +1,78 @@
 package pl.gooradev.library.model;
 
+import pl.gooradev.library.exception.PublicationAlreadyExistException;
+import pl.gooradev.library.exception.UserAlreadyExistException;
+
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Library implements Serializable {
+    private Map<String, User> users = new HashMap<>();
+    private Map<Integer, Publication> publications = new HashMap<>();
 
     private int maxPublications = 10;
-    private Publication[] publications = new Publication[maxPublications];
     private int publicationNumber;
 
     public Library() {
     }
 
-    public void addPublication(Publication publication) {
-        if (maxPublications <= publicationNumber) {
-            publications = Arrays.copyOf(publications, publications.length*2);
+    public void addUser(User user) throws UserAlreadyExistException {
+        if(users.containsKey(user.getPesel())){
+            throw new UserAlreadyExistException(
+                    "Użytkownik o numerze pesel " + user.getPesel() + " już istnieje"
+            );
         }
-        publications[publicationNumber] = publication;
-        publicationNumber++;
     }
 
-    public boolean removePublicationByPublication(Publication publication){
-        final int NOT_FOUND = -1;
-        int found = NOT_FOUND;
-        int i = 0;
-        while (i < publications.length && found == NOT_FOUND) {
-            if (publication.equals(publications[i])) {
-                found = i;
-            } else {
-                i++;
-            }
+    public void addPublication(Publication publication) throws PublicationAlreadyExistException {
+        int publicationId = publication.getId();
+        if(publications.containsKey(publicationId)){
+            throw new PublicationAlreadyExistException(
+                    "Publikacja o takim ID już istnieje " + publicationId
+            );
         }
+        publications.put(publicationId, publication);
+    }
 
-        if (found != NOT_FOUND) {
-            System.arraycopy(publications, found + 1, publications, found,
-                    publications.length - found - 1);
-            publicationNumber--;
+    public boolean removePublication(Publication publication){
+        if(publications.equals(publication)){
+            publications.remove(publication);
+            return true;
         }
+        return false;
+    }
 
-        return found != NOT_FOUND;
+    public boolean removePublication(int id){
+        if(publications.containsKey(id)){
+            publications.remove(id);
+            return true;
+        } else {
+            throw new NullPointerException();
+        }
+    }
+
+    public Collection<Publication> getPublicationsCollection(){
+        return publications.values();
     }
 
 
-    public Publication[] getPublications() {
-        Publication[] resultTab = new Publication[publicationNumber];
-        for (int i = 0; i < publications.length; i++) {
-            if(publications[i]!=null)
-                resultTab[i] = publications[i];
-        }
-        return resultTab;
+    public Map<String, User> getUsers() {
+        return users;
     }
 
+    public void setUsers(Map<String, User> users) {
+        this.users = users;
+    }
+
+    public Map<Integer, Publication> getPublications() {
+        return publications;
+    }
+
+    public void setPublications(Map<Integer, Publication> publications) {
+        this.publications = publications;
+    }
 
     public int getMaxPublications() {
         return maxPublications;
@@ -58,10 +80,6 @@ public class Library implements Serializable {
 
     public void setMaxPublications(int maxPublications) {
         this.maxPublications = maxPublications;
-    }
-
-    public void setPublications(Publication[] publications) {
-        this.publications = publications;
     }
 
     public int getPublicationNumber() {
