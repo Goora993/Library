@@ -72,3 +72,6 @@ klasy i odpowiadającego jej enuma w oddzielnym pakiecie w celu poprawienia czyt
 jego czytelności,
 - przygotowanie aplikacji pod dodanie funkcjonalności dodawania użytkowników poprzez utworzenie pustych klas 
 analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacjami
+
+29/08/2020:
+- wypełnienie pustych klas metodami i utworzenie opcji dodawania, usuwania i wyświetlania użytkowników biblioteki

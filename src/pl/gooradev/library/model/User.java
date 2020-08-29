@@ -50,6 +50,6 @@ public abstract class User implements Serializable {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " - " + pesel;
+        return "Użytkownik: " + firstName + " " + lastName + ", pesel: " + pesel;
     }
 }

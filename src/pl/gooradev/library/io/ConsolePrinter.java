@@ -1,10 +1,7 @@
 package pl.gooradev.library.io;
 
 import pl.gooradev.library.control.publication.info_publication.InfoPublicationOption;
-import pl.gooradev.library.model.Book;
-import pl.gooradev.library.model.Library;
-import pl.gooradev.library.model.Magazine;
-import pl.gooradev.library.model.Publication;
+import pl.gooradev.library.model.*;
 import pl.gooradev.library.model.comparator.AlphabeticalAuthorComparator;
 import pl.gooradev.library.model.comparator.AlphabeticalPublisherComparator;
 import pl.gooradev.library.model.comparator.AlphabeticalTitleComparator;
@@ -14,15 +11,15 @@ import java.util.*;
 public class ConsolePrinter {
 
 
-    public void printAll(Library library) {
+    public void printAllPublications(Library library) {
         StringBuffer sb = new StringBuffer();
         Collection<Publication> publicationCollection = library.getPublicationsCollection();
-        List<Publication> publicationList= new ArrayList<>(publicationCollection);
+        List<Publication> publicationList = new ArrayList<>(publicationCollection);
 
         Collections.sort(publicationList, new AlphabeticalTitleComparator());
 
         for (int i = 0; i < publicationList.size(); i++) {
-            if(publicationList.get(i) instanceof Book)
+            if (publicationList.get(i) instanceof Book)
                 sb.append("Książka: " + publicationList.get(i).toString() + "\n");
             else
                 sb.append("Magazyn/gazeta: " + publicationList.get(i).toString() + "\n");
@@ -44,7 +41,7 @@ public class ConsolePrinter {
 
         if (option.equals(InfoPublicationOption.SORT_BY_TITLE))
             Collections.sort(publicationList, new AlphabeticalTitleComparator());
-        else if(option.equals(InfoPublicationOption.SORT_BY_AUTHOR))
+        else if (option.equals(InfoPublicationOption.SORT_BY_AUTHOR))
             Collections.sort(publicationList, new AlphabeticalAuthorComparator());
 
         for (Publication publication : publicationList) {
@@ -69,7 +66,7 @@ public class ConsolePrinter {
 
         if (option.equals(InfoPublicationOption.SORT_BY_NAME))
             Collections.sort(publicationList, new AlphabeticalTitleComparator());
-        else if(option.equals(InfoPublicationOption.SORT_BY_PUBLISHER))
+        else if (option.equals(InfoPublicationOption.SORT_BY_PUBLISHER))
             Collections.sort(publicationList, new AlphabeticalPublisherComparator());
 
         for (Publication publication : publicationList) {
@@ -81,6 +78,24 @@ public class ConsolePrinter {
 
         if (counter == 0) {
             printLine("Brak magazynów/książek w bibliotece");
+        }
+
+        printLine(sb.toString());
+    }
+
+    public void printAllUsers(Library library) {
+        StringBuffer sb = new StringBuffer();
+        Collection<User> userCollection = library.getUsers().values();
+        List<User> userList = new ArrayList<>(userCollection);
+
+
+        for (int i = 0; i < userList.size(); i++) {
+
+            sb.append(userList.get(i).toString() + "\n");
+        }
+
+        if (userList.size() == 0) {
+            printLine("Brak zarejestrowanych użytkowników");
         }
 
         printLine(sb.toString());

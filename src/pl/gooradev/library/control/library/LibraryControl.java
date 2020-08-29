@@ -52,6 +52,9 @@ public class LibraryControl {
     }
 
     private void addUserControls() {
+         addUserControl = new AddUserControl(library, dataReader, consolePrinter);
+         removeUserControl = new RemoveUserControl(library, dataReader, consolePrinter);
+         infoUserControl = new InfoUserControl(library, dataReader, consolePrinter);
     }
 
 
@@ -64,14 +67,15 @@ public class LibraryControl {
                 mainLoop(libraryOption);
             } catch (NoSuchOptionException | InputMismatchException e) {
                 consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
-            } catch (NoSuchIdException e) {
+            } catch (NoSuchIdException | UserAlreadyExistException | NoUserWithSuchPesel e) {
                 consolePrinter.printLine(e.getMessage());
             }
         } while (libraryOption != LibraryOption.EXIT);
     }
 
 
-    private void mainLoop(LibraryOption libraryOption) throws NoSuchOptionException, InputMismatchException, NoSuchIdException {
+    private void mainLoop(LibraryOption libraryOption) throws NoSuchOptionException, InputMismatchException,
+            NoSuchIdException, UserAlreadyExistException, NoUserWithSuchPesel {
         try{
             switch (libraryOption) {
                 case ADD_PUBLICATION:
@@ -85,10 +89,13 @@ public class LibraryControl {
                     break;
                 case ADD_USER:
                     addUserControl.addUser();
+                    break;
                 case REMOVE_USER:
                     removeUserControl.removeUser();
+                    break;
                 case PRINT_USER:
                     infoUserControl.printUsers();
+                    break;
                 case EXIT:
                     exit();
                     break;
@@ -116,6 +123,9 @@ public class LibraryControl {
         consolePrinter.printLine(LibraryOption.ADD_PUBLICATION);
         consolePrinter.printLine(LibraryOption.REMOVE_PUBLICATION);
         consolePrinter.printLine(LibraryOption.PRINT_PUBLICATIONS);
+        consolePrinter.printLine(LibraryOption.ADD_USER);
+        consolePrinter.printLine(LibraryOption.REMOVE_USER);
+        consolePrinter.printLine(LibraryOption.PRINT_USER);
         consolePrinter.printLine(LibraryOption.EXIT);
     }
 

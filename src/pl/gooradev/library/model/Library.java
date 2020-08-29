@@ -1,5 +1,6 @@
 package pl.gooradev.library.model;
 
+import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.exception.PublicationAlreadyExistException;
 import pl.gooradev.library.exception.UserAlreadyExistException;
 
@@ -18,13 +19,6 @@ public class Library implements Serializable {
     public Library() {
     }
 
-    public void addUser(User user) throws UserAlreadyExistException {
-        if(users.containsKey(user.getPesel())){
-            throw new UserAlreadyExistException(
-                    "Użytkownik o numerze pesel " + user.getPesel() + " już istnieje"
-            );
-        }
-    }
 
     public void addPublication(Publication publication) throws PublicationAlreadyExistException {
         int publicationId = publication.getId();
@@ -52,6 +46,35 @@ public class Library implements Serializable {
             throw new NullPointerException();
         }
     }
+
+
+    public void addUser(User user) throws UserAlreadyExistException {
+        if(users.containsKey(user.getPesel())){
+            throw new UserAlreadyExistException(
+                    "Użytkownik o numerze pesel " + user.getPesel() + " już istnieje"
+            );
+        } else{
+            users.put(user.getPesel(), user);
+        }
+    }
+
+    public boolean removeUserByPesel(String pesel) throws NoUserWithSuchPesel {
+        User userToRemove = getUserByPesel(pesel);
+        return users.remove(pesel, userToRemove);
+
+    }
+
+    private User getUserByPesel(String pesel) throws NoUserWithSuchPesel {
+        if(users.containsKey(pesel)){
+            return users.get(pesel);
+        }
+        throw new NoUserWithSuchPesel(
+                "Użytkownik o numerze pesel " + pesel + " nie istnieje"
+        );
+    }
+
+
+
 
     public Collection<Publication> getPublicationsCollection(){
         return publications.values();

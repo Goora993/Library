@@ -77,7 +77,7 @@ public class InfoPublicationControl {
     }
 
     private void printAll() {
-        consolePrinter.printAll(library);
+        consolePrinter.printAllPublications(library);
     }
 
 

@@ -1,6 +1,7 @@
 package pl.gooradev.library.io;
 
 import pl.gooradev.library.model.Book;
+import pl.gooradev.library.model.LibraryUser;
 import pl.gooradev.library.model.Magazine;
 
 import java.util.InputMismatchException;
@@ -51,6 +52,19 @@ public class DataReader {
 
         return new Magazine(title, publisher, language, year, month, day);
     }
+
+    public LibraryUser readAndCreateUser(){
+        consolePrinter.printLine("Imię: ");
+        String firstName = sc.nextLine();
+        consolePrinter.printLine("Nazwisko: ");
+        String lastName = sc.nextLine();
+        consolePrinter.printLine("Pesel: ");
+        String pesel = sc.nextLine();
+
+        return new LibraryUser(firstName, lastName, pesel);
+    }
+
+
 
     public int getInt() throws InputMismatchException {
         try {
