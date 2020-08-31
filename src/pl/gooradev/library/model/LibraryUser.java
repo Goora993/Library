@@ -8,6 +8,8 @@ public class LibraryUser extends User{
     private List<Publication> publicationHistory = new ArrayList<>();
     private List<Publication> borrowedPublications = new ArrayList<>();
 
+    public static final String TYPE = "Użytkownik biblioteki";
+
     public List<Publication> getPublicationHistory() {
         return publicationHistory;
     }
@@ -51,4 +53,12 @@ public class LibraryUser extends User{
     public int hashCode() {
         return Objects.hash(super.hashCode(), publicationHistory, borrowedPublications);
     }
+
+    public String toCsv(){
+        return  (TYPE + ";") +
+                getFirstName() + ";" +
+                getLastName() + ";" +
+                getPesel()+ ";";
+    }
 }
+

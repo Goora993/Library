@@ -80,6 +80,10 @@ public class Library implements Serializable {
         return publications.values();
     }
 
+    public Collection<User> getUsersCollection(){
+        return users.values();
+    }
+
 
     public Map<String, User> getUsers() {
         return users;

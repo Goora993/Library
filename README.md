@@ -75,3 +75,7 @@ analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacj
 
 29/08/2020:
 - wypełnienie pustych klas metodami i utworzenie opcji dodawania, usuwania i wyświetlania użytkowników biblioteki
+
+31/08/2020:
+- rozdzielenie klasy LibraryControl na mniejsze klasy obsługujące funkcje związane z publikacjami i użytkownikami
+- dodanie importu i eksportu użytkowników do pliku Users.csv
