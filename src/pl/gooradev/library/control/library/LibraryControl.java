@@ -7,6 +7,7 @@ import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.FileManager;
 import pl.gooradev.library.io.file.FileManagerBuilder;
+import pl.gooradev.library.io.file.ImportType;
 import pl.gooradev.library.model.Library;
 
 import java.util.InputMismatchException;
@@ -28,12 +29,34 @@ public class LibraryControl {
         try {
             library = fileManager.importData();
             consolePrinter.printLine("Zaimportowane dane z pliku");
-            publicationControl = new PublicationControl(library, consolePrinter, dataReader);
-            userControl = new UserControl(library, consolePrinter, dataReader);
-        } catch (DataImportException | InvalidDataException e) {
+        } catch (InvalidDataException e) {
             consolePrinter.printLine(e.getMessage());
             consolePrinter.printLine("Zainicjowano nową bazę.");
             library = new Library();
+        } catch (PublicationImportException e) {
+            consolePrinter.printLine(e.getMessage());
+            consolePrinter.printLine("Zainicjowano nową bazę publikacji.");
+            try{
+                library = fileManager.importData(ImportType.IMPORT_USERS);
+            } catch (UserImportException ex){
+                consolePrinter.printLine(ex.getMessage());
+                consolePrinter.printLine("Zainicjowano nową bazę użytkowników.");
+                library = new Library();
+            }
+        } catch (UserImportException e) {
+            consolePrinter.printLine(e.getMessage());
+            consolePrinter.printLine("Zainicjowano nową bazę użytkowników.");
+
+            try{
+                library = fileManager.importData(ImportType.IMPORT_PUBLICATIONS);
+            } catch (PublicationImportException ex){
+                consolePrinter.printLine(ex.getMessage());
+                consolePrinter.printLine("Zainicjowano nową bazę publikacji.");
+                library = new Library();
+            }
+        } finally {
+            publicationControl = new PublicationControl(library, consolePrinter, dataReader);
+            userControl = new UserControl(library, consolePrinter, dataReader);
         }
     }
 

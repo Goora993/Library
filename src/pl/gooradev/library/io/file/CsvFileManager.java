@@ -1,12 +1,11 @@
 package pl.gooradev.library.io.file;
 
-import pl.gooradev.library.exception.DataExportException;
-import pl.gooradev.library.exception.DataImportException;
-import pl.gooradev.library.exception.InvalidDataException;
+import pl.gooradev.library.exception.*;
 import pl.gooradev.library.model.*;
 
 import java.io.*;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class CsvFileManager implements FileManager {
@@ -23,6 +22,24 @@ public class CsvFileManager implements FileManager {
         return library;
     }
 
+    @Override
+    public Library importData(ImportType importType) {
+        Library library = new Library();
+
+        switch (importType){
+            case IMPORT_PUBLICATIONS:
+                importPublications(library);
+                library.setUsers(new HashMap<>());
+                break;
+            case IMPORT_USERS:
+                importUsers(library);
+                library.setPublications(new HashMap<>());
+                break;
+        }
+
+        return library;
+    }
+
     private void importPublications(Library library) {
         try (Scanner fileReader = new Scanner(new File(PUBLICATION_FILE_NAME))) {
             while (fileReader.hasNextLine()) {
@@ -31,7 +48,7 @@ public class CsvFileManager implements FileManager {
                 library.addPublication(publication);
             }
         } catch (FileNotFoundException e) {
-            throw new DataImportException("Brak pliku " + PUBLICATION_FILE_NAME);
+            throw new PublicationImportException("Brak pliku " + PUBLICATION_FILE_NAME);
         }
     }
 
@@ -76,7 +93,7 @@ public class CsvFileManager implements FileManager {
                 library.addUser(user);
             }
         } catch (FileNotFoundException e) {
-            throw new DataImportException("Brak pliku " + USER_FILE_NAME);
+            throw new UserImportException("Brak pliku " + USER_FILE_NAME);
         }
     }
 
