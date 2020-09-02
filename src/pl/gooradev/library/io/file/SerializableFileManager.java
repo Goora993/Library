@@ -21,8 +21,8 @@ public class SerializableFileManager implements FileManager {
     public Library importData() {
         Library library = new Library();
 
-        importPublications(library);
-        importUsers(library);
+        library.setPublications(importPublicationsMap());
+        library.setUsers(importUsersMap());
 
         return library;
     }
@@ -33,11 +33,11 @@ public class SerializableFileManager implements FileManager {
 
         switch (importType){
             case IMPORT_PUBLICATIONS:
-                importPublications(library);
+                library.setPublications(importPublicationsMap());
                 library.setUsers(new HashMap<>());
                 break;
             case IMPORT_USERS:
-                importUsers(library);
+                library.setUsers(importUsersMap());
                 library.setPublications(new HashMap<>());
                 break;
         }
@@ -45,11 +45,11 @@ public class SerializableFileManager implements FileManager {
         return library;
     }
 
-    private void importPublications(Library library) {
+    private Map<Integer, Publication> importPublicationsMap() {
         try (FileInputStream fis = new FileInputStream(PUBLICATION_FILE_NAME);
              ObjectInputStream ois = new ObjectInputStream(fis);
         ) {
-            library.setPublications((Map<Integer, Publication>) ois.readObject());
+            return (Map<Integer, Publication>) ois.readObject();
         } catch (FileNotFoundException e) {
             throw new PublicationImportException("Brak pliku " + PUBLICATION_FILE_NAME);
         } catch (IOException e) {
@@ -59,11 +59,11 @@ public class SerializableFileManager implements FileManager {
         }
     }
 
-    private void importUsers(Library library) {
+    private Map<String, User> importUsersMap() {
         try (FileInputStream fis = new FileInputStream(USER_FILE_NAME);
              ObjectInputStream ois = new ObjectInputStream(fis);
         ) {
-            library.setUsers((Map<String, User>) ois.readObject());
+            return (Map<String, User>) ois.readObject();
         } catch (FileNotFoundException e) {
             throw new UserImportException("Brak pliku " + USER_FILE_NAME);
         } catch (IOException e) {
@@ -84,7 +84,7 @@ public class SerializableFileManager implements FileManager {
         try (FileOutputStream fos = new FileOutputStream(PUBLICATION_FILE_NAME);
              ObjectOutputStream oos = new ObjectOutputStream(fos);
         ){
-            oos.writeObject(library);
+            oos.writeObject(library.getPublications());
         } catch (FileNotFoundException e) {
             throw new DataExportException("Brak pliku " + PUBLICATION_FILE_NAME);
         } catch (IOException e) {
@@ -96,7 +96,7 @@ public class SerializableFileManager implements FileManager {
         try (FileOutputStream fos = new FileOutputStream(USER_FILE_NAME);
              ObjectOutputStream oos = new ObjectOutputStream(fos);
         ){
-            oos.writeObject(library);
+            oos.writeObject(library.getUsers());
         } catch (FileNotFoundException e) {
             throw new DataExportException("Brak pliku " + USER_FILE_NAME);
         } catch (IOException e) {

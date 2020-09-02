@@ -36,28 +36,40 @@ public class LibraryControl {
         } catch (PublicationImportException e) {
             consolePrinter.printLine(e.getMessage());
             consolePrinter.printLine("Zainicjowano nową bazę publikacji.");
-            try{
-                library = fileManager.importData(ImportType.IMPORT_USERS);
-            } catch (UserImportException ex){
-                consolePrinter.printLine(ex.getMessage());
-                consolePrinter.printLine("Zainicjowano nową bazę użytkowników.");
-                library = new Library();
-            }
+            library = createLibraryWithEmptyPublications();
         } catch (UserImportException e) {
             consolePrinter.printLine(e.getMessage());
             consolePrinter.printLine("Zainicjowano nową bazę użytkowników.");
-
-            try{
-                library = fileManager.importData(ImportType.IMPORT_PUBLICATIONS);
-            } catch (PublicationImportException ex){
-                consolePrinter.printLine(ex.getMessage());
-                consolePrinter.printLine("Zainicjowano nową bazę publikacji.");
-                library = new Library();
-            }
+            library = createLibraryWithEmptyUsers();
         } finally {
             publicationControl = new PublicationControl(library, consolePrinter, dataReader);
             userControl = new UserControl(library, consolePrinter, dataReader);
         }
+    }
+
+    private Library createLibraryWithEmptyPublications(){
+         Library resultLibrary;
+        try{
+            resultLibrary = fileManager.importData(ImportType.IMPORT_USERS);
+        } catch (UserImportException ex){
+            consolePrinter.printLine(ex.getMessage());
+            consolePrinter.printLine("Zainicjowano nową bazę użytkowników.");
+            resultLibrary = new Library();
+        }
+        return resultLibrary;
+    }
+
+    private Library createLibraryWithEmptyUsers(){
+        Library resultLibrary;
+        try{
+            resultLibrary = fileManager.importData(ImportType.IMPORT_PUBLICATIONS);
+        } catch (PublicationImportException ex){
+            consolePrinter.printLine(ex.getMessage());
+            consolePrinter.printLine("Zainicjowano nową bazę publikacji.");
+            resultLibrary = new Library();
+        }
+
+        return resultLibrary;
     }
 
 

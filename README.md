@@ -82,3 +82,8 @@ analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacj
 
 01/09/2020:
 - dodanie importu i eksportu publikacji i użytkowników przy pomocy serializacji do plików z rozszerzeniem .o 
+
+02/09/2020:
+- uporządkowanie konstruktora klasy LibraryControl
+- naprawienie problemów pojawiających się przy imporcie serializowanych obiektów
+
