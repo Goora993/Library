@@ -101,6 +101,58 @@ public class ConsolePrinter {
         printLine(sb.toString());
     }
 
+    public void printUserByPesel(Library library, String pesel) {
+        User user = library.getUsers().get(pesel);
+
+        printLine("Użytkownik: " + user);
+        printBorrowedList(user);
+        printBorrowedHistory(user);
+
+    }
+
+    private void printBorrowedList(User user){
+        StringBuffer sb = new StringBuffer();
+        List<Publication> borrowedList = null;
+
+        if(user instanceof LibraryUser) {
+           borrowedList = ((LibraryUser) user).getBorrowedPublications();
+        }
+
+        sb.append("Lista wypożyczonych publikacji: \n");
+
+        if(borrowedList.size()==0){
+            sb.append("Brak wypożyczonych publikacji");
+        }
+
+        for (Publication publication : borrowedList) {
+            sb.append(publication + "\n");
+        }
+
+        printLine(sb.toString());
+    }
+
+    private void printBorrowedHistory(User user){
+        StringBuffer sb = new StringBuffer();
+        List<Publication> borrowedHistory = null;
+
+        if(user instanceof LibraryUser) {
+            borrowedHistory = ((LibraryUser) user).getPublicationHistory();
+        }
+
+        sb.append("Historia wypożyczonych publikacji: \n");
+
+        if(borrowedHistory.size()==0){
+            sb.append("Brak wypożyczonych publikacji w historii");
+        }
+
+        for (Publication publication : borrowedHistory) {
+            sb.append(publication + "\n");
+        }
+
+        printLine(sb.toString());
+    }
+
+
     public void printLine(String text) {
         System.out.println(text);
     }
@@ -108,5 +160,7 @@ public class ConsolePrinter {
     public <T> void printLine(T t) {
         System.out.println(t.toString());
     }
+
+
 }
 

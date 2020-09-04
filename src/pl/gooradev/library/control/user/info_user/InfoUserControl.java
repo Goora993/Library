@@ -3,9 +3,7 @@ package pl.gooradev.library.control.user.info_user;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
-import pl.gooradev.library.model.User;
 
-import java.util.Collection;
 
 public class InfoUserControl {
     Library library;
@@ -20,5 +18,10 @@ public class InfoUserControl {
 
     public void printUsers() {
         consolePrinter.printAllUsers(library);
+    }
+
+    public void printUserByPesel(){
+        consolePrinter.printLine("Podaj numer pesel użytkownika: ");
+        consolePrinter.printUserByPesel(library, dataReader.getString());
     }
 }

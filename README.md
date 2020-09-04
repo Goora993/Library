@@ -87,3 +87,6 @@ analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacj
 - uporządkowanie konstruktora klasy LibraryControl
 - naprawienie problemów pojawiających się przy imporcie serializowanych obiektów
 
+04/09/2020:
+- dodanie możliwości wypożyczania i oddawania książek przez użytkowników
+- dodawanie możliwości wyświetlania szczegółów użytkownika na podstawie jego nr pesel

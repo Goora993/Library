@@ -22,7 +22,7 @@ public class LibraryUser extends User{
         super(firstName, lastName, pesel);
     }
 
-    private void addPublicationToHistory(Publication pub) {
+    public void addPublicationToHistory(Publication pub) {
         publicationHistory.add(pub);
     }
 

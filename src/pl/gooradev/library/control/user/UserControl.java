@@ -2,8 +2,10 @@ package pl.gooradev.library.control.user;
 
 import pl.gooradev.library.control.publication.PublicationOption;
 import pl.gooradev.library.control.user.add_user.AddUserControl;
+import pl.gooradev.library.control.user.borrow_publication.BorrowPublicationControl;
 import pl.gooradev.library.control.user.info_user.InfoUserControl;
 import pl.gooradev.library.control.user.remove_user.RemoveUserControl;
+import pl.gooradev.library.control.user.return_publication.ReturnPublicationControl;
 import pl.gooradev.library.exception.NoSuchOptionException;
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.exception.UserAlreadyExistException;
@@ -20,6 +22,8 @@ public class UserControl {
     AddUserControl addUserControl;
     RemoveUserControl removeUserControl;
     InfoUserControl infoUserControl;
+    BorrowPublicationControl borrowPublicationControl;
+    ReturnPublicationControl returnPublicationControl;
 
     int optionInt;
     UserOption userOption;
@@ -35,6 +39,8 @@ public class UserControl {
         addUserControl = new AddUserControl(library, dataReader, consolePrinter);
         removeUserControl = new RemoveUserControl(library, dataReader, consolePrinter);
         infoUserControl = new InfoUserControl(library, dataReader, consolePrinter);
+        borrowPublicationControl = new BorrowPublicationControl(library, dataReader, consolePrinter);
+        returnPublicationControl = new ReturnPublicationControl(library, dataReader, consolePrinter);
     }
 
     public void manageUserLoop()
@@ -56,6 +62,15 @@ public class UserControl {
                 case REMOVE_USER:
                     removeUserControl.removeUser();
                     break;
+                case BORROW_PUBLICATION:
+                    borrowPublicationControl.borrowPublication();
+                    break;
+                case RETURN_PUBLICATION:
+                    returnPublicationControl.returnPublication();
+                    break;
+                case PRINT_USER_BY_PESEL:
+                    infoUserControl.printUserByPesel();
+                    break;
                 case PRINT_USER:
                     infoUserControl.printUsers();
                     break;
@@ -71,6 +86,9 @@ public class UserControl {
         consolePrinter.printLine("Wybierz opcję: ");
         consolePrinter.printLine(UserOption.ADD_USER);
         consolePrinter.printLine(UserOption.REMOVE_USER);
+        consolePrinter.printLine(UserOption.BORROW_PUBLICATION);
+        consolePrinter.printLine(UserOption.RETURN_PUBLICATION);
+        consolePrinter.printLine(UserOption.PRINT_USER_BY_PESEL);
         consolePrinter.printLine(UserOption.PRINT_USER);
         consolePrinter.printLine(PublicationOption.BACK);
     }
