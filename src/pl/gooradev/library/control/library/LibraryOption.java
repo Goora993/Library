@@ -3,6 +3,7 @@ package pl.gooradev.library.control.library;
 public enum LibraryOption {
     PUBLICATION_MENU(1, "Menu zarządzania publikacjami"),
     USER_MENU(2, "Menu zarządzania użytkownikami"),
+    SAVE_LOAD_MENU(3, "Menu zarządzania zapisem i odczytem danych"),
     EXIT(0, "Wyjście z programu");
 
     private int value;

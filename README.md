@@ -90,3 +90,5 @@ analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacj
 04/09/2020:
 - dodanie możliwości wypożyczania i oddawania książek przez użytkowników
 - dodawanie możliwości wyświetlania szczegółów użytkownika na podstawie jego nr pesel
+- dodanie szablonu plików potrzebnych do zaimplementowania możliwości zapisywania danych do pliku w trakcie
+korzystania z aplikacji

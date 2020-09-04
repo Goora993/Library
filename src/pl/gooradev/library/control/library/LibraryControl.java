@@ -1,6 +1,7 @@
 package pl.gooradev.library.control.library;
 
 import pl.gooradev.library.control.publication.PublicationControl;
+import pl.gooradev.library.control.sl.SaveLoadControl;
 import pl.gooradev.library.control.user.UserControl;
 import pl.gooradev.library.exception.*;
 import pl.gooradev.library.io.ConsolePrinter;
@@ -20,6 +21,7 @@ public class LibraryControl {
     FileManager fileManager;
     PublicationControl publicationControl;
     UserControl userControl;
+    SaveLoadControl saveLoadControl;
 
     int optionInt;
     LibraryOption libraryOption;
@@ -44,6 +46,7 @@ public class LibraryControl {
         } finally {
             publicationControl = new PublicationControl(library, consolePrinter, dataReader);
             userControl = new UserControl(library, consolePrinter, dataReader);
+            saveLoadControl = new SaveLoadControl();
         }
     }
 
@@ -98,6 +101,8 @@ public class LibraryControl {
                 case USER_MENU:
                     userControl.manageUserLoop();
                     break;
+                case SAVE_LOAD_MENU:
+                    saveLoadControl.manageSaveLoadLoop();
                 case EXIT:
                     exit();
                     break;
