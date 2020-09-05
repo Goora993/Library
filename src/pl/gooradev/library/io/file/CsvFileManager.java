@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class CsvFileManager implements FileManager {
-    public static final String PUBLICATION_FILE_NAME = "Publications.csv";
-    public static final String USER_FILE_NAME = "Users.csv";
+    public static String PUBLICATION_FILE_NAME = "Publications.csv";
+    public static String USER_FILE_NAME = "Users.csv";
 
     @Override
     public Library importData() {
@@ -18,6 +18,7 @@ public class CsvFileManager implements FileManager {
 
         importPublications(library);
         importUsers(library);
+        setRandomPathAndNames();
 
         return library;
     }
@@ -115,8 +116,10 @@ public class CsvFileManager implements FileManager {
 
     @Override
     public void exportData(Library library) {
+
         exportPublications(library);
         exportUsers(library);
+        setRandomPathAndNames();
     }
 
     private void exportPublications(Library library) {
@@ -144,4 +147,27 @@ public class CsvFileManager implements FileManager {
             throw new DataExportException("Błąd zapisu danych do pliku " + USER_FILE_NAME);
         }
     }
+
+    public static String getPublicationFileName() {
+        return PUBLICATION_FILE_NAME;
+    }
+
+    public static void setPublicationFileName(String publicationFileName) {
+        PUBLICATION_FILE_NAME = publicationFileName;
+    }
+
+    public static String getUserFileName() {
+        return USER_FILE_NAME;
+    }
+
+    public static void setUserFileName(String userFileName) {
+        USER_FILE_NAME = userFileName;
+    }
+
+    private static void setRandomPathAndNames(){
+        setPublicationFileName("Publications.csv");
+        setUserFileName("Users.csv");
+    }
+
+
 }

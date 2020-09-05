@@ -92,3 +92,9 @@ analogicznych do klas odpowiedzialnych za funkcjonalności związane z publikacj
 - dodawanie możliwości wyświetlania szczegółów użytkownika na podstawie jego nr pesel
 - dodanie szablonu plików potrzebnych do zaimplementowania możliwości zapisywania danych do pliku w trakcie
 korzystania z aplikacji
+
+05/09/2020:
+- ustawienie zapisu przy pomocy serializacji jako domyślnego sposobu zapisu plików
+- utworzenie mechanizmu umożliwiającego zapisywanie danych do pliku w trakcie korzystania z aplikacji bez
+konieczności jej wyłączania by utworzyć zapis (tak jak było to wcześniej)
+- dodanie możliwości zapisywania i wczytywania danych na podstawie wybranej przez użytkownika ściezki do pliku 

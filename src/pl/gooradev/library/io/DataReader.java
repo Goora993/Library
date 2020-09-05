@@ -1,5 +1,6 @@
 package pl.gooradev.library.io;
 
+import pl.gooradev.library.io.file.CsvFileManager;
 import pl.gooradev.library.model.Book;
 import pl.gooradev.library.model.LibraryUser;
 import pl.gooradev.library.model.Magazine;
@@ -53,7 +54,7 @@ public class DataReader {
         return new Magazine(title, publisher, language, year, month, day);
     }
 
-    public LibraryUser readAndCreateUser(){
+    public LibraryUser readAndCreateUser() {
         consolePrinter.printLine("Imię: ");
         String firstName = sc.nextLine();
         consolePrinter.printLine("Nazwisko: ");
@@ -64,6 +65,12 @@ public class DataReader {
         return new LibraryUser(firstName, lastName, pesel);
     }
 
+    public void getAndSetFilePath() {
+        consolePrinter.printLine("Podaj ścieżkę do folderu z danymi: ");
+        String filePath = getString();
+        CsvFileManager.USER_FILE_NAME = filePath + "/Users.csv";
+        CsvFileManager.PUBLICATION_FILE_NAME = filePath + "/Publications.csv";
+    }
 
 
     public int getInt() throws InputMismatchException {

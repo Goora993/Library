@@ -7,8 +7,8 @@ import pl.gooradev.library.exception.*;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.FileManager;
-import pl.gooradev.library.io.file.FileManagerBuilder;
 import pl.gooradev.library.io.file.ImportType;
+import pl.gooradev.library.io.file.SerializableFileManager;
 import pl.gooradev.library.model.Library;
 
 import java.util.InputMismatchException;
@@ -27,7 +27,7 @@ public class LibraryControl {
     LibraryOption libraryOption;
 
      public LibraryControl() {
-        fileManager = new FileManagerBuilder(consolePrinter, dataReader).build();
+        fileManager = new SerializableFileManager();
         try {
             library = fileManager.importData();
             consolePrinter.printLine("Zaimportowane dane z pliku");
@@ -46,7 +46,7 @@ public class LibraryControl {
         } finally {
             publicationControl = new PublicationControl(library, consolePrinter, dataReader);
             userControl = new UserControl(library, consolePrinter, dataReader);
-            saveLoadControl = new SaveLoadControl();
+            saveLoadControl = new SaveLoadControl(library, consolePrinter, dataReader);
         }
     }
 
@@ -103,6 +103,7 @@ public class LibraryControl {
                     break;
                 case SAVE_LOAD_MENU:
                     saveLoadControl.manageSaveLoadLoop();
+                    break;
                 case EXIT:
                     exit();
                     break;
@@ -129,6 +130,7 @@ public class LibraryControl {
         consolePrinter.printLine("Wybierz opcję: ");
         consolePrinter.printLine(LibraryOption.PUBLICATION_MENU);
         consolePrinter.printLine(LibraryOption.USER_MENU);
+        consolePrinter.printLine(LibraryOption.SAVE_LOAD_MENU);
         consolePrinter.printLine(LibraryOption.EXIT);
     }
 

@@ -13,4 +13,28 @@ public enum SaveLoadOption {
         this.value = value;
         this.description = desc;
     }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return value + " - " + description;
+    }
+
+    static SaveLoadOption createFromInt(int opt) {
+        SaveLoadOption[] options = SaveLoadOption.values();
+        SaveLoadOption optionToReturn = null;
+        for (SaveLoadOption option : options) {
+            if (option.getValue() == opt)
+                optionToReturn = option;
+        }
+        return optionToReturn;
+    }
+
 }
