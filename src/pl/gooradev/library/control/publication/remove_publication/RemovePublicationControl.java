@@ -1,6 +1,5 @@
 package pl.gooradev.library.control.publication.remove_publication;
 
-import pl.gooradev.library.exception.NoSuchIdException;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
@@ -13,54 +12,81 @@ public class RemovePublicationControl {
     DataReader dataReader;
     ConsolePrinter consolePrinter;
 
+    int optionInt;
+    RemovePublicationOption removePublicationOption;
+
     public RemovePublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
         this.dataReader = dataReader;
         this.consolePrinter = consolePrinter;
     }
 
-    public void removePublication() throws NoSuchIdException {
-        RemovePublicationOption option;
+    public void removePublicationLoop() {
         do {
-            printRemovePublicationMenu();
-            option = RemovePublicationOption.getOption(dataReader.getInt());
-            switch (option) {
-                case REMOVE_BY_ID:
-                    removeById();
-                    break;
-                case REMOVE_BY_PUBLICATION:
-                    removeByPublication();
-                    break;
-                case BACK:
-                    break;
-            }
-        } while (option != RemovePublicationOption.BACK);
 
+            try {
+                printRemovePublicationMenu();
+                removePublicationOption = getOption();
+                removePublication(removePublicationOption);
+            } catch (NullPointerException e) {
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+
+        } while (removePublicationOption != RemovePublicationOption.BACK);
     }
 
+    private void removePublication(RemovePublicationOption removePublicationOption) {
 
-    private void removeById() throws NoSuchIdException {
+        switch (removePublicationOption) {
+            case REMOVE_BY_ID:
+                removeById();
+                break;
+            case REMOVE_BY_PUBLICATION:
+                removeByPublicationLoop();
+                break;
+            case BACK:
+                break;
+        }
+    }
+
+    private void removeById() {
         consolePrinter.printLine("Podaj ID publikacji do usunięcia: ");
         int id = dataReader.getInt();
-        boolean removed;
-        try{
+        boolean removed = false;
+
+        try {
             removed = library.removePublication(id);
-        } catch (NullPointerException e){
-            throw new NoSuchIdException("Brak publikacji o ID " + id);
+        } catch (NullPointerException e) {
+            consolePrinter.printLine("Brak publikacji o ID " + id);
         }
 
-        if(removed)
+        if (removed)
             consolePrinter.printLine("Pomyślnie usunięto publikację o ID " + id);
-
     }
 
 
-    private void removeByPublication() {
-        RemovePublicationOption option;
+    private void removeByPublicationLoop() {
         do {
-            printRemoveByPublicationMenu();
-            option = RemovePublicationOption.getOption(dataReader.getInt());
-            switch (option) {
+
+            try{
+                printRemoveByPublicationMenu();
+                removePublicationOption = getOption();
+                removeByPublication(removePublicationOption);
+            } catch (NullPointerException e) {
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+
+        } while (removePublicationOption != RemovePublicationOption.BACK);
+    }
+
+
+    private void removeByPublication(RemovePublicationOption removePublicationOption) {
+
+            switch (removePublicationOption) {
                 case REMOVE_BOOK:
                     removeBook();
                     break;
@@ -70,29 +96,34 @@ public class RemovePublicationControl {
                 case BACK:
                     break;
             }
-        } while (option != RemovePublicationOption.BACK);
     }
 
     private void removeBook() {
-        try{
+
+        try {
+
             Publication publication = dataReader.readAndCreateBook();
-            if(library.removePublication(publication))
+            if (library.removePublication(publication))
                 consolePrinter.printLine("Usunięto książkę");
             else
                 consolePrinter.printLine("Brak wskazanej książki");
-        } catch (InputMismatchException e){
+
+        } catch (InputMismatchException e) {
             consolePrinter.printLine("Nie udało się usunąć wskazanej książki, niepoprawne dane");
         }
     }
 
     private void removeMagazine() {
-        try{
+
+        try {
+
             Publication publication = dataReader.readAndCreateMagazine();
-            if(library.removePublication(publication))
+            if (library.removePublication(publication))
                 consolePrinter.printLine("Usunięto magazyn/gazetę");
             else
                 consolePrinter.printLine("Brak wskazanego magazynu/gazety");
-        } catch (InputMismatchException e){
+
+        } catch (InputMismatchException e) {
             consolePrinter.printLine("Nie udało się usunąć wskazanego magazynu/gazety, niepoprawne dane");
         }
     }
@@ -110,5 +141,10 @@ public class RemovePublicationControl {
         consolePrinter.printLine(RemovePublicationOption.REMOVE_BOOK);
         consolePrinter.printLine(RemovePublicationOption.REMOVE_MAGAZINE);
         consolePrinter.printLine(RemovePublicationOption.BACK);
+    }
+
+    private RemovePublicationOption getOption() throws InputMismatchException {
+        optionInt = dataReader.getInt();
+        return RemovePublicationOption.createFromInt(optionInt);
     }
 }

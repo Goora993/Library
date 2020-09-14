@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 
 public enum RemovePublicationOption {
     REMOVE_BY_ID(1, "Usuwanie za pomocą ID publikacji"),
-    REMOVE_BY_PUBLICATION(2, "Usuwanie za pomocą informacji na temat publiacji"),
+    REMOVE_BY_PUBLICATION(2, "Usuwanie za pomocą informacji na temat publikacji"),
     REMOVE_BOOK(21, "Usuwanie ksiażki"),
     REMOVE_MAGAZINE(22, "Usuwanie magazynu/gazety"),
     BACK(0, "Wróc do poprzedniego menu");

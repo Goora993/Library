@@ -1,7 +1,5 @@
 package pl.gooradev.library.control.publication;
 
-import java.util.InputMismatchException;
-
 public enum PublicationOption {
     ADD_PUBLICATION(1, "Dodawanie publikacji"),
     REMOVE_PUBLICATION(2, "Usuwanie publikacji"),

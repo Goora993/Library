@@ -98,3 +98,10 @@ korzystania z aplikacji
 - utworzenie mechanizmu umożliwiającego zapisywanie danych do pliku w trakcie korzystania z aplikacji bez
 konieczności jej wyłączania by utworzyć zapis (tak jak było to wcześniej)
 - dodanie możliwości zapisywania i wczytywania danych na podstawie wybranej przez użytkownika ściezki do pliku 
+
+14/09/2020:
+- modyfikacja klas odpowiedzialnych za kontrolę publikacj:
+  * zmniejszenie ilości bloków try/catch
+  * uporzadkowanie obsługi wyjątków w taki sposób, aby użytkownik w razie wyboru błędnej wartości pozostawał
+  w menu, w którym aktualnie się znajduje 
+  * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu

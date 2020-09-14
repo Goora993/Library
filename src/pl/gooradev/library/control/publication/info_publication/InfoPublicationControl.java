@@ -4,10 +4,15 @@ import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 
+import java.util.InputMismatchException;
+
 public class InfoPublicationControl {
     Library library;
     DataReader dataReader;
     ConsolePrinter consolePrinter;
+
+    int optionInt;
+    InfoPublicationOption infoPublicationOption;
 
     public InfoPublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
@@ -15,17 +20,28 @@ public class InfoPublicationControl {
         this.consolePrinter = consolePrinter;
     }
 
-    public void printPublications() {
-        InfoPublicationOption option;
-        do {
-            printPublicationsInfoMenu();
-            option = InfoPublicationOption.getOption(dataReader.getInt());
-            switch (option) {
+    public void printPublicationsLoop(){
+        do{
+            try {
+                printPublicationsInfoMenu();
+                infoPublicationOption = getOption();
+                printPublications(infoPublicationOption);
+            } catch (NullPointerException e) {
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+        } while (infoPublicationOption != InfoPublicationOption.BACK);
+    }
+
+    private void printPublications(InfoPublicationOption infoPublicationOption)
+            throws InputMismatchException, NullPointerException {
+            switch (infoPublicationOption) {
                 case PRINT_BOOKS:
-                    printSortedBooks();
+                    printSortedBooksLoop();
                     break;
                 case PRINT_MAGAZINES:
-                    printSortedMagazines();
+                    printSortedMagazinesLoop();
                     break;
                 case PRINT_ALL:
                     printAll();
@@ -33,43 +49,68 @@ public class InfoPublicationControl {
                 case BACK:
                     break;
             }
-        } while (option != InfoPublicationOption.BACK);
     }
 
-    private void printSortedBooks(){
-        InfoPublicationOption option;
-        do {
-            printSortBooksMenu();
-            option = InfoPublicationOption.getOption(dataReader.getInt());
-            switch (option) {
+    private void printSortedBooksLoop() throws InputMismatchException, NullPointerException{
+        do{
+            try{
+                printSortBooksMenu();
+                infoPublicationOption = getOption();
+                printSortedBooks(infoPublicationOption);
+            } catch (NullPointerException e) {
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+        } while (infoPublicationOption != InfoPublicationOption.BACK);
+
+        printPublicationsInfoMenu();
+        infoPublicationOption = getOption();
+    }
+
+    private void printSortedBooks(InfoPublicationOption infoPublicationOption){
+            switch (infoPublicationOption) {
                 case SORT_BY_TITLE:
                 case SORT_BY_AUTHOR:
-                    printBooks(option);
+                    printBooks(infoPublicationOption);
                     break;
                 case BACK:
                     break;
             }
-        } while (option != InfoPublicationOption.BACK);
     }
 
     private void printBooks(InfoPublicationOption option) {
         consolePrinter.printBooks(library, option);
     }
 
-    private void printSortedMagazines(){
-        InfoPublicationOption option;
-        do {
-            printSortMagazinesMenu();
-            option = InfoPublicationOption.getOption(dataReader.getInt());
-            switch (option) {
+
+    private void printSortedMagazinesLoop() throws InputMismatchException, NullPointerException{
+        do{
+            try{
+                printSortMagazinesMenu();
+                infoPublicationOption = getOption();
+                printSortedMagazines(infoPublicationOption);
+            } catch (NullPointerException e) {
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+        } while (infoPublicationOption != InfoPublicationOption.BACK);
+
+        printPublicationsInfoMenu();
+        infoPublicationOption = getOption();
+    }
+
+
+    private void printSortedMagazines(InfoPublicationOption infoPublicationOption){
+            switch (infoPublicationOption) {
                 case SORT_BY_NAME:
                 case SORT_BY_PUBLISHER:
-                    printMagazines(option);
+                    printMagazines(infoPublicationOption);
                     break;
                 case BACK:
                     break;
             }
-        } while (option != InfoPublicationOption.BACK);
     }
 
     private void printMagazines(InfoPublicationOption option) {
@@ -101,6 +142,11 @@ public class InfoPublicationControl {
         consolePrinter.printLine(InfoPublicationOption.SORT_BY_NAME);
         consolePrinter.printLine(InfoPublicationOption.SORT_BY_PUBLISHER);
         consolePrinter.printLine(InfoPublicationOption.BACK);
+    }
+
+    private InfoPublicationOption getOption() throws InputMismatchException {
+        optionInt = dataReader.getInt();
+        return InfoPublicationOption.createFromInt(optionInt);
     }
 }
 
