@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.user.info_user;
 
+import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
@@ -20,7 +21,7 @@ public class InfoUserControl {
         consolePrinter.printAllUsers(library);
     }
 
-    public void printUserByPesel(){
+    public void printUserByPesel() throws NoUserWithSuchPesel {
         consolePrinter.printLine("Podaj numer pesel użytkownika: ");
         consolePrinter.printUserByPesel(library, dataReader.getString());
     }

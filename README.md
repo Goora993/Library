@@ -101,7 +101,16 @@ konieczności jej wyłączania by utworzyć zapis (tak jak było to wcześniej)
 
 14/09/2020:
 - modyfikacja klas odpowiedzialnych za kontrolę publikacj:
-  * zmniejszenie ilości bloków try/catch
-  * uporzadkowanie obsługi wyjątków w taki sposób, aby użytkownik w razie wyboru błędnej wartości pozostawał
-  w menu, w którym aktualnie się znajduje 
-  * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu
+    * zmniejszenie ilości bloków try/catch
+    * uporzadkowanie obsługi wyjątków w taki sposób, aby użytkownik w razie wyboru błędnej wartości pozostawał 
+    w menu, w którym aktualnie się znajduje 
+    * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu
+  
+17/09/2020:
+- modyfikacja klas odpowiedzialnych za kontrolę użytkowników:
+    * zmniejszenie ilości bloków try/catch
+    * uporzadkowanie obsługi wyjątków w taki sposób, aby użytkownik w razie wyboru błędnej wartości pozostawał 
+    w menu, w którym aktualnie się znajduje 
+    * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu
+    * dodanie komunikatów powiadamiających użytkownika o wypożyczeniu bądź zwróceniu publikacji 
+    

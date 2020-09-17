@@ -1,6 +1,7 @@
 package pl.gooradev.library.io;
 
 import pl.gooradev.library.control.publication.info_publication.InfoPublicationOption;
+import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.model.*;
 import pl.gooradev.library.model.comparator.AlphabeticalAuthorComparator;
 import pl.gooradev.library.model.comparator.AlphabeticalPublisherComparator;
@@ -101,13 +102,16 @@ public class ConsolePrinter {
         printLine(sb.toString());
     }
 
-    public void printUserByPesel(Library library, String pesel) {
+    public void printUserByPesel(Library library, String pesel) throws NoUserWithSuchPesel {
         User user = library.getUsers().get(pesel);
 
-        printLine("Użytkownik: " + user);
-        printBorrowedList(user);
-        printBorrowedHistory(user);
-
+        if(user!=null){
+            printLine("Użytkownik: " + user);
+            printBorrowedList(user);
+            printBorrowedHistory(user);
+        } else {
+            throw new NoUserWithSuchPesel("Brak użytkownika o numerze pesel " + pesel);
+        }
     }
 
     private void printBorrowedList(User user){

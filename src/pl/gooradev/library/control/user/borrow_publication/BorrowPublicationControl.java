@@ -1,5 +1,7 @@
 package pl.gooradev.library.control.user.borrow_publication;
 
+import pl.gooradev.library.exception.NoPublicationWithSuchId;
+import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.io.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
@@ -18,20 +20,41 @@ public class BorrowPublicationControl {
         this.consolePrinter = consolePrinter;
     }
 
-    public void borrowPublication() {
+    public void borrowPublication() throws NoUserWithSuchPesel, NoPublicationWithSuchId {
 
-        consolePrinter.printLine("Podaj numer pesel użytkownika: ");
-        String pesel = dataReader.getString();
-        consolePrinter.printLine("Podaj ID publikacji: ");
-        int id = dataReader.getInt();
-
-
-        User user = library.getUsers().get(pesel);
-        Publication publication = library.getPublications().get(id);
+        User user = getUser();
+        Publication publication = getPublication();
 
         if(user instanceof LibraryUser){
             ((LibraryUser) user).borrowPublication(publication);
         }
 
+        consolePrinter.printLine("Publikacja id: " + publication.getId() + " " + publication.getTitle() +
+                " została wypożyczona");
+
+    }
+
+    private User getUser() throws NoUserWithSuchPesel {
+        consolePrinter.printLine("Podaj numer pesel użytkownika: ");
+        String pesel = dataReader.getString();
+        User user = library.getUsers().get(pesel);
+
+        if(user!=null)
+            return user;
+        else
+            throw new NoUserWithSuchPesel("Brak użytkownika o numerze pesel " + pesel);
+
+
+    }
+
+    private Publication getPublication() throws NoPublicationWithSuchId {
+        consolePrinter.printLine("Podaj ID publikacji: ");
+        int id = dataReader.getInt();
+        Publication publication = library.getPublications().get(id);
+
+        if(publication!=null)
+            return publication;
+        else
+            throw new NoPublicationWithSuchId("Brak publikacji o ID " + id);
     }
 }

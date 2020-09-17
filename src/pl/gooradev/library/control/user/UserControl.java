@@ -6,6 +6,7 @@ import pl.gooradev.library.control.user.borrow_publication.BorrowPublicationCont
 import pl.gooradev.library.control.user.info_user.InfoUserControl;
 import pl.gooradev.library.control.user.remove_user.RemoveUserControl;
 import pl.gooradev.library.control.user.return_publication.ReturnPublicationControl;
+import pl.gooradev.library.exception.NoPublicationWithSuchId;
 import pl.gooradev.library.exception.NoSuchOptionException;
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.exception.UserAlreadyExistException;
@@ -43,18 +44,27 @@ public class UserControl {
         returnPublicationControl = new ReturnPublicationControl(library, dataReader, consolePrinter);
     }
 
-    public void manageUserLoop()
-            throws NoUserWithSuchPesel, NoSuchOptionException, UserAlreadyExistException {
+    public void manageUserLoop() {
+
         do{
-            printOptions();
-            userOption = getOption();
-            manageUser(userOption);
+
+            try {
+                printOptions();
+                userOption = getOption();
+                manageUser(userOption);
+            } catch (NullPointerException e){
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException | UserAlreadyExistException  | NoUserWithSuchPesel |
+                    NoPublicationWithSuchId e){
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
+            }
+
         } while(userOption!=UserOption.BACK);
     }
 
-    private void manageUser(UserOption userOption) throws NoSuchOptionException, InputMismatchException,
-            UserAlreadyExistException, NoUserWithSuchPesel {
-        try{
+    private void manageUser(UserOption userOption) throws NullPointerException, InputMismatchException,
+            UserAlreadyExistException, NoUserWithSuchPesel, NoPublicationWithSuchId {
+
             switch (userOption) {
                 case ADD_USER:
                     addUserControl.addUser();
@@ -77,9 +87,7 @@ public class UserControl {
                 case BACK:
                     break;
             }
-        } catch (NullPointerException e){
-            throw new NoSuchOptionException("Brak opcji o id " + optionInt);
-        }
+
     }
 
     private void printOptions() {
