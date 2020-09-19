@@ -13,7 +13,7 @@ public class SaveControl {
     ConsolePrinter consolePrinter;
     DataReader dataReader;
 
-    SerializableFileManager sfm = new SerializableFileManager();
+    SerializableFileManager sfm;
     CsvFileManager cfm = new CsvFileManager();
 
     int optionInt;
@@ -24,25 +24,37 @@ public class SaveControl {
         this.library = library;
         this.consolePrinter = consolePrinter;
         this.dataReader = dataReader;
+        this.sfm = new SerializableFileManager(consolePrinter);
     }
 
     public void manageSaveLoop() {
         do {
-            printOptions();
-            saveOption = getOption();
 
-            switch (saveOption){
-                case SERIAL_SAVE:
-                    sfm.exportData(library);
-                    break;
-                case CSV_SAVE:
-                    dataReader.getAndSetFilePath();
-                    cfm.exportData(library);
-                    break;
-                case BACK:
-                    break;
+            try{
+                printOptions();
+                saveOption = getOption();
+                manageSave(saveOption);
+            } catch (NullPointerException e){
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
+                consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
             }
+
         } while (saveOption!=SaveOption.BACK);
+    }
+
+    private void manageSave(SaveOption saveOption){
+        switch (saveOption){
+            case SERIAL_SAVE:
+                sfm.exportData(library);
+                break;
+            case CSV_SAVE:
+                dataReader.getAndSetFilePath();
+                cfm.exportData(library);
+                break;
+            case BACK:
+                break;
+        }
     }
 
     private void printOptions(){

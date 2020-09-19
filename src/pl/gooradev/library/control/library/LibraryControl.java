@@ -27,7 +27,7 @@ public class LibraryControl {
     LibraryOption libraryOption;
 
      public LibraryControl() {
-        fileManager = new SerializableFileManager();
+        fileManager = new SerializableFileManager(consolePrinter);
         try {
             library = fileManager.importData();
             consolePrinter.printLine("Zaimportowane dane z pliku");
@@ -82,18 +82,17 @@ public class LibraryControl {
             try{
                 libraryOption = getOption();
                 libraryMainSwitch(libraryOption);
-            } catch (NoSuchOptionException | InputMismatchException e) {
+            } catch (NullPointerException e){
+                consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
+            } catch (InputMismatchException e) {
                 consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
-            } catch (NoSuchIdException | UserAlreadyExistException | NoUserWithSuchPesel e) {
-                consolePrinter.printLine(e.getMessage());
             }
         } while (libraryOption != LibraryOption.EXIT);
     }
 
 
-    private void libraryMainSwitch(LibraryOption libraryOption) throws NoSuchOptionException, InputMismatchException,
-            NoSuchIdException, UserAlreadyExistException, NoUserWithSuchPesel {
-        try{
+    private void libraryMainSwitch(LibraryOption libraryOption) throws NullPointerException, InputMismatchException {
+
             switch (libraryOption) {
                 case PUBLICATION_MENU:
                     publicationControl.managePublicationLoop();
@@ -108,9 +107,7 @@ public class LibraryControl {
                     exit();
                     break;
             }
-        } catch (NullPointerException e){
-            throw new NoSuchOptionException("Brak opcji o id " + optionInt);
-        }
+
     }
 
 

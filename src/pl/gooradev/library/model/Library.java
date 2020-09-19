@@ -73,9 +73,6 @@ public class Library implements Serializable {
         );
     }
 
-
-
-
     public Collection<Publication> getPublicationsCollection(){
         return publications.values();
     }

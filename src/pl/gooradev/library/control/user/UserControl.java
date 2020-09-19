@@ -7,7 +7,6 @@ import pl.gooradev.library.control.user.info_user.InfoUserControl;
 import pl.gooradev.library.control.user.remove_user.RemoveUserControl;
 import pl.gooradev.library.control.user.return_publication.ReturnPublicationControl;
 import pl.gooradev.library.exception.NoPublicationWithSuchId;
-import pl.gooradev.library.exception.NoSuchOptionException;
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.exception.UserAlreadyExistException;
 import pl.gooradev.library.io.ConsolePrinter;

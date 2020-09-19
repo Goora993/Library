@@ -34,6 +34,7 @@ public class PublicationControl {
         infoPublicationControl = new InfoPublicationControl(library, dataReader, consolePrinter);
     }
 
+
     public void managePublicationLoop() {
         do {
 

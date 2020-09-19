@@ -18,7 +18,7 @@ public class FileManagerBuilder {
         FileType fileType = getFileType();
         switch (fileType) {
             case SERIAL:
-                return new SerializableFileManager();
+                return new SerializableFileManager(printer);
             case CSV:
                 return new CsvFileManager();
             default:

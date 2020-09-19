@@ -114,3 +114,11 @@ konieczności jej wyłączania by utworzyć zapis (tak jak było to wcześniej)
     * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu
     * dodanie komunikatów powiadamiających użytkownika o wypożyczeniu bądź zwróceniu publikacji 
     
+19/09/2020:
+- modyfikacja klas odpowiedzialnych za kontrole zapisu i wczytywania danych:
+    * zmniejszenie ilości bloków try/catch
+    * uporzadkowanie obsługi wyjątków w taki sposób, aby użytkownik w razie wyboru błędnej wartości pozostawał 
+    w menu, w którym aktualnie się znajduje 
+    * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu
+- uporzadkowanie części kodu, tak aby był bardziej przejrzysty
+- usunięcie niektórych, niepotrzebnych już klas wyjątków
