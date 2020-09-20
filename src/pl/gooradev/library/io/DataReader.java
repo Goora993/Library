@@ -1,6 +1,7 @@
 package pl.gooradev.library.io;
 
 import pl.gooradev.library.io.file.CsvFileManager;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.model.Book;
 import pl.gooradev.library.model.LibraryUser;
 import pl.gooradev.library.model.Magazine;

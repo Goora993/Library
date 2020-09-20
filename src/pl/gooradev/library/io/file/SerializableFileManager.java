@@ -4,7 +4,7 @@ import pl.gooradev.library.exception.DataExportException;
 import pl.gooradev.library.exception.DataImportException;
 import pl.gooradev.library.exception.PublicationImportException;
 import pl.gooradev.library.exception.UserImportException;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
 import pl.gooradev.library.model.User;
@@ -20,9 +20,11 @@ public class SerializableFileManager implements FileManager {
 
     ConsolePrinter consolePrinter;
 
+
     public SerializableFileManager(ConsolePrinter consolePrinter){
         this.consolePrinter = consolePrinter;
     }
+
 
     @Override
     public Library importData() {
@@ -31,8 +33,11 @@ public class SerializableFileManager implements FileManager {
         library.setPublications(importPublicationsMap());
         library.setUsers(importUsersMap());
 
+        consolePrinter.printLine("Import danych z pliku zakończony powodzeniem");
+
         return library;
     }
+
 
     @Override
     public Library importData(ImportType importType) {
@@ -52,6 +57,7 @@ public class SerializableFileManager implements FileManager {
         return library;
     }
 
+
     private Map<Integer, Publication> importPublicationsMap() {
         try (FileInputStream fis = new FileInputStream(PUBLICATION_FILE_NAME);
              ObjectInputStream ois = new ObjectInputStream(fis);
@@ -65,6 +71,7 @@ public class SerializableFileManager implements FileManager {
             throw new DataImportException("Niezgodny typ danych w pliku " + PUBLICATION_FILE_NAME);
         }
     }
+
 
     private Map<String, User> importUsersMap() {
         try (FileInputStream fis = new FileInputStream(USER_FILE_NAME);
@@ -85,8 +92,9 @@ public class SerializableFileManager implements FileManager {
     public void exportData(Library library) {
         exportPublications(library);
         exportUsers(library);
-        consolePrinter.printLine("Pomyślnie zapisano zmiany w bibliotece");
+        consolePrinter.printLine("Export danych do pliku zakończony powodzeniem");
     }
+
 
     private void exportPublications(Library library) {
         try (FileOutputStream fos = new FileOutputStream(PUBLICATION_FILE_NAME);
@@ -100,6 +108,7 @@ public class SerializableFileManager implements FileManager {
         }
     }
 
+
     private void exportUsers(Library library) {
         try (FileOutputStream fos = new FileOutputStream(USER_FILE_NAME);
              ObjectOutputStream oos = new ObjectOutputStream(fos);
@@ -111,6 +120,5 @@ public class SerializableFileManager implements FileManager {
             throw new DataExportException("Błąd zapisu danych do pliku " + USER_FILE_NAME);
         }
     }
-
 
 }

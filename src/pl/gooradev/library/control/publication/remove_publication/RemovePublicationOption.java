@@ -12,22 +12,10 @@ public enum RemovePublicationOption {
     private int value;
     private String description;
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
     RemovePublicationOption(int value, String desc) {
         this.value = value;
         this.description = desc;
-    }
-
-    @Override
-    public String toString() {
-        return value + " - " + description;
     }
 
     static RemovePublicationOption createFromInt(int opt) {
@@ -40,7 +28,17 @@ public enum RemovePublicationOption {
         return optionToReturn;
     }
 
-    public static RemovePublicationOption getOption(int inputInt) throws InputMismatchException {
-        return RemovePublicationOption.createFromInt(inputInt);
+    public int getValue() {
+        return value;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return value + " - " + description;
+    }
+
 }

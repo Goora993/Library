@@ -2,7 +2,7 @@ package pl.gooradev.library.control.user.borrow_publication;
 
 import pl.gooradev.library.exception.NoPublicationWithSuchId;
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.LibraryUser;
@@ -14,11 +14,13 @@ public class BorrowPublicationControl {
     DataReader dataReader;
     ConsolePrinter consolePrinter;
 
+
     public BorrowPublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter){
         this.library = library;
         this.dataReader = dataReader;
         this.consolePrinter = consolePrinter;
     }
+
 
     public void borrowPublication() throws NoUserWithSuchPesel, NoPublicationWithSuchId {
 
@@ -31,8 +33,8 @@ public class BorrowPublicationControl {
 
         consolePrinter.printLine("Publikacja id: " + publication.getId() + " " + publication.getTitle() +
                 " została wypożyczona");
-
     }
+
 
     private User getUser() throws NoUserWithSuchPesel {
         consolePrinter.printLine("Podaj numer pesel użytkownika: ");
@@ -43,9 +45,8 @@ public class BorrowPublicationControl {
             return user;
         else
             throw new NoUserWithSuchPesel("Brak użytkownika o numerze pesel " + pesel);
-
-
     }
+
 
     private Publication getPublication() throws NoPublicationWithSuchId {
         consolePrinter.printLine("Podaj ID publikacji: ");
@@ -57,4 +58,5 @@ public class BorrowPublicationControl {
         else
             throw new NoPublicationWithSuchId("Brak publikacji o ID " + id);
     }
+
 }

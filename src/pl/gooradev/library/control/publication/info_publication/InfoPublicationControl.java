@@ -1,6 +1,6 @@
 package pl.gooradev.library.control.publication.info_publication;
 
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 
@@ -14,6 +14,7 @@ public class InfoPublicationControl {
     int optionInt;
     InfoPublicationOption infoPublicationOption;
 
+
     public InfoPublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
         this.dataReader = dataReader;
@@ -22,6 +23,7 @@ public class InfoPublicationControl {
 
     public void printPublicationsLoop(){
         do{
+
             try {
                 printPublicationsInfoMenu();
                 infoPublicationOption = getOption();
@@ -31,6 +33,7 @@ public class InfoPublicationControl {
             } catch (InputMismatchException e) {
                 consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
             }
+
         } while (infoPublicationOption != InfoPublicationOption.BACK);
     }
 
@@ -53,6 +56,7 @@ public class InfoPublicationControl {
 
     private void printSortedBooksLoop() throws InputMismatchException, NullPointerException{
         do{
+
             try{
                 printSortBooksMenu();
                 infoPublicationOption = getOption();
@@ -62,6 +66,7 @@ public class InfoPublicationControl {
             } catch (InputMismatchException e) {
                 consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
             }
+
         } while (infoPublicationOption != InfoPublicationOption.BACK);
 
         printPublicationsInfoMenu();
@@ -83,7 +88,6 @@ public class InfoPublicationControl {
         consolePrinter.printBooks(library, option);
     }
 
-
     private void printSortedMagazinesLoop() throws InputMismatchException, NullPointerException{
         do{
             try{
@@ -100,7 +104,6 @@ public class InfoPublicationControl {
         printPublicationsInfoMenu();
         infoPublicationOption = getOption();
     }
-
 
     private void printSortedMagazines(InfoPublicationOption infoPublicationOption){
             switch (infoPublicationOption) {
@@ -120,7 +123,6 @@ public class InfoPublicationControl {
     private void printAll() {
         consolePrinter.printAllPublications(library);
     }
-
 
     private void printPublicationsInfoMenu() {
         consolePrinter.printLine("Wybierz opcję: ");

@@ -1,6 +1,6 @@
 package pl.gooradev.library.control.publication.remove_publication;
 
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
@@ -14,6 +14,7 @@ public class RemovePublicationControl {
 
     int optionInt;
     RemovePublicationOption removePublicationOption;
+
 
     public RemovePublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
@@ -38,7 +39,6 @@ public class RemovePublicationControl {
     }
 
     private void removePublication(RemovePublicationOption removePublicationOption) {
-
         switch (removePublicationOption) {
             case REMOVE_BY_ID:
                 removeById();
@@ -66,7 +66,6 @@ public class RemovePublicationControl {
             consolePrinter.printLine("Pomyślnie usunięto publikację o ID " + id);
     }
 
-
     private void removeByPublicationLoop() {
         do {
 
@@ -82,7 +81,6 @@ public class RemovePublicationControl {
 
         } while (removePublicationOption != RemovePublicationOption.BACK);
     }
-
 
     private void removeByPublication(RemovePublicationOption removePublicationOption) {
 

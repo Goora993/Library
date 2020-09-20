@@ -9,22 +9,10 @@ public enum PublicationOption {
     private int value;
     private String description;
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
     PublicationOption(int value, String desc) {
         this.value = value;
         this.description = desc;
-    }
-
-    @Override
-    public String toString() {
-        return value + " - " + description;
     }
 
     static PublicationOption createFromInt(int opt) {
@@ -35,6 +23,19 @@ public enum PublicationOption {
                 optionToReturn = option;
         }
         return optionToReturn;
+    }
+
+    public int getValue() {
+        return value;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return value + " - " + description;
     }
 
 }

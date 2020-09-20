@@ -6,26 +6,16 @@ public enum SaveLoadOption {
     LOAD_MENU(2, "Menu odczytu danych"),
     BACK(0, "Wróc do poprzedniego menu");
 
+
     private int value;
     private String description;
+
 
     SaveLoadOption(int value, String desc){
         this.value = value;
         this.description = desc;
     }
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public String toString() {
-        return value + " - " + description;
-    }
 
     static SaveLoadOption createFromInt(int opt) {
         SaveLoadOption[] options = SaveLoadOption.values();
@@ -35,6 +25,22 @@ public enum SaveLoadOption {
                 optionToReturn = option;
         }
         return optionToReturn;
+    }
+
+
+    public int getValue() {
+        return value;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    @Override
+    public String toString() {
+        return value + " - " + description;
     }
 
 }

@@ -122,3 +122,10 @@ konieczności jej wyłączania by utworzyć zapis (tak jak było to wcześniej)
     * rezygnacja z częsci klas wyjątków utworzonych wcześniej w celu poprawności czytelności kodu
 - uporzadkowanie części kodu, tak aby był bardziej przejrzysty
 - usunięcie niektórych, niepotrzebnych już klas wyjątków
+
+20/09/2020:
+- uporządkowanie większości klas w taki sposób aby kod był bardziej przejrzysty i czytelny (usuwanie nieużywanych
+importów, usuwanie zbędnych przerw między metodami itp.)
+- utworzenie abstrakcyjnych klas odpowiedzialnych za wyświetlanie informacji o publikacjach oraz użytkownikach i 
+scalenie ich funkcjonalności w klasie ConsolePrinter
+- poprawienie wyświetlania się komunikatów w klasach odpowiedzialnych za kontrolę zapisu i wczytywania danych

@@ -1,6 +1,6 @@
 package pl.gooradev.library.control.publication.add_publication;
 
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
@@ -16,6 +16,7 @@ public class AddPublicationControl {
 
     int optionInt;
     AddPublicationOption addPublicationOption;
+
 
     public AddPublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         this.library = library;
@@ -40,7 +41,6 @@ public class AddPublicationControl {
     }
 
     private void addPublication(AddPublicationOption addPublicationOption) {
-
         switch (addPublicationOption) {
             case ADD_BOOK:
                 addBook();
@@ -51,7 +51,6 @@ public class AddPublicationControl {
             case BACK:
                 break;
         }
-
     }
 
     private void addMagazine() {

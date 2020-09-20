@@ -1,7 +1,7 @@
 package pl.gooradev.library.io.file;
 
 import pl.gooradev.library.exception.NoSuchFileTypeException;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 
 public class FileManagerBuilder {
@@ -20,7 +20,7 @@ public class FileManagerBuilder {
             case SERIAL:
                 return new SerializableFileManager(printer);
             case CSV:
-                return new CsvFileManager();
+                return new CsvFileManager(printer);
             default:
                 throw new NoSuchFileTypeException("Nieobsługiwany typ danych");
         }

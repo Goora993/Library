@@ -1,6 +1,5 @@
 package pl.gooradev.library.control.publication.add_publication;
 
-import java.util.InputMismatchException;
 
 public enum AddPublicationOption {
     ADD_BOOK(1, "Dodawanie książki"),
@@ -10,22 +9,10 @@ public enum AddPublicationOption {
     private int value;
     private String description;
 
-    public int getValue() {
-        return value;
-    }
-
-    public String getDescription() {
-        return description;
-    }
 
     AddPublicationOption(int value, String desc) {
         this.value = value;
         this.description = desc;
-    }
-
-    @Override
-    public String toString() {
-        return value + " - " + description;
     }
 
     static AddPublicationOption createFromInt(int opt) {
@@ -38,7 +25,17 @@ public enum AddPublicationOption {
         return optionToReturn;
     }
 
-    public static AddPublicationOption getOption(int inputInt) throws InputMismatchException {
-        return AddPublicationOption.createFromInt(inputInt);
+    public int getValue() {
+        return value;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public String toString() {
+        return value + " - " + description;
+    }
+
 }

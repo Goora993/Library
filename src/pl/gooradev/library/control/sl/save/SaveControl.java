@@ -1,6 +1,6 @@
 package pl.gooradev.library.control.sl.save;
 
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.CsvFileManager;
 import pl.gooradev.library.io.file.SerializableFileManager;
@@ -14,7 +14,7 @@ public class SaveControl {
     DataReader dataReader;
 
     SerializableFileManager sfm;
-    CsvFileManager cfm = new CsvFileManager();
+    CsvFileManager cfm;
 
     int optionInt;
     SaveOption saveOption;
@@ -25,6 +25,7 @@ public class SaveControl {
         this.consolePrinter = consolePrinter;
         this.dataReader = dataReader;
         this.sfm = new SerializableFileManager(consolePrinter);
+        this.cfm = new CsvFileManager(consolePrinter);
     }
 
     public void manageSaveLoop() {
@@ -49,6 +50,9 @@ public class SaveControl {
                 sfm.exportData(library);
                 break;
             case CSV_SAVE:
+                cfm.exportData(library);
+                break;
+            case CSV_BY_PATH_SAVE:
                 dataReader.getAndSetFilePath();
                 cfm.exportData(library);
                 break;
@@ -61,6 +65,7 @@ public class SaveControl {
         consolePrinter.printLine("Wybierz opcję: ");
         consolePrinter.printLine(SaveOption.SERIAL_SAVE);
         consolePrinter.printLine(SaveOption.CSV_SAVE);
+        consolePrinter.printLine(SaveOption.CSV_BY_PATH_SAVE);
         consolePrinter.printLine(SaveOption.BACK);
     }
 

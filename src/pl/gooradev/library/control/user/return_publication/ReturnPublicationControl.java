@@ -2,7 +2,7 @@ package pl.gooradev.library.control.user.return_publication;
 
 import pl.gooradev.library.exception.NoPublicationWithSuchId;
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.LibraryUser;

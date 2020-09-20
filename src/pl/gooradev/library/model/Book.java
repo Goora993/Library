@@ -8,6 +8,7 @@ public class Book extends Publication {
     private int pages;
     private String isbn;
 
+
     public Book(String title, String publisher, int year, String author, int pages, String isbn){
         super(title, publisher, year);
         this.author = author;

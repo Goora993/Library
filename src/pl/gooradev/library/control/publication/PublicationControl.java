@@ -3,7 +3,7 @@ package pl.gooradev.library.control.publication;
 import pl.gooradev.library.control.publication.add_publication.AddPublicationControl;
 import pl.gooradev.library.control.publication.info_publication.InfoPublicationControl;
 import pl.gooradev.library.control.publication.remove_publication.RemovePublicationControl;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 
@@ -34,7 +34,6 @@ public class PublicationControl {
         infoPublicationControl = new InfoPublicationControl(library, dataReader, consolePrinter);
     }
 
-
     public void managePublicationLoop() {
         do {
 
@@ -52,7 +51,6 @@ public class PublicationControl {
     }
 
     private void managePublication(PublicationOption publicationOption) {
-
         switch (publicationOption) {
             case ADD_PUBLICATION:
                 addPublicationControl.addPublicationLoop();

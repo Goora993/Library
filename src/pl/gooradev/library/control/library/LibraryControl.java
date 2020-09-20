@@ -4,7 +4,7 @@ import pl.gooradev.library.control.publication.PublicationControl;
 import pl.gooradev.library.control.sl.SaveLoadControl;
 import pl.gooradev.library.control.user.UserControl;
 import pl.gooradev.library.exception.*;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.FileManager;
 import pl.gooradev.library.io.file.ImportType;
@@ -26,11 +26,11 @@ public class LibraryControl {
     int optionInt;
     LibraryOption libraryOption;
 
+
      public LibraryControl() {
         fileManager = new SerializableFileManager(consolePrinter);
         try {
             library = fileManager.importData();
-            consolePrinter.printLine("Zaimportowane dane z pliku");
         } catch (InvalidDataException e) {
             consolePrinter.printLine(e.getMessage());
             consolePrinter.printLine("Zainicjowano nową bazę.");
@@ -50,6 +50,7 @@ public class LibraryControl {
         }
     }
 
+
     private Library createLibraryWithEmptyPublications(){
          Library resultLibrary;
         try{
@@ -62,6 +63,7 @@ public class LibraryControl {
         return resultLibrary;
     }
 
+
     private Library createLibraryWithEmptyUsers(){
         Library resultLibrary;
         try{
@@ -71,7 +73,6 @@ public class LibraryControl {
             consolePrinter.printLine("Zainicjowano nową bazę publikacji.");
             resultLibrary = new Library();
         }
-
         return resultLibrary;
     }
 
@@ -92,7 +93,6 @@ public class LibraryControl {
 
 
     private void libraryMainSwitch(LibraryOption libraryOption) throws NullPointerException, InputMismatchException {
-
             switch (libraryOption) {
                 case PUBLICATION_MENU:
                     publicationControl.managePublicationLoop();
@@ -107,14 +107,12 @@ public class LibraryControl {
                     exit();
                     break;
             }
-
     }
 
 
     private void exit() {
         try {
             fileManager.exportData(library);
-            consolePrinter.printLine("Export danych do pliku zakończony powodzeniem");
         } catch (DataExportException e) {
             consolePrinter.printLine(e.getMessage());
         }

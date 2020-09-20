@@ -1,6 +1,6 @@
 package pl.gooradev.library.control.sl.load;
 
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.CsvFileManager;
 import pl.gooradev.library.io.file.SerializableFileManager;
@@ -14,7 +14,7 @@ public class LoadControl {
     DataReader dataReader;
 
     SerializableFileManager sfm;
-    CsvFileManager cfm = new CsvFileManager();
+    CsvFileManager cfm;
 
     int optionInt;
     LoadOption loadOption;
@@ -25,6 +25,7 @@ public class LoadControl {
         this.consolePrinter = consolePrinter;
         this.dataReader = dataReader;
         this.sfm = new SerializableFileManager(consolePrinter);
+        this.cfm = new CsvFileManager(consolePrinter);
     }
 
     public void manageLoadLoop() {
@@ -49,6 +50,9 @@ public class LoadControl {
                 this.library = sfm.importData();
                 break;
             case CSV_LOAD:
+                this.library = cfm.importData();
+                break;
+            case CSV_BY_PATH_LOAD:
                 dataReader.getAndSetFilePath();
                 this.library = cfm.importData();
                 break;
@@ -61,6 +65,7 @@ public class LoadControl {
         consolePrinter.printLine("Wybierz opcję: ");
         consolePrinter.printLine(LoadOption.SERIAL_LOAD);
         consolePrinter.printLine(LoadOption.CSV_LOAD);
+        consolePrinter.printLine(LoadOption.CSV_BY_PATH_LOAD);
         consolePrinter.printLine(LoadOption.BACK);
     }
 

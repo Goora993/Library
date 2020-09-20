@@ -1,6 +1,7 @@
 package pl.gooradev.library.io.file;
 
 import pl.gooradev.library.exception.*;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.model.*;
 
 import java.io.*;
@@ -12,6 +13,15 @@ public class CsvFileManager implements FileManager {
     public static String PUBLICATION_FILE_NAME = "Publications.csv";
     public static String USER_FILE_NAME = "Users.csv";
 
+
+    ConsolePrinter consolePrinter;
+
+
+    public CsvFileManager(ConsolePrinter consolePrinter){
+        this.consolePrinter = consolePrinter;
+    }
+
+
     @Override
     public Library importData() {
         Library library = new Library();
@@ -20,8 +30,11 @@ public class CsvFileManager implements FileManager {
         importUsers(library);
         setRandomPathAndNames();
 
+        consolePrinter.printLine("Import danych z pliku zakończony powodzeniem");
+
         return library;
     }
+
 
     @Override
     public Library importData(ImportType importType) {
@@ -41,6 +54,7 @@ public class CsvFileManager implements FileManager {
         return library;
     }
 
+
     private void importPublications(Library library) {
         try (Scanner fileReader = new Scanner(new File(PUBLICATION_FILE_NAME))) {
             while (fileReader.hasNextLine()) {
@@ -53,6 +67,7 @@ public class CsvFileManager implements FileManager {
         }
     }
 
+
     private Publication createPublicationFromString(String csvText) {
         String[] split = csvText.split(";");
         String type = split[0];
@@ -63,6 +78,7 @@ public class CsvFileManager implements FileManager {
         }
         throw new InvalidDataException("Nieznany typ publikacji: " + type);
     }
+
 
     private Book createBook(String[] data) {
         String title = data[1];
@@ -75,6 +91,7 @@ public class CsvFileManager implements FileManager {
         return new Book(title, publisher, year, author, pages, isbn, id);
     }
 
+
     private Magazine createMagazine(String[] data) {
         String title = data[1];
         String publisher = data[2];
@@ -85,6 +102,7 @@ public class CsvFileManager implements FileManager {
         int id = Integer.valueOf(data[7]);
         return new Magazine(title, publisher, language, year, month, day, id);
     }
+
 
     private void importUsers(Library library) {
         try (Scanner fileReader = new Scanner(new File(USER_FILE_NAME))) {
@@ -98,6 +116,7 @@ public class CsvFileManager implements FileManager {
         }
     }
 
+
     public User createUserFromString(String csvText) {
         String[] split = csvText.split(";");
         String type = split[0];
@@ -107,6 +126,7 @@ public class CsvFileManager implements FileManager {
         throw new InvalidDataException("Nieznany typ publikacji: " + type);
     }
 
+
     private User createLibraryUser(String[] split) {
         String firstName = split[1];
         String lastName = split[2];
@@ -114,13 +134,15 @@ public class CsvFileManager implements FileManager {
         return new LibraryUser(firstName, lastName, pesel);
     }
 
+
     @Override
     public void exportData(Library library) {
-
         exportPublications(library);
         exportUsers(library);
         setRandomPathAndNames();
+        consolePrinter.printLine("Export danych do pliku zakończony powodzeniem");
     }
+
 
     private void exportPublications(Library library) {
         Collection<Publication> publications = library.getPublicationsCollection();
@@ -135,6 +157,7 @@ public class CsvFileManager implements FileManager {
         }
     }
 
+
     private void exportUsers(Library library) {
         Collection<User> users = library.getUsersCollection();
         try (FileWriter fileWriter = new FileWriter(USER_FILE_NAME);
@@ -148,26 +171,30 @@ public class CsvFileManager implements FileManager {
         }
     }
 
+
     public static String getPublicationFileName() {
         return PUBLICATION_FILE_NAME;
     }
+
 
     public static void setPublicationFileName(String publicationFileName) {
         PUBLICATION_FILE_NAME = publicationFileName;
     }
 
+
     public static String getUserFileName() {
         return USER_FILE_NAME;
     }
+
 
     public static void setUserFileName(String userFileName) {
         USER_FILE_NAME = userFileName;
     }
 
+
     private static void setRandomPathAndNames(){
         setPublicationFileName("Publications.csv");
         setUserFileName("Users.csv");
     }
-
 
 }

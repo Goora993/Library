@@ -2,7 +2,7 @@ package pl.gooradev.library.control.sl;
 
 import pl.gooradev.library.control.sl.load.LoadControl;
 import pl.gooradev.library.control.sl.save.SaveControl;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 

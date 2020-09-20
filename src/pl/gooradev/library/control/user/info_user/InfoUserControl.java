@@ -1,7 +1,7 @@
 package pl.gooradev.library.control.user.info_user;
 
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
-import pl.gooradev.library.io.ConsolePrinter;
+import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
 

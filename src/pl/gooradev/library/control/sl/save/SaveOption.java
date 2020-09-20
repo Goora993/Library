@@ -3,6 +3,7 @@ package pl.gooradev.library.control.sl.save;
 public enum SaveOption {
     SERIAL_SAVE(1, "Zapisywanie akutalnych danych"),
     CSV_SAVE(2, "Zapisywanie akutalnych danych do pliku CSV"),
+    CSV_BY_PATH_SAVE(3, "Zapisywanie akutalnych danych do pliku CSV w wybranym folderze"),
     BACK(0, "Wróc do poprzedniego menu");
 
     private int value;
