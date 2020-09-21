@@ -1,6 +1,8 @@
 package pl.gooradev.library.io.print;
 
 import pl.gooradev.library.control.publication.info_publication.InfoPublicationOption;
+import pl.gooradev.library.control.publication.info_publication.info_book.InfoBookOption;
+import pl.gooradev.library.control.publication.info_publication.info_magazine.InfoMagazineOption;
 import pl.gooradev.library.model.Book;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Magazine;
@@ -37,16 +39,16 @@ abstract class PublicationPrinter {
         return sb.toString();
     }
 
-    public static String printBooks(Library library, InfoPublicationOption option) {
+    public static String printBooks(Library library, InfoBookOption infoBookOption) {
         StringBuffer sb = new StringBuffer();
         Collection<Publication> publicationCollection = library.getPublicationsCollection();
         List<Publication> publicationList = new ArrayList<>(publicationCollection);
 
         int counter = 0;
 
-        if (option.equals(InfoPublicationOption.SORT_BY_TITLE))
+        if (infoBookOption.equals(InfoPublicationOption.SORT_BY_TITLE))
             Collections.sort(publicationList, new AlphabeticalTitleComparator());
-        else if (option.equals(InfoPublicationOption.SORT_BY_AUTHOR))
+        else if (infoBookOption.equals(InfoPublicationOption.SORT_BY_AUTHOR))
             Collections.sort(publicationList, new AlphabeticalAuthorComparator());
 
         for (Publication publication : publicationList) {
@@ -63,15 +65,15 @@ abstract class PublicationPrinter {
        return sb.toString();
     }
 
-    public static String printMagazines(Library library, InfoPublicationOption option) {
+    public static String printMagazines(Library library, InfoMagazineOption infoMagazineOption) {
         StringBuffer sb = new StringBuffer();
         Collection<Publication> publicationCollection = library.getPublicationsCollection();
         List<Publication> publicationList = new ArrayList<>(publicationCollection);
         int counter = 0;
 
-        if (option.equals(InfoPublicationOption.SORT_BY_NAME))
+        if (infoMagazineOption.equals(InfoPublicationOption.SORT_BY_NAME))
             Collections.sort(publicationList, new AlphabeticalTitleComparator());
-        else if (option.equals(InfoPublicationOption.SORT_BY_PUBLISHER))
+        else if (infoMagazineOption.equals(InfoPublicationOption.SORT_BY_PUBLISHER))
             Collections.sort(publicationList, new AlphabeticalPublisherComparator());
 
         for (Publication publication : publicationList) {

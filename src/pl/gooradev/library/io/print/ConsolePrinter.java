@@ -1,6 +1,7 @@
 package pl.gooradev.library.io.print;
 
-import pl.gooradev.library.control.publication.info_publication.InfoPublicationOption;
+import pl.gooradev.library.control.publication.info_publication.info_book.InfoBookOption;
+import pl.gooradev.library.control.publication.info_publication.info_magazine.InfoMagazineOption;
 import pl.gooradev.library.exception.NoUserWithSuchPesel;
 import pl.gooradev.library.model.*;
 
@@ -12,12 +13,12 @@ public class ConsolePrinter {
         PublicationPrinter.printAllPublications(library);
     }
 
-    public void printBooks(Library library, InfoPublicationOption option) {
-        PublicationPrinter.printBooks(library, option);
+    public void printBooks(Library library, InfoBookOption infoBookOption) {
+        PublicationPrinter.printBooks(library, infoBookOption);
     }
 
-    public void printMagazines(Library library, InfoPublicationOption option) {
-        PublicationPrinter.printMagazines(library, option);
+    public void printMagazines(Library library, InfoMagazineOption infoMagazineOption) {
+        PublicationPrinter.printMagazines(library, infoMagazineOption);
     }
 
     public void printAllUsers(Library library) {

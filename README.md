@@ -129,3 +129,8 @@ importów, usuwanie zbędnych przerw między metodami itp.)
 - utworzenie abstrakcyjnych klas odpowiedzialnych za wyświetlanie informacji o publikacjach oraz użytkownikach i 
 scalenie ich funkcjonalności w klasie ConsolePrinter
 - poprawienie wyświetlania się komunikatów w klasach odpowiedzialnych za kontrolę zapisu i wczytywania danych
+
+21/09/2020:
+- naprawienie błędów w menu wyświetlania informacji nt. publikacji:
+    * przeniesienie funkcjonalności odpowiedzialnych za wyświatlanie informacji o ksiażkach do klasy InfoBookControl
+    * przeniesienie funkcjonalności odpowiedzialnych za wyświatlanie informacji o czasopismach do klasy InfoMagazineControl
