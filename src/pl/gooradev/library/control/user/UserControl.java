@@ -6,9 +6,7 @@ import pl.gooradev.library.control.user.borrow_publication.BorrowPublicationCont
 import pl.gooradev.library.control.user.info_user.InfoUserControl;
 import pl.gooradev.library.control.user.remove_user.RemoveUserControl;
 import pl.gooradev.library.control.user.return_publication.ReturnPublicationControl;
-import pl.gooradev.library.exception.NoPublicationWithSuchId;
-import pl.gooradev.library.exception.NoUserWithSuchPesel;
-import pl.gooradev.library.exception.UserAlreadyExistException;
+import pl.gooradev.library.exception.*;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
@@ -53,8 +51,9 @@ public class UserControl {
                 manageUser(userOption);
             } catch (NullPointerException e){
                 consolePrinter.printLine("Brak opcji o id " + optionInt + ", wybierz ponownie");
-            } catch (InputMismatchException | UserAlreadyExistException  | NoUserWithSuchPesel |
-                    NoPublicationWithSuchId e){
+            } catch (InputMismatchException | UserAlreadyExistException  | NoUserWithSuchPeselException |
+                    NoPublicationWithSuchIdException | PublicationIsAlreadyBorrowedException |
+                    NoSuchPublicationBorrowedException e){
                 consolePrinter.printLine(e.getMessage() + ", wybierz ponownie");
             }
 
@@ -62,7 +61,8 @@ public class UserControl {
     }
 
     private void manageUser(UserOption userOption) throws NullPointerException, InputMismatchException,
-            UserAlreadyExistException, NoUserWithSuchPesel, NoPublicationWithSuchId {
+            UserAlreadyExistException, NoUserWithSuchPeselException, NoPublicationWithSuchIdException,
+            PublicationIsAlreadyBorrowedException, NoSuchPublicationBorrowedException {
 
             switch (userOption) {
                 case ADD_USER:

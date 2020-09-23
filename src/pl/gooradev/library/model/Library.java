@@ -1,6 +1,6 @@
 package pl.gooradev.library.model;
 
-import pl.gooradev.library.exception.NoUserWithSuchPesel;
+import pl.gooradev.library.exception.NoUserWithSuchPeselException;
 import pl.gooradev.library.exception.PublicationAlreadyExistException;
 import pl.gooradev.library.exception.UserAlreadyExistException;
 
@@ -58,17 +58,17 @@ public class Library implements Serializable {
         }
     }
 
-    public boolean removeUserByPesel(String pesel) throws NoUserWithSuchPesel {
+    public boolean removeUserByPesel(String pesel) throws NoUserWithSuchPeselException {
         User userToRemove = getUserByPesel(pesel);
         return users.remove(pesel, userToRemove);
 
     }
 
-    private User getUserByPesel(String pesel) throws NoUserWithSuchPesel {
+    private User getUserByPesel(String pesel) throws NoUserWithSuchPeselException {
         if(users.containsKey(pesel)){
             return users.get(pesel);
         }
-        throw new NoUserWithSuchPesel(
+        throw new NoUserWithSuchPeselException(
                 "Użytkownik o numerze pesel " + pesel + " nie istnieje"
         );
     }

@@ -88,7 +88,8 @@ public class CsvFileManager implements FileManager {
         int pages = Integer.valueOf(data[5]);
         String isbn = data[6];
         int id = Integer.valueOf(data[7]);
-        return new Book(title, publisher, year, author, pages, isbn, id);
+        boolean borrowed = Boolean.valueOf(data[8]);
+        return new Book(title, publisher, year, author, pages, isbn, id, borrowed);
     }
 
 
@@ -100,7 +101,8 @@ public class CsvFileManager implements FileManager {
         int day = Integer.valueOf(data[5]);
         String language = data[6];
         int id = Integer.valueOf(data[7]);
-        return new Magazine(title, publisher, language, year, month, day, id);
+        boolean borrowed = Boolean.valueOf(data[8]);
+        return new Magazine(title, publisher, language, year, month, day, id, borrowed);
     }
 
 

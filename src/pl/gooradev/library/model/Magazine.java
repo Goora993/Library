@@ -15,8 +15,8 @@ public class Magazine extends Publication {
         this.day = day;
     }
 
-    public Magazine(String title, String publisher, String language, int year, int month, int day, int id) {
-        super(title, publisher, year, id);
+    public Magazine(String title, String publisher, String language, int year, int month, int day, int id, boolean borrowed) {
+        super(title, publisher, year, id, borrowed);
         this.language = language;
         this.month = month;
         this.day = day;
@@ -49,9 +49,13 @@ public class Magazine extends Publication {
 
     @Override
     public String toString() {
-        return "Tytuł: " + getTitle() + ", język: " + getLanguage() + ", wydawnictwo: "
-                + getPublisher() + ", data wydania: " + getYear() + "-" + getMonth() + "-" + getDay()
-                + ", ID: " + getId();
+        String description = "ID: " + getId() + ", tytuł: " + getTitle() + ", język: " + getLanguage() + ", wydawnictwo: "
+                + getPublisher() + ", data wydania: " + getYear() + "-" + getMonth() + "-" + getDay() + ", aktualny status: ";
+
+        if (isBorrowed()==true)
+            return description + "wypożyczona";
+        else
+            return description + "niewypożyczona";
     }
 
     @Override
@@ -83,6 +87,7 @@ public class Magazine extends Publication {
                 month + ";" +
                 day + ";" +
                 language + ";" +
-                getId() + "";
+                getId() + ";" +
+                isBorrowed() + "";
     }
 }

@@ -16,8 +16,8 @@ public class Book extends Publication {
         this.isbn = isbn;
     }
 
-    public Book(String title, String publisher, int year, String author, int pages, String isbn, int id){
-        super(title, publisher, year, id);
+    public Book(String title, String publisher, int year, String author, int pages, String isbn, int id, boolean borrowed){
+        super(title, publisher, year, id, borrowed);
         this.author = author;
         this.pages = pages;
         this.isbn = isbn;
@@ -53,9 +53,14 @@ public class Book extends Publication {
 
     @Override
     public String toString() {
-        return "Tytuł: " + getTitle() + ", autor: " + getAuthor() + ", ilość stron " + getPages() + ", wydawnictwo: "
+        String description = "ID: " + getId() + ", tytuł: " + getTitle() + ", autor: " + getAuthor() + ", ilość stron " + getPages() + ", wydawnictwo: "
                 + getPublisher() + ", rok wydania: " + getYear() + ", ISBN: " + getIsbn()
-                + ", ID: " + getId();
+                + ", aktualny status: ";
+
+        if (isBorrowed()==true)
+            return description + "wypożyczona";
+        else
+            return description + "niewypożyczona";
     }
 
     @Override
@@ -87,6 +92,7 @@ public class Book extends Publication {
                 author + ";" +
                 pages + ";" +
                 isbn + ";" +
-                + getId() + "";
+                + getId() + ";" +
+                isBorrowed() + "";
     }
 }

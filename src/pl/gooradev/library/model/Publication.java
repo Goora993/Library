@@ -9,6 +9,7 @@ public abstract class Publication implements Serializable {
     private String title;
     private String publisher;
     private int year;
+    private boolean borrowed;
 
 
     Publication(String title, String publisher, int year){
@@ -17,11 +18,12 @@ public abstract class Publication implements Serializable {
         this.year = year;
 }
 
-    Publication(String title, String publisher, int year, int id){
+    Publication(String title, String publisher, int year, int id, boolean borrowed){
         this.id = id;
         this.title = title;
         this.publisher = publisher;
         this.year = year;
+        this.borrowed = borrowed;
     }
 
     public int getId() {
@@ -56,6 +58,13 @@ public abstract class Publication implements Serializable {
         this.year = year;
     }
 
+    public boolean isBorrowed() {
+        return borrowed;
+    }
+
+    public void setBorrowed(boolean borrowed) {
+        this.borrowed = borrowed;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -75,8 +84,13 @@ public abstract class Publication implements Serializable {
 
     @Override
     public String toString() {
-        return  "Tytuł: " + getTitle()  + ", wydawnictwo: "
-                + getPublisher() + ", rok wydania: " + getYear() + ", ID: " + getId();
+        String description = "ID: " + getId() + ", tytuł: " + getTitle()  + ", wydawnictwo: "
+                + getPublisher() + ", rok wydania: " + getYear() + ", aktualny status: ";
+
+        if (borrowed==true)
+            return description + "wypożyczona";
+        else
+            return description + "niewypożyczona";
     }
 
     public abstract String toCsv();

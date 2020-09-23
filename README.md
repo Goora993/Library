@@ -134,3 +134,10 @@ scalenie ich funkcjonalności w klasie ConsolePrinter
 - naprawienie błędów w menu wyświetlania informacji nt. publikacji:
     * przeniesienie funkcjonalności odpowiedzialnych za wyświatlanie informacji o ksiażkach do klasy InfoBookControl
     * przeniesienie funkcjonalności odpowiedzialnych za wyświatlanie informacji o czasopismach do klasy InfoMagazineControl
+    
+23/09/2020:
+- utworzenie funkcji okreslającej czy dana publikacja jest aktualnie wypożyczona czy nie, w tym celu zmodyfikowano 
+klasy modelu danych (Publication, Book i Magazine) oraz klasy odpowiedzialne za funkcjonalność wypożyczania i zwracania 
+publikacji
+- dodano dwie nowe klasy wyjątków mające na celu informowanie użytkownika o problemie z wypożyczeniem danej publikacji 
+(NoSuchPublicationBorrowedException i PublicationIsAlreadyBorrowedException)

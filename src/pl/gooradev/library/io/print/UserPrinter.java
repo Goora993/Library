@@ -1,6 +1,6 @@
 package pl.gooradev.library.io.print;
 
-import pl.gooradev.library.exception.NoUserWithSuchPesel;
+import pl.gooradev.library.exception.NoUserWithSuchPeselException;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.LibraryUser;
 import pl.gooradev.library.model.Publication;
@@ -30,7 +30,7 @@ abstract class UserPrinter {
         return sb.toString();
     }
 
-    public static String printUserByPesel(Library library, String pesel) throws NoUserWithSuchPesel {
+    public static String printUserByPesel(Library library, String pesel) throws NoUserWithSuchPeselException {
         User user = library.getUsers().get(pesel);
         StringBuffer sb = new StringBuffer();
 
@@ -39,7 +39,7 @@ abstract class UserPrinter {
             printBorrowedList(user) + "\n" +
             printBorrowedHistory(user);
         } else {
-            throw new NoUserWithSuchPesel("Brak użytkownika o numerze pesel " + pesel);
+            throw new NoUserWithSuchPeselException("Brak użytkownika o numerze pesel " + pesel);
         }
     }
 
