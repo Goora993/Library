@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.publication.add_publication;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
@@ -28,6 +29,7 @@ public class AddPublicationControl {
         do {
 
             try{
+                refreshLibrary();
                 printAddMagazineOrBookMenu();
                 addPublicationOption = getOption();
                 addPublication(addPublicationOption);
@@ -75,5 +77,9 @@ public class AddPublicationControl {
     private AddPublicationOption getOption() throws InputMismatchException {
         optionInt = dataReader.getInt();
         return AddPublicationOption.createFromInt(optionInt);
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }

@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.publication;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.control.publication.add_publication.AddPublicationControl;
 import pl.gooradev.library.control.publication.info_publication.InfoPublicationControl;
 import pl.gooradev.library.control.publication.remove_publication.RemovePublicationControl;

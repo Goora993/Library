@@ -44,9 +44,9 @@ public class LibraryUser extends User{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        LibraryUser that = (LibraryUser) o;
-        return Objects.equals(publicationHistory, that.publicationHistory) &&
-                Objects.equals(borrowedPublications, that.borrowedPublications);
+        LibraryUser user = (LibraryUser) o;
+        return Objects.equals(publicationHistory, user.publicationHistory) &&
+                Objects.equals(borrowedPublications, user.borrowedPublications);
     }
 
     @Override

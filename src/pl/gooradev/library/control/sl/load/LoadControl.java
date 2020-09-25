@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.sl.load;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.CsvFileManager;
@@ -47,14 +48,14 @@ public class LoadControl {
     private void manageLoad(LoadOption loadOption) {
         switch (loadOption) {
             case SERIAL_LOAD:
-                this.library = sfm.importData();
+                LibraryControl.setLibrary(sfm.importData());
                 break;
             case CSV_LOAD:
-                this.library = cfm.importData();
+                LibraryControl.setLibrary(cfm.importData());
                 break;
             case CSV_BY_PATH_LOAD:
                 dataReader.getAndSetFilePath();
-                this.library = cfm.importData();
+                LibraryControl.setLibrary(cfm.importData());
                 break;
             case BACK:
                 break;

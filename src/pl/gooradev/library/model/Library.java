@@ -13,8 +13,6 @@ public class Library implements Serializable {
     private Map<String, User> users = new HashMap<>();
     private Map<Integer, Publication> publications = new HashMap<>();
 
-    private int maxPublications = 10;
-    private int publicationNumber;
 
     public Library() {
     }
@@ -98,19 +96,4 @@ public class Library implements Serializable {
         this.publications = publications;
     }
 
-    public int getMaxPublications() {
-        return maxPublications;
-    }
-
-    public void setMaxPublications(int maxPublications) {
-        this.maxPublications = maxPublications;
-    }
-
-    public int getPublicationNumber() {
-        return publicationNumber;
-    }
-
-    public void setPublicationNumber(int publicationNumber) {
-        this.publicationNumber = publicationNumber;
-    }
 }

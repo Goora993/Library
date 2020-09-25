@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.sl.save;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.file.CsvFileManager;
@@ -32,6 +33,7 @@ public class SaveControl {
         do {
 
             try{
+                refreshLibrary();
                 printOptions();
                 saveOption = getOption();
                 manageSave(saveOption);
@@ -72,5 +74,9 @@ public class SaveControl {
     private SaveOption getOption() throws InputMismatchException {
         optionInt = dataReader.getInt();
         return SaveOption.createFromInt(optionInt);
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }

@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.publication.remove_publication;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.model.Library;
@@ -26,6 +27,7 @@ public class RemovePublicationControl {
         do {
 
             try {
+                refreshLibrary();
                 printRemovePublicationMenu();
                 removePublicationOption = getOption();
                 removePublication(removePublicationOption);
@@ -144,5 +146,9 @@ public class RemovePublicationControl {
     private RemovePublicationOption getOption() throws InputMismatchException {
         optionInt = dataReader.getInt();
         return RemovePublicationOption.createFromInt(optionInt);
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }

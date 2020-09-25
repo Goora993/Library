@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.user.return_publication;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.exception.NoPublicationWithSuchIdException;
 import pl.gooradev.library.exception.NoSuchPublicationBorrowedException;
 import pl.gooradev.library.exception.NoUserWithSuchPeselException;
@@ -25,6 +26,7 @@ public class ReturnPublicationControl {
 
 
     public void returnPublication() throws NoUserWithSuchPeselException, NoPublicationWithSuchIdException, NoSuchPublicationBorrowedException {
+        refreshLibrary();
 
         User user = getUser();
         Publication publication = getPublication();
@@ -64,5 +66,9 @@ public class ReturnPublicationControl {
             return publication;
         else
             throw new NoPublicationWithSuchIdException("Brak publikacji o ID " + id);
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }

@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.publication.info_publication;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.control.publication.info_publication.info_book.InfoBookControl;
 import pl.gooradev.library.control.publication.info_publication.info_magazine.InfoMagazineControl;
 import pl.gooradev.library.io.print.ConsolePrinter;
@@ -21,13 +22,13 @@ public class InfoPublicationControl {
 
 
     public InfoPublicationControl(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
-        createControlers(library, dataReader, consolePrinter);
+        createControllers(library, dataReader, consolePrinter);
         this.library = library;
         this.dataReader = dataReader;
         this.consolePrinter = consolePrinter;
     }
 
-    private void createControlers(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
+    private void createControllers(Library library, DataReader dataReader, ConsolePrinter consolePrinter) {
         infoBookControl = new InfoBookControl(library, dataReader, consolePrinter);
         infoMagazineControl = new InfoMagazineControl(library, dataReader, consolePrinter);
     }
@@ -37,6 +38,7 @@ public class InfoPublicationControl {
         do{
 
             try {
+                refreshLibrary();
                 printPublicationsInfoMenu();
                 infoPublicationOption = getOption();
                 printPublications(infoPublicationOption);
@@ -83,6 +85,10 @@ public class InfoPublicationControl {
     private InfoPublicationOption getOption() throws InputMismatchException {
         optionInt = dataReader.getInt();
         return InfoPublicationOption.createFromInt(optionInt);
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }
 

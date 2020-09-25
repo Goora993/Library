@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.user.add_user;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.exception.UserAlreadyExistException;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
@@ -18,7 +19,12 @@ public class AddUserControl {
     }
 
     public void addUser() throws UserAlreadyExistException {
+        refreshLibrary();
         User userToAdd = dataReader.readAndCreateUser();
         library.addUser(userToAdd);
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }

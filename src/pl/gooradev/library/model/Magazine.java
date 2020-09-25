@@ -62,6 +62,7 @@ public class Magazine extends Publication {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Magazine magazine = (Magazine) o;
         return month == magazine.month &&
                 day == magazine.day &&
@@ -70,7 +71,7 @@ public class Magazine extends Publication {
 
     @Override
     public int hashCode() {
-        return Objects.hash(language, month, day);
+        return Objects.hash(super.hashCode(), language, month, day);
     }
 
     @Override

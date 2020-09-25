@@ -73,13 +73,14 @@ public abstract class Publication implements Serializable {
         Publication that = (Publication) o;
         return id == that.id &&
                 year == that.year &&
+                borrowed == that.borrowed &&
                 Objects.equals(title, that.title) &&
                 Objects.equals(publisher, that.publisher);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, publisher, year);
+        return Objects.hash(id, title, publisher, year, borrowed);
     }
 
     @Override

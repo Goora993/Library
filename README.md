@@ -141,3 +141,11 @@ klasy modelu danych (Publication, Book i Magazine) oraz klasy odpowiedzialne za 
 publikacji
 - dodano dwie nowe klasy wyjątków mające na celu informowanie użytkownika o problemie z wypożyczeniem danej publikacji 
 (NoSuchPublicationBorrowedException i PublicationIsAlreadyBorrowedException)
+
+24/09/2020:
+- naprawienie systemu wczytywania i zapisywania danych w trakcie działania programu:
+    * obiekt klasy Library w klasie LibraryControl od teraz jest statyczny i prywatny
+    * wykorzystanie setera do modyfikacji statycznego obiektu library podczas ładowania danych
+    * wykorzystywanie getera do zmiany referencji obiektów library w poszczególnych klasach, w których library odwołuje się
+    do nieaktualnego już obiektu
+- dodanie możliwości wyboru przez użytkownika czy podczas zamykania aplikacji chce nadpisywać dane 

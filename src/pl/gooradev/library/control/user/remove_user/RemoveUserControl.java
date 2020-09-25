@@ -1,5 +1,6 @@
 package pl.gooradev.library.control.user.remove_user;
 
+import pl.gooradev.library.control.library.LibraryControl;
 import pl.gooradev.library.exception.NoUserWithSuchPeselException;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
@@ -18,6 +19,8 @@ public class RemoveUserControl {
 
 
     public void removeUser() throws NoUserWithSuchPeselException {
+        refreshLibrary();
+
         consolePrinter.printLine("Podaj pesel użytkownika, którego chcesz usunąć: ");
         String pesel = dataReader.getString();
         boolean removed;
@@ -27,5 +30,9 @@ public class RemoveUserControl {
         if(removed){
             consolePrinter.printLine("Pomyślnie usunięto użytkownika o numerze pesel " + pesel);
         }
+    }
+
+    private void refreshLibrary(){
+        library = LibraryControl.getLibrary();
     }
 }

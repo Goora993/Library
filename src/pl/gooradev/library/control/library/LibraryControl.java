@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
 
 public class LibraryControl {
 
-    Library library;
+    private static Library library;
     ConsolePrinter consolePrinter = new ConsolePrinter();
     DataReader dataReader = new DataReader(consolePrinter);
     FileManager fileManager;
@@ -112,7 +112,13 @@ public class LibraryControl {
 
     private void exit() {
         try {
-            fileManager.exportData(library);
+            consolePrinter.printLine("Czy chcesz nadpisać aktualne dane? (y/n)");
+
+            String answer = dataReader.getString();
+
+            if("y".equals(answer))
+                fileManager.exportData(library);
+
         } catch (DataExportException e) {
             consolePrinter.printLine(e.getMessage());
         }
@@ -133,6 +139,14 @@ public class LibraryControl {
     private LibraryOption getOption() throws InputMismatchException {
         optionInt = dataReader.getInt();
         return LibraryOption.createFromInt(optionInt);
+    }
+
+    public static Library getLibrary() {
+        return library;
+    }
+
+    public static void setLibrary(Library library) {
+        LibraryControl.library = library;
     }
 }
 
