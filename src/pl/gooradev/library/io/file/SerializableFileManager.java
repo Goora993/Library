@@ -21,7 +21,7 @@ public class SerializableFileManager implements FileManager {
     ConsolePrinter consolePrinter;
 
 
-    public SerializableFileManager(ConsolePrinter consolePrinter){
+    protected SerializableFileManager(ConsolePrinter consolePrinter){
         this.consolePrinter = consolePrinter;
     }
 

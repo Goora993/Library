@@ -28,28 +28,28 @@ public class ReturnPublicationControl {
     public void returnPublication() throws NoUserWithSuchPeselException, NoPublicationWithSuchIdException, NoSuchPublicationBorrowedException {
         refreshLibrary();
 
-        User user = getUser();
+        LibraryUser user = getUser();
         Publication publication = getPublication();
-        List<Publication> borrowedList = ((LibraryUser) user).getBorrowedPublications();
+        List<Publication> borrowedList = user.getBorrowedPublications();
 
         if(!borrowedList.contains(publication))
             throw new NoSuchPublicationBorrowedException("Użytkownik o numerze pesel " + user.getPesel() + " nie posiada wypożyczonej" +
                     " książki o id " + publication.getId());
 
         if(user instanceof LibraryUser){
-            ((LibraryUser) user).returnPublication(publication);
+            user.returnPublication(publication);
             publication.setBorrowed(false);
         }
 
-        consolePrinter.printLine("Publikacja id: " + publication.getId() + " " + publication.getTitle() +
-                " została zwrócona");
+        consolePrinter.printLine("Publikacja id: " + publication.getId() + ", \"" + publication.getTitle() +
+                "\" została zwrócona");
 
     }
 
-    private User getUser() throws NoUserWithSuchPeselException {
+    private LibraryUser getUser() throws NoUserWithSuchPeselException {
         consolePrinter.printLine("Podaj numer pesel użytkownika: ");
         String pesel = dataReader.getString();
-        User user = library.getUsers().get(pesel);
+        LibraryUser user = (LibraryUser) library.getUsers().get(pesel);
 
         if(user!=null)
             return user;

@@ -2,50 +2,37 @@ package pl.gooradev.library.io.file;
 
 import pl.gooradev.library.exception.NoSuchFileTypeException;
 import pl.gooradev.library.io.print.ConsolePrinter;
-import pl.gooradev.library.io.DataReader;
 
 public class FileManagerBuilder {
-    private ConsolePrinter printer;
-    private DataReader reader;
 
-    public FileManagerBuilder(ConsolePrinter printer, DataReader reader) {
-        this.printer = printer;
-        this.reader = reader;
-    }
+    private static CsvFileManager csvFileManager;
+    private static SerializableFileManager serializableFileManager;
 
-    public FileManager build() {
-        printer.printLine("Wybierz format danych:");
-        FileType fileType = getFileType();
-        switch (fileType) {
-            case SERIAL:
-                return new SerializableFileManager(printer);
+    public static FileManager getFileManager(FileType fileType, ConsolePrinter consolePrinter){
+        switch (fileType){
             case CSV:
-                return new CsvFileManager(printer);
-            default:
-                throw new NoSuchFileTypeException("Nieobsługiwany typ danych");
+                return buildCsvFileManager(consolePrinter);
+            case SERIAL:
+                return buildSerializableFileManager(consolePrinter);
+            default :
+                throw  new NoSuchFileTypeException("Błędny typ danych");
         }
     }
 
-    private FileType getFileType() {
-        boolean typeOk = false;
-        FileType result = null;
-        do {
-            printTypes();
-            String type = reader.getString().toUpperCase();
-            try {
-                result = FileType.valueOf(type);
-                typeOk = true;
-            } catch (IllegalArgumentException e) {
-                printer.printLine("Nieobsługiwany typ danych, wybierz ponownie.");
-            }
-        } while (!typeOk);
-
-        return result;
-    }
-
-    private void printTypes() {
-        for (FileType value : FileType.values()) {
-            printer.printLine(value.name());
+    private static FileManager buildSerializableFileManager(ConsolePrinter consolePrinter) {
+        if(serializableFileManager == null){
+            serializableFileManager = new SerializableFileManager(consolePrinter);
         }
+
+        return serializableFileManager;
     }
+
+    private static CsvFileManager buildCsvFileManager(ConsolePrinter consolePrinter) {
+        if(csvFileManager == null){
+            csvFileManager = new CsvFileManager(consolePrinter);
+        }
+
+        return csvFileManager;
+    }
+
 }

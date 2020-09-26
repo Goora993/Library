@@ -69,8 +69,8 @@ public class DataReader {
     public void getAndSetFilePath() {
         consolePrinter.printLine("Podaj ścieżkę do folderu z danymi: ");
         String filePath = getString();
-        CsvFileManager.USER_FILE_NAME = filePath + "/Users.csv";
-        CsvFileManager.PUBLICATION_FILE_NAME = filePath + "/Publications.csv";
+        CsvFileManager.setUserFileName(filePath + "/Users.csv");
+        CsvFileManager.setPublicationFileName(filePath + "/Publications.csv");
     }
 
 

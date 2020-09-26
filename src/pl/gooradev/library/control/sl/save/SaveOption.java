@@ -1,13 +1,28 @@
 package pl.gooradev.library.control.sl.save;
 
+import pl.gooradev.library.io.file.FileType;
+
 public enum SaveOption {
-    SERIAL_SAVE(1, "Zapisywanie akutalnych danych"),
-    CSV_SAVE(2, "Zapisywanie akutalnych danych do pliku CSV"),
-    CSV_BY_PATH_SAVE(3, "Zapisywanie akutalnych danych do pliku CSV w wybranym folderze"),
+    SERIAL_SAVE(1, "Zapisywanie akutalnych danych", FileType.SERIAL),
+    CSV_SAVE(2, "Zapisywanie akutalnych danych do pliku CSV", FileType.CSV),
+    CSV_BY_PATH_SAVE(3, "Zapisywanie akutalnych danych do pliku CSV w wybranym folderze", FileType.CSV),
     BACK(0, "Wróc do poprzedniego menu");
 
     private int value;
     private String description;
+    private FileType fileType;
+
+
+    SaveOption(int value, String description){
+        this.value = value;
+        this.description = description;
+    }
+
+    SaveOption(int value, String description, FileType fileType){
+        this.value = value;
+        this.description = description;
+        this.fileType = fileType;
+    }
 
     public int getValue() {
         return value;
@@ -17,9 +32,8 @@ public enum SaveOption {
         return description;
     }
 
-    SaveOption(int value, String description){
-        this.value = value;
-        this.description = description;
+    public FileType getFileType() {
+        return fileType;
     }
 
     @Override

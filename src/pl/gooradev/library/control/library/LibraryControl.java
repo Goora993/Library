@@ -4,11 +4,9 @@ import pl.gooradev.library.control.publication.PublicationControl;
 import pl.gooradev.library.control.sl.SaveLoadControl;
 import pl.gooradev.library.control.user.UserControl;
 import pl.gooradev.library.exception.*;
+import pl.gooradev.library.io.file.*;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
-import pl.gooradev.library.io.file.FileManager;
-import pl.gooradev.library.io.file.ImportType;
-import pl.gooradev.library.io.file.SerializableFileManager;
 import pl.gooradev.library.model.Library;
 
 import java.util.InputMismatchException;
@@ -28,7 +26,7 @@ public class LibraryControl {
 
 
      public LibraryControl() {
-        fileManager = new SerializableFileManager(consolePrinter);
+        fileManager = setFileManager();
         try {
             library = fileManager.importData();
         } catch (InvalidDataException e) {
@@ -141,9 +139,16 @@ public class LibraryControl {
         return LibraryOption.createFromInt(optionInt);
     }
 
+
+    private FileManager setFileManager() {
+        return FileManagerBuilder.getFileManager(FileType.SERIAL, consolePrinter);
+    }
+
+
     public static Library getLibrary() {
         return library;
     }
+
 
     public static void setLibrary(Library library) {
         LibraryControl.library = library;

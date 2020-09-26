@@ -3,11 +3,11 @@ package pl.gooradev.library.io.print;
 import pl.gooradev.library.control.publication.info_publication.info_book.InfoBookOption;
 import pl.gooradev.library.control.publication.info_publication.info_magazine.InfoMagazineOption;
 import pl.gooradev.library.exception.NoUserWithSuchPeselException;
+import pl.gooradev.library.io.file.CsvFileManager;
 import pl.gooradev.library.model.*;
 
 
 public class ConsolePrinter {
-
 
     public void printAllPublications(Library library) {
         printLine(PublicationPrinter.printAllPublications(library));

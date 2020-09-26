@@ -27,7 +27,7 @@ public class BorrowPublicationControl {
     public void borrowPublication() throws NoUserWithSuchPeselException, NoPublicationWithSuchIdException {
         refreshLibrary();
 
-        User user = getUser();
+        LibraryUser user = getUser();
         Publication publication = getPublication();
 
         if(publication.isBorrowed())
@@ -35,19 +35,19 @@ public class BorrowPublicationControl {
                     " jest już wypożyczona");
 
         if(user instanceof LibraryUser){
-            ((LibraryUser) user).borrowPublication(publication);
+            user.borrowPublication(publication);
             publication.setBorrowed(true);
         }
 
-        consolePrinter.printLine("Publikacja id: " + publication.getId() + ", " + publication.getTitle() +
-                " została wypożyczona");
+        consolePrinter.printLine("Publikacja id: " + publication.getId() + ", \"" + publication.getTitle() +
+                "\" została wypożyczona");
     }
 
 
-    private User getUser() throws NoUserWithSuchPeselException {
+    private LibraryUser getUser() throws NoUserWithSuchPeselException {
         consolePrinter.printLine("Podaj numer pesel użytkownika: ");
         String pesel = dataReader.getString();
-        User user = library.getUsers().get(pesel);
+        LibraryUser user = (LibraryUser) library.getUsers().get(pesel);
 
         if(user!=null)
             return user;

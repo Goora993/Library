@@ -1,10 +1,11 @@
 package pl.gooradev.library.control.sl.save;
 
 import pl.gooradev.library.control.library.LibraryControl;
+import pl.gooradev.library.io.file.FileManager;
+import pl.gooradev.library.io.file.FileManagerBuilder;
+import pl.gooradev.library.io.file.FileType;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
-import pl.gooradev.library.io.file.CsvFileManager;
-import pl.gooradev.library.io.file.SerializableFileManager;
 import pl.gooradev.library.model.Library;
 
 import java.util.InputMismatchException;
@@ -14,8 +15,7 @@ public class SaveControl {
     ConsolePrinter consolePrinter;
     DataReader dataReader;
 
-    SerializableFileManager sfm;
-    CsvFileManager cfm;
+    FileManager fileManager;
 
     int optionInt;
     SaveOption saveOption;
@@ -25,8 +25,6 @@ public class SaveControl {
         this.library = library;
         this.consolePrinter = consolePrinter;
         this.dataReader = dataReader;
-        this.sfm = new SerializableFileManager(consolePrinter);
-        this.cfm = new CsvFileManager(consolePrinter);
     }
 
     public void manageSaveLoop() {
@@ -49,19 +47,23 @@ public class SaveControl {
     private void manageSave(SaveOption saveOption){
         switch (saveOption){
             case SERIAL_SAVE:
-                sfm.exportData(library);
-                break;
             case CSV_SAVE:
-                cfm.exportData(library);
+                saveData(saveOption.getFileType());
                 break;
             case CSV_BY_PATH_SAVE:
                 dataReader.getAndSetFilePath();
-                cfm.exportData(library);
+                saveData(saveOption.getFileType());
                 break;
             case BACK:
                 break;
         }
     }
+
+    private void saveData(FileType fileType){
+        fileManager = FileManagerBuilder.getFileManager(fileType, consolePrinter);
+        fileManager.exportData(library);
+    }
+
 
     private void printOptions(){
         consolePrinter.printLine("Wybierz opcję: ");

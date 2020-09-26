@@ -7,7 +7,7 @@ import pl.gooradev.library.model.*;
 import java.io.*;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Scanner;
+
 
 public class CsvFileManager implements FileManager {
     public static String PUBLICATION_FILE_NAME = "Publications.csv";
@@ -17,7 +17,7 @@ public class CsvFileManager implements FileManager {
     ConsolePrinter consolePrinter;
 
 
-    public CsvFileManager(ConsolePrinter consolePrinter){
+    protected CsvFileManager(ConsolePrinter consolePrinter){
         this.consolePrinter = consolePrinter;
     }
 
@@ -56,13 +56,11 @@ public class CsvFileManager implements FileManager {
 
 
     private void importPublications(Library library) {
-        try (Scanner fileReader = new Scanner(new File(PUBLICATION_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                Publication publication = createPublicationFromString(line);
-                library.addPublication(publication);
-            }
-        } catch (FileNotFoundException e) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(PUBLICATION_FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(string->createPublicationFromString(string))
+                    .forEach(publication->library.addPublication(publication));
+        } catch (IOException e) {
             throw new PublicationImportException("Brak pliku " + PUBLICATION_FILE_NAME);
         }
     }
@@ -107,13 +105,11 @@ public class CsvFileManager implements FileManager {
 
 
     private void importUsers(Library library) {
-        try (Scanner fileReader = new Scanner(new File(USER_FILE_NAME))) {
-            while (fileReader.hasNextLine()) {
-                String line = fileReader.nextLine();
-                User user = createUserFromString(line);
-                library.addUser(user);
-            }
-        } catch (FileNotFoundException e) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(USER_FILE_NAME))) {
+            bufferedReader.lines()
+                    .map(string->createUserFromString(string))
+                    .forEach(user->library.addUser(user));
+        } catch (IOException e) {
             throw new UserImportException("Brak pliku " + USER_FILE_NAME);
         }
     }

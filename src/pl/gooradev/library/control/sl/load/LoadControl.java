@@ -1,10 +1,9 @@
 package pl.gooradev.library.control.sl.load;
 
 import pl.gooradev.library.control.library.LibraryControl;
+import pl.gooradev.library.io.file.*;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.io.DataReader;
-import pl.gooradev.library.io.file.CsvFileManager;
-import pl.gooradev.library.io.file.SerializableFileManager;
 import pl.gooradev.library.model.Library;
 
 import java.util.InputMismatchException;
@@ -14,8 +13,7 @@ public class LoadControl {
     ConsolePrinter consolePrinter;
     DataReader dataReader;
 
-    SerializableFileManager sfm;
-    CsvFileManager cfm;
+    FileManager fileManager;
 
     int optionInt;
     LoadOption loadOption;
@@ -25,8 +23,6 @@ public class LoadControl {
         this.library = library;
         this.consolePrinter = consolePrinter;
         this.dataReader = dataReader;
-        this.sfm = new SerializableFileManager(consolePrinter);
-        this.cfm = new CsvFileManager(consolePrinter);
     }
 
     public void manageLoadLoop() {
@@ -48,19 +44,23 @@ public class LoadControl {
     private void manageLoad(LoadOption loadOption) {
         switch (loadOption) {
             case SERIAL_LOAD:
-                LibraryControl.setLibrary(sfm.importData());
-                break;
             case CSV_LOAD:
-                LibraryControl.setLibrary(cfm.importData());
+                loadData(loadOption.fileType());
                 break;
             case CSV_BY_PATH_LOAD:
                 dataReader.getAndSetFilePath();
-                LibraryControl.setLibrary(cfm.importData());
+                loadData(loadOption.fileType());
                 break;
             case BACK:
                 break;
         }
     }
+
+    private void loadData(FileType fileType){
+        fileManager = FileManagerBuilder.getFileManager(fileType, consolePrinter);
+        LibraryControl.setLibrary(fileManager.importData());
+    }
+
 
     private void printOptions() {
         consolePrinter.printLine("Wybierz opcję: ");
