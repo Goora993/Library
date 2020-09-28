@@ -48,8 +48,7 @@ public class LoadControl {
                 loadData(loadOption.fileType());
                 break;
             case CSV_BY_PATH_LOAD:
-                dataReader.getAndSetFilePath();
-                loadData(loadOption.fileType());
+                loadData(loadOption.fileType(), dataReader, consolePrinter);
                 break;
             case BACK:
                 break;
@@ -58,6 +57,12 @@ public class LoadControl {
 
     private void loadData(FileType fileType){
         fileManager = FileManagerBuilder.getFileManager(fileType, consolePrinter);
+        LibraryControl.setLibrary(fileManager.importData());
+    }
+
+    private void loadData(FileType fileType, DataReader dataReader, ConsolePrinter consolePrinter){
+        fileManager = FileManagerBuilder.getFileManager(fileType, consolePrinter);
+        fileManager.setDataPath(dataReader, consolePrinter);
         LibraryControl.setLibrary(fileManager.importData());
     }
 

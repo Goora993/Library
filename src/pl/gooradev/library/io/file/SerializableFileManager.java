@@ -4,6 +4,7 @@ import pl.gooradev.library.exception.DataExportException;
 import pl.gooradev.library.exception.DataImportException;
 import pl.gooradev.library.exception.PublicationImportException;
 import pl.gooradev.library.exception.UserImportException;
+import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.model.Library;
 import pl.gooradev.library.model.Publication;
@@ -25,6 +26,10 @@ public class SerializableFileManager implements FileManager {
         this.consolePrinter = consolePrinter;
     }
 
+    @Override
+    public void setDataPath(DataReader dataReader, ConsolePrinter consolePrinter) {
+        //empty method, will be useful in case of upgrading app
+    }
 
     @Override
     public Library importData() {
@@ -120,5 +125,6 @@ public class SerializableFileManager implements FileManager {
             throw new DataExportException("Błąd zapisu danych do pliku " + USER_FILE_NAME);
         }
     }
+
 
 }

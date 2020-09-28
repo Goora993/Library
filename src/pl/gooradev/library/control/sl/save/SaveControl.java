@@ -1,6 +1,7 @@
 package pl.gooradev.library.control.sl.save;
 
 import pl.gooradev.library.control.library.LibraryControl;
+import pl.gooradev.library.io.file.CsvFileManager;
 import pl.gooradev.library.io.file.FileManager;
 import pl.gooradev.library.io.file.FileManagerBuilder;
 import pl.gooradev.library.io.file.FileType;
@@ -51,8 +52,7 @@ public class SaveControl {
                 saveData(saveOption.getFileType());
                 break;
             case CSV_BY_PATH_SAVE:
-                dataReader.getAndSetFilePath();
-                saveData(saveOption.getFileType());
+                saveData(saveOption.getFileType(), dataReader, consolePrinter);
                 break;
             case BACK:
                 break;
@@ -61,6 +61,12 @@ public class SaveControl {
 
     private void saveData(FileType fileType){
         fileManager = FileManagerBuilder.getFileManager(fileType, consolePrinter);
+        fileManager.exportData(library);
+    }
+
+    private void saveData(FileType fileType, DataReader dataReader, ConsolePrinter consolePrinter){
+        fileManager = FileManagerBuilder.getFileManager(fileType, consolePrinter);
+        fileManager.setDataPath(dataReader, consolePrinter);
         fileManager.exportData(library);
     }
 

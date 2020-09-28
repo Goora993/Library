@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Library implements Serializable {
+
     private Map<String, User> users = new HashMap<>();
     private Map<Integer, Publication> publications = new HashMap<>();
 

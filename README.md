@@ -158,3 +158,8 @@ za pomocą strumieni
 do potrzeb użytkownika, poza tym w FileManagerBuilder wykorzystano mechanizm zmuszający aplikację do korzystania z wcześniej 
 utworzonych obiektów klas CsvFileManager i SerializableFileManager po to aby zabezpieczyć się przed tworzeniem zbędnych obiektów
 
+28/09/2020:
+- przeniesienie funkcjonalności wybierania przez użytkownika ścieżki zapisu/odczytu danych z klasy DataReader do interface
+FileManager, tak aby było to usytuowane w kodzie w bardziej odpowiednim miejscu
+
+

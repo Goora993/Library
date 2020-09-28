@@ -1,6 +1,7 @@
 package pl.gooradev.library.io.file;
 
 import pl.gooradev.library.exception.*;
+import pl.gooradev.library.io.DataReader;
 import pl.gooradev.library.io.print.ConsolePrinter;
 import pl.gooradev.library.model.*;
 
@@ -19,6 +20,15 @@ public class CsvFileManager implements FileManager {
 
     protected CsvFileManager(ConsolePrinter consolePrinter){
         this.consolePrinter = consolePrinter;
+    }
+
+
+    @Override
+    public void setDataPath(DataReader dataReader, ConsolePrinter consolePrinter){
+        consolePrinter.printLine("Podaj ścieżkę do folderu z danymi: ");
+        String filePath = dataReader.getString();
+        setUserFileName(filePath + "/Users.csv");
+        setPublicationFileName(filePath + "/Publications.csv");
     }
 
 

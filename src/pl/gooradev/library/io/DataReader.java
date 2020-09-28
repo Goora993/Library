@@ -66,13 +66,6 @@ public class DataReader {
         return new LibraryUser(firstName, lastName, pesel);
     }
 
-    public void getAndSetFilePath() {
-        consolePrinter.printLine("Podaj ścieżkę do folderu z danymi: ");
-        String filePath = getString();
-        CsvFileManager.setUserFileName(filePath + "/Users.csv");
-        CsvFileManager.setPublicationFileName(filePath + "/Publications.csv");
-    }
-
 
     public int getInt() throws InputMismatchException {
         try {
