@@ -4,6 +4,8 @@ przez ekipę Javastart.pl, jednak aplikacja została przeze mnie wzbogacona o ki
 Celem tworzenia tego projektu było utrwalenie podstaw języka Java oraz poznawanie funkcji systemu kontroli wersji GIT.
 
 
+
+
 Podstawowe funkcjonalności aplikacji:
 - dodawanie i usuwanie publikacji mających unikalne, generowane, numeryczne id
 - sortowanie i wyświetlanie publikacji dostępnych w bibliotece
@@ -20,7 +22,12 @@ Podstawowe funkcjonalności aplikacji:
                 
 Jak we wstępie zostało wspomniane jest to póki co tylko aplikacja konsolowa, jednak w przyszłości w ramach przećwiczenia 
 i utrwalenia umiejętności korzystania z JavaFX i Mavena, chciałbym wzbogacić aplikację o proste GUI.
-  
+
+
+
+
+
+Co i kiedy było robione:
 
 12/08/2020:
 - utworzenie projektu, dodanie pierwszej klasy modelu oraz klasy z metodą main
