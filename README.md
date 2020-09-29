@@ -2,10 +2,12 @@
 Projekt prostej konsolowej aplikacji bibliotecznej. Pomysł aplikacji i "szkielet" pochodzi z kursu JavySE przygotowanego
 przez ekipę Javastart.pl, jednak aplikacja została przeze mnie wzbogacona o kilka moich pomysłów. 
 Celem tworzenia tego projektu było utrwalenie podstaw języka Java oraz poznawanie funkcji systemu kontroli wersji GIT.
-
-
-
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 Podstawowe funkcjonalności aplikacji:
 - dodawanie i usuwanie publikacji mających unikalne, generowane, numeryczne id
 - sortowanie i wyświetlanie publikacji dostępnych w bibliotece
@@ -18,16 +20,17 @@ Podstawowe funkcjonalności aplikacji:
 - wybór ścieżki zapisu lub odczytu danych w formie plików *.csv
 - możliwość zapisania postępów prac bądź wczytanie ostatniego stanu biblioteki w trakcie korzystania z aplikacji
         bez konieczności ponownego uruchamiania jej
-        
-                
+<br>       
+<br>               
 Jak we wstępie zostało wspomniane jest to póki co tylko aplikacja konsolowa, jednak w przyszłości w ramach przećwiczenia 
 i utrwalenia umiejętności korzystania z JavaFX i Mavena, chciałbym wzbogacić aplikację o proste GUI.
+<br>
+<br>
+<br>
+<br>
+<br>
 
-
-
-
-
-Co i kiedy było robione:
+Historia powstawania aplikacji:
 
 12/08/2020:
 - utworzenie projektu, dodanie pierwszej klasy modelu oraz klasy z metodą main
