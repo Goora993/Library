@@ -1,10 +1,26 @@
 # LibraryApp
-Projekt prostej konsolowej aplikacji bibliotecznej oparty na kursie Java SE od Javastart.pl. <br>
-Celem tworzenia tego projektu jest utrwalenie podstaw języka Java oraz nauka funkcji systemu kontroli wersji GIT.
+Projekt prostej konsolowej aplikacji bibliotecznej. Pomysł aplikacji i "szkielet" pochodzi z kursu JavySE przygotowanego
+przez ekipę Javastart.pl, jednak aplikacja została przeze mnie wzbogacona o kilka moich pomysłów. 
+Celem tworzenia tego projektu było utrwalenie podstaw języka Java oraz poznawanie funkcji systemu kontroli wersji GIT.
 
-Aplikacja ma za zadanie umożliwiać użytkownikowi dodawanie nowych pozycji (czasopisma i książki) do biblioteki, bezproblemowy odczyt ich po każdym, ponownym uruchomieniu aplikacji,
-co zapewnia zapisywanie treści w przeznaczonych do tego plikach. 
-W przyszłości aplikacja otrzyma interfejs graficzny stworzony w technologii JavaFX. 
+
+Podstawowe funkcjonalności aplikacji:
+    - dodawanie i usuwanie publikacji mających unikalne, generowane, numeryczne id
+    - sortowanie i wyświetlanie publikacji dostępnych w bibliotece
+    - dodawanie i usuwanie użytkowników
+    - zarządzanie użytkownikami (np. wypożyczanie ksiażek)
+    - domyślne zapisywanie danych publikacji i użytkowników przy pomocy serializacji do plików o rozszerzeniu *.o
+    - domyślne wczytywanie danych z pliku o rozszerzeniu *.o każdorazowo przy uruchomieniu programu
+    - zapisywanie danych do plików *.csv, które następnie można otworzyć w arkuszu kalkulacyjnym
+    - wczytywanie danych z plików *.csv
+    - wybór ścieżki zapisu lub odczytu danych w formie plików *.csv
+    - możliwość zapisania postępów prac bądź wczytanie ostatniego stanu biblioteki w trakcie korzystania z aplikacji
+        bez konieczności ponownego uruchamiania jej
+        
+                
+Jak we wstępie zostało wspomniane jest to póki co tylko aplikacja konsolowa, jednak w przyszłości w ramach przećwiczenia 
+i utrwalenia umiejętności korzystania z JavaFX i Mavena, chciałbym wzbogacić aplikację o proste GUI.
+  
 
 12/08/2020:
 - utworzenie projektu, dodanie pierwszej klasy modelu oraz klasy z metodą main
@@ -161,5 +177,11 @@ utworzonych obiektów klas CsvFileManager i SerializableFileManager po to aby za
 28/09/2020:
 - przeniesienie funkcjonalności wybierania przez użytkownika ścieżki zapisu/odczytu danych z klasy DataReader do interface
 FileManager, tak aby było to usytuowane w kodzie w bardziej odpowiednim miejscu
+
+29/09/2020:
+- zmieniono sposób zapisywania dat w klasach dziedziczących po klasie Publication z int na obiekty typu Year i MonthDay
+
+
+
 
 

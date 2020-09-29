@@ -13,7 +13,7 @@ public class IdGenerator {
         int id;
         boolean exist = true;
         do{
-            id = random.nextInt(899999999) + 100000000;
+            id = random.nextInt(900000000) + 100000000;
 
             for (Publication publication : publications) {
                 if(publication.getId() == id)

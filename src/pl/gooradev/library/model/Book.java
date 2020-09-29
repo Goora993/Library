@@ -9,15 +9,15 @@ public class Book extends Publication {
     private String isbn;
 
 
-    public Book(String title, String publisher, int year, String author, int pages, String isbn){
-        super(title, publisher, year);
+    public Book(String title, String publisher, int releaseYear, String author, int pages, String isbn){
+        super(title, publisher, releaseYear);
         this.author = author;
         this.pages = pages;
         this.isbn = isbn;
     }
 
-    public Book(String title, String publisher, int year, String author, int pages, String isbn, int id, boolean borrowed){
-        super(title, publisher, year, id, borrowed);
+    public Book(String title, String publisher, int releaseYear, String author, int pages, String isbn, int id, boolean borrowed){
+        super(title, publisher, releaseYear, id, borrowed);
         this.author = author;
         this.pages = pages;
         this.isbn = isbn;
@@ -54,7 +54,7 @@ public class Book extends Publication {
     @Override
     public String toString() {
         String description = "ID: " + getId() + ", tytuł: " + getTitle() + ", autor: " + getAuthor() + ", ilość stron " + getPages() + ", wydawnictwo: "
-                + getPublisher() + ", rok wydania: " + getYear() + ", ISBN: " + getIsbn()
+                + getPublisher() + ", rok wydania: " + getReleaseYear() + ", ISBN: " + getIsbn()
                 + ", aktualny status: ";
 
         if (isBorrowed()==true)
@@ -89,7 +89,7 @@ public class Book extends Publication {
         return  (TYPE + ";") +
                 getTitle() + ";" +
                 getPublisher() + ";" +
-                getYear() + ";" +
+                getReleaseYear() + ";" +
                 author + ";" +
                 pages + ";" +
                 isbn + ";" +

@@ -1,25 +1,23 @@
 package pl.gooradev.library.model;
 
+import java.time.MonthDay;
 import java.util.Objects;
 
 public class Magazine extends Publication {
     public static final String TYPE = "Magazyn";
     private String language;
-    private int month;
-    private int day;
+    private MonthDay releaseMonthDay;
 
     public Magazine(String title, String publisher, String language, int year, int month, int day) {
         super(title, publisher, year);
         this.language = language;
-        this.month = month;
-        this.day = day;
+        this.releaseMonthDay = MonthDay.of(month, day);
     }
 
     public Magazine(String title, String publisher, String language, int year, int month, int day, int id, boolean borrowed) {
         super(title, publisher, year, id, borrowed);
         this.language = language;
-        this.month = month;
-        this.day = day;
+        this.releaseMonthDay = MonthDay.of(month, day);
     }
 
 
@@ -31,26 +29,19 @@ public class Magazine extends Publication {
         this.language = language;
     }
 
-    public int getMonth() {
-        return month;
+    public MonthDay getReleaseMonthDay() {
+        return releaseMonthDay;
     }
 
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
+    public void setReleaseMonthDay(MonthDay releaseMonthDay) {
+        this.releaseMonthDay = releaseMonthDay;
     }
 
     @Override
     public String toString() {
         String description = "ID: " + getId() + ", tytuł: " + getTitle() + ", język: " + getLanguage() + ", wydawnictwo: "
-                + getPublisher() + ", data wydania: " + getYear() + "-" + getMonth() + "-" + getDay() + ", aktualny status: ";
+                + getPublisher() + ", data wydania: " + getReleaseYear() + "-" + getReleaseMonthDay().getMonthValue() + "-"
+                + getReleaseMonthDay().getDayOfMonth()+ ", aktualny status: ";
 
         if (isBorrowed()==true)
             return description + "wypożyczona";
@@ -64,15 +55,15 @@ public class Magazine extends Publication {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
         Magazine magazine = (Magazine) o;
-        return month == magazine.month &&
-                day == magazine.day &&
-                Objects.equals(language, magazine.language);
+        return Objects.equals(language, magazine.language) &&
+                Objects.equals(releaseMonthDay, magazine.releaseMonthDay);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), language, month, day);
+        return Objects.hash(super.hashCode(), language, releaseMonthDay);
     }
+
 
     @Override
     public int getId() {
@@ -84,9 +75,9 @@ public class Magazine extends Publication {
         return (TYPE + ";") +
                 getTitle() + ";" +
                 getPublisher() + ";" +
-                getYear() + ";" +
-                month + ";" +
-                day + ";" +
+                getReleaseYear() + ";" +
+                getReleaseMonthDay().getMonthValue() + ";" +
+                getReleaseMonthDay().getDayOfMonth() + ";" +
                 language + ";" +
                 getId() + ";" +
                 isBorrowed() + "";
