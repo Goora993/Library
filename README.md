@@ -5,16 +5,16 @@ Celem tworzenia tego projektu było utrwalenie podstaw języka Java oraz poznawa
 
 
 Podstawowe funkcjonalności aplikacji:
-    - dodawanie i usuwanie publikacji mających unikalne, generowane, numeryczne id
-    - sortowanie i wyświetlanie publikacji dostępnych w bibliotece
-    - dodawanie i usuwanie użytkowników
-    - zarządzanie użytkownikami (np. wypożyczanie ksiażek)
-    - domyślne zapisywanie danych publikacji i użytkowników przy pomocy serializacji do plików o rozszerzeniu *.o
-    - domyślne wczytywanie danych z pliku o rozszerzeniu *.o każdorazowo przy uruchomieniu programu
-    - zapisywanie danych do plików *.csv, które następnie można otworzyć w arkuszu kalkulacyjnym
-    - wczytywanie danych z plików *.csv
-    - wybór ścieżki zapisu lub odczytu danych w formie plików *.csv
-    - możliwość zapisania postępów prac bądź wczytanie ostatniego stanu biblioteki w trakcie korzystania z aplikacji
+- dodawanie i usuwanie publikacji mających unikalne, generowane, numeryczne id
+- sortowanie i wyświetlanie publikacji dostępnych w bibliotece
+- dodawanie i usuwanie użytkowników
+- zarządzanie użytkownikami (np. wypożyczanie ksiażek)
+- domyślne zapisywanie danych publikacji i użytkowników przy pomocy serializacji do plików o rozszerzeniu *.o
+- domyślne wczytywanie danych z pliku o rozszerzeniu *.o każdorazowo przy uruchomieniu programu
+- zapisywanie danych do plików *.csv, które następnie można otworzyć w arkuszu kalkulacyjnym
+- wczytywanie danych z plików *.csv
+- wybór ścieżki zapisu lub odczytu danych w formie plików *.csv
+- możliwość zapisania postępów prac bądź wczytanie ostatniego stanu biblioteki w trakcie korzystania z aplikacji
         bez konieczności ponownego uruchamiania jej
         
                 
